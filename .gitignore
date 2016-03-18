@@ -1,0 +1,11 @@
+# Composer
+/vendor
+/composer.lock
+
+# Eclipse
+/.settings
+/.project
+/.buildpath
+
+# PHP Storm
+/.idea

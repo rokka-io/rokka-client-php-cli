@@ -1,0 +1,31 @@
+{
+  "name": "rokka/client-cli",
+  "description": "CLI to use the Rokka service, using PHP",
+  "keywords": [
+    "rokka",
+    "rokka.io"
+  ],
+  "homepage": "https://github.com/rokka-io/rokka-client-php-cli",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Emanuele Panzeri",
+      "email": "emanuele.panzeri@liip.ch"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "rokka/client": "^0.2.0",
+    "symfony/console" : "3.0.*",
+    "symfony/finder" : "3.0.*",
+    "symfony/config": "3.0.*",
+    "symfony/dependency-injection": "3.0.*",
+    "symfony/yaml": "3.0.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "RokkaCli\\": "src/"
+    }
+  }
+}
