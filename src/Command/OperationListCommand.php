@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ema
- * Date: 21/12/15
- * Time: 11:13.
- */
+
 namespace RokkaCli\Command;
 
 use Rokka\Client\Core\Operation;

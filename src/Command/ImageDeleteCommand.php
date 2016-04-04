@@ -51,7 +51,6 @@ class ImageDeleteCommand extends BaseRokkaCliCommand
             }
         }
 
-
         if (!$client->deleteSourceImage($hash, $organization)) {
             $output->writeln($this->formatterHelper->formatBlock([
                 'Error!',
