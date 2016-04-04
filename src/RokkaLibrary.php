@@ -148,4 +148,34 @@ class RokkaLibrary
 
         return file_put_contents($fileName, Yaml::dump($yml));
     }
+
+    /**
+     * Build a string representation for the StackOperation's options attribute.
+     *
+     * @param array $settings
+     *
+     * @return string
+     */
+    public static function formatStackOperationOptions(array $settings, $associative = false)
+    {
+        $data = [];
+
+        if (!$associative) {
+            $fixed_settings = [];
+            foreach ($settings as $name => $value) {
+                $fixed_settings[] = array(
+                    'name' => $name,
+                    'value' => $value,
+                );
+            }
+
+            $settings = $fixed_settings;
+        }
+
+        foreach ($settings as $setting) {
+            $data[] = $setting['name'].':'.$setting['value'];
+        }
+
+        return implode(' | ', $data);
+    }
 }

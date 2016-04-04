@@ -8,6 +8,7 @@ use Rokka\Client\Core\DynamicMetadata\SubjectArea;
 use Rokka\Client\Core\Membership;
 use Rokka\Client\Core\Organization;
 use Rokka\Client\Core\SourceImage;
+use Rokka\Client\Core\Stack;
 use Rokka\Client\User;
 use Rokka\Client\Factory;
 use Rokka\Client\Image;
@@ -310,6 +311,26 @@ abstract class BaseRokkaCliCommand extends Command
         $output->writeln('  ID: <info>'.$membership->userId.'</info>');
         $output->writeln('  Role: <info>'.$membership->role.'</info>');
         $output->writeln('  Active: <info>'.($membership->active ? 'True' : 'False').'</info>');
+    }
+
+    /**
+     * @param Stack           $stack
+     * @param OutputInterface $output
+     */
+    public static function outputStackInfo(Stack $stack, OutputInterface $output)
+    {
+        $output->writeln('  Name: <info>'.$stack->getName().'</info>');
+        $output->writeln('  Created: <info>'.$stack->getCreated()->format('Y-m-d H:i:s').'</info>');
+
+        $operations = $stack->getStackOperations();
+        if (!empty($operations)) {
+            $output->writeln('  Operations:');
+
+            foreach ($stack->getStackOperations() as $operation) {
+                $output->write('    '.$operation->name.': ');
+                $output->writeln(RokkaLibrary::formatStackOperationOptions($operation->options));
+            }
+        }
     }
 
     /**
