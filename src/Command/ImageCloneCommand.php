@@ -134,7 +134,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
 
         if ($output->isVerbose() || $output->isVeryVerbose()) {
             if ($output->isVeryVerbose()) {
-                $output->write(' (hash:' . $currentHash . ') ');
+                $output->write(' (hash:'.$currentHash.') ');
             }
             $output->writeln('<info>done</info>');
         }
@@ -155,7 +155,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
 
             if ($output->isVerbose() || $output->isVeryVerbose()) {
                 if ($output->isVeryVerbose()) {
-                    $output->write('(new-hash:' . $currentHash . ') ');
+                    $output->write('(new-hash:'.$currentHash.') ');
                 }
                 $output->writeln('<info>done</info>');
             }

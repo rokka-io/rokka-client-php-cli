@@ -50,5 +50,4 @@ class ImageDynamicMetadataDeleteSubjectAreaCommand extends BaseRokkaCliCommand
 
         return 0;
     }
-
 }
