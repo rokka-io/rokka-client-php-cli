@@ -21,6 +21,7 @@ Available commands:
  * `stack:clone-all`: Clones all ImageStack to another organization 
  * `stack:delete`: Removes an ImageStack
  * `stack:list`: List all available ImageStacks
+ * `stack:info`: Given a Stack name, output its details (name, operations, options)
 
  * `organization:create`: Creates a new organization
  * `organization:info`: Prints the details of a given organization

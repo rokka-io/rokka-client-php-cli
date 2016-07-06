@@ -2,6 +2,7 @@
 
 namespace RokkaCli\Command;
 
+use RokkaCli\RokkaLibrary;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
@@ -52,7 +53,7 @@ class StackListCommand extends BaseRokkaCliCommand
                 $data = [
                     null, null,
                     $operation->name,
-                    $this->getOptionSettings($operation->options),
+                    RokkaLibrary::formatStackOperationOptions($operation->options, true),
                 ];
 
                 $table->addRow($data);
@@ -64,22 +65,5 @@ class StackListCommand extends BaseRokkaCliCommand
         }
 
         $table->render();
-    }
-
-    /**
-     * Build a string for the "Settings" column.
-     *
-     * @param $settings
-     *
-     * @return string
-     */
-    protected function getOptionSettings($settings)
-    {
-        $data = [];
-        foreach ($settings as $setting) {
-            $data[] = $setting['name'].':'.$setting['value'];
-        }
-
-        return implode(' | ', $data);
     }
 }
