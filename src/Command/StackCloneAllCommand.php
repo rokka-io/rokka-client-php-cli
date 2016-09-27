@@ -55,7 +55,6 @@ class StackCloneAllCommand extends StackCloneCommand
 
         $overwrite = $input->getOption('overwrite');
 
-        $skipped = $cloned = 0;
         $client = $this->getImageClient($sourceOrganization);
         $skipped = $cloned = $errors = 0;
 
