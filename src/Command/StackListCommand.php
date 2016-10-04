@@ -53,7 +53,7 @@ class StackListCommand extends BaseRokkaCliCommand
                 $data = [
                     null, null,
                     $operation->name,
-                    RokkaLibrary::formatStackOperationOptions($operation->options, true),
+                    RokkaLibrary::formatStackOperationOptions($operation->options),
                 ];
 
                 $table->addRow($data);

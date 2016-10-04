@@ -156,26 +156,13 @@ class RokkaLibrary
      *
      * @return string
      */
-    public static function formatStackOperationOptions(array $settings, $associative = false)
+    public static function formatStackOperationOptions(array $settings)
     {
         $data = [];
-
-        if (!$associative) {
-            $fixed_settings = [];
-            foreach ($settings as $name => $value) {
-                $fixed_settings[] = array(
-                    'name' => $name,
-                    'value' => $value,
-                );
-            }
-
-            $settings = $fixed_settings;
+        foreach ($settings as $name => $value) {
+            $data[] = $name.':'.$value;
         }
 
-        foreach ($settings as $setting) {
-            $data[] = $setting['name'].':'.$setting['value'];
-        }
-
-        return implode(' | ', $data);
+        return implode(', ', $data);
     }
 }

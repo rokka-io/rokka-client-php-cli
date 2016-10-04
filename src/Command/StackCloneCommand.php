@@ -116,17 +116,7 @@ class StackCloneCommand extends BaseRokkaCliCommand
             }
         }
 
-        // Converting the Operation parameters to an associative array, instead of an array with 'name' and 'value' as keys.
-        // @todo: Rokka should return compatible objects here for Operations and their options! :|
         $operations = $stack->getStackOperations();
-        foreach ($operations as $operation) {
-            $options = [];
-            foreach ($operation->options as $option) {
-                $options[$option['name']] = $option['value'];
-            }
-            $operation->options = $options;
-        }
-
         $ret = $this->getImageClient()->createStack(
             $destStackName ? $destStackName : $stack->getName(),
             $operations,
