@@ -331,6 +331,15 @@ abstract class BaseRokkaCliCommand extends Command
                 $output->writeln(RokkaLibrary::formatStackOperationOptions($operation->options));
             }
         }
+
+        $options = $stack->getStackOptions();
+        if (!empty($options)) {
+            $output->writeln('  Options:');
+            foreach ($stack->getStackOptions() as $name => $value) {
+                $output->write('    '.$name.': ');
+                $output->writeln('<info>'.$value.'</info>');
+            }
+        }
     }
 
     /**
