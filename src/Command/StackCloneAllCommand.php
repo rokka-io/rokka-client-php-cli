@@ -74,6 +74,7 @@ class StackCloneAllCommand extends StackCloneCommand
 
                 if ($this->cloneStack($stack, $destOrganization, null, $overwrite)) {
                     $output->writeln('<info>done</info>');
+                    ++$cloned;
                 } else {
                     $output->writeln('<error>Error</error>');
                 }
