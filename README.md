@@ -31,7 +31,7 @@ Available commands:
  * `user:create`: Creates and register a new User on Rokka.io
 
 Default settings are loaded from a `rokka.yml` file, if it exists, from the current location.
-Create a file with the following contents, and run `bin/rokka-cli.php`.
+Create a file with the following contents, and run `bin/rokka-cli`.
 
 ```
 rokka_cli:
@@ -43,9 +43,22 @@ rokka_cli:
 The commands `organization:create` and `user:create` have a `--save-as-default` option to create and save
 the new values to the `rokka.yml` defaults file. 
 
-## Building rokka-cli.phar
+## Installation: Composer
+
+ - `composer require rokka/client-cli`
+ - run the CLI from `vendor/bin/rokka-cli`
+
+## Installation: GIT
+
+ - `git clone https://github.com/rokka-io/rokka-client-php-cli.git`
+ - `cd rokka-client-php-cli && composer install`
+ - run the CLI from `bin/rokka-cli`
+
+# Building rokka-cli.phar
 
 Rokka-CLI uses [Box](http://box-project.github.io/box2/) to build executable Phars.
-Once _Box_ is installed, just run `box build` in the project root to build `rokka-cli.phar`.
 
+ - Checkout the GIT repository
+ - globally install the `box2` tool
+ - run `box build` in the project root to build `rokka-cli.phar`.
 
