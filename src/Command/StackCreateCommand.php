@@ -3,6 +3,7 @@
 namespace RokkaCli\Command;
 
 use Rokka\Client\Core\Stack;
+use Rokka\Client\Core\StackOperation;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -63,9 +64,11 @@ class StackCreateCommand extends BaseRokkaCliCommand
                     continue;
                 }
                 $options[$optionName] = $this->askForOption($optionName, $property['type'], $input, $output);
+            } else {
+                $options[$optionName] = $this->askForOption($optionName, $property['type'], $input, $output);
             }
         }
-        $this->collectedData['operations'][$operationName] = $options;
+        $this->collectedData['operations'][$operationName] = new StackOperation($operationName, $options);
     }
 
     protected function askForOption($propertyName, $propertyType, InputInterface $input, OutputInterface $output) {
