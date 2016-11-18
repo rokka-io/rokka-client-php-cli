@@ -63,10 +63,8 @@ class StackCreateCommand extends BaseRokkaCliCommand
                 if (!$this->getHelper('question')->ask($input, $output, new ConfirmationQuestion("\nDo you want to use the option [$optionName] ? (y/n)"))) {
                     continue;
                 }
-                $options[$optionName] = $this->askForOption($optionName, $property['type'], $input, $output);
-            } else {
-                $options[$optionName] = $this->askForOption($optionName, $property['type'], $input, $output);
             }
+            $options[$optionName] = $this->askForOption($optionName, $property['type'], $input, $output);
         }
         $this->collectedData['operations'][$operationName] = new StackOperation($operationName, $options);
     }
