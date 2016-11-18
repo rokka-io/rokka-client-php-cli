@@ -11,15 +11,15 @@ Available commands:
  * `image:delete`: Delete an image from a Rokka organization by its hash
  * `image:delete-all`: Delete all images from a Rokka organization
  * `image:download`: Download a source image from Rokka, given its hash
- * `image:info`: Given an image hash, output its details (name, filesize, metadatas)    
+ * `image:info`: Given an image hash, output its details (name, filesize, metadatas)
  * `image:list`: List all uploaded images
  * `image:render`: Render and download an image from Rokka given its hash
  * `image:set-subjectarea`: Updates/adds the SubjectArea metadata to a given image
  * `image:upload`: Upload a given image file to Rokka.io
- 
- * `stack:clone`: Copies a given ImageStack to another name (or to a different organization) 
- * `stack:clone-all`: Clones all ImageStack to another organization 
- * `stack:delete`: Removes an ImageStack
+
+ * `stack:create`: Create a stack
+ * `stack:clone`: Copies a given ImageStack to another name (or to a different organization)
+ * `stack:clone-all`: Clones all ImageStack to another organization
  * `stack:list`: List all available ImageStacks
  * `stack:info`: Given a Stack name, output its details (name, operations, options)
 
@@ -27,7 +27,7 @@ Available commands:
  * `organization:info`: Prints the details of a given organization
  * `organization:membership:add`: Adds a membership given a user email and role
  * `organization:membership:info`: Prints the details of a given membership (by user email and organization)
-    
+
  * `user:create`: Creates and register a new User on Rokka.io
 
 Default settings are loaded from a `rokka.yml` file, if it exists, from the current location.
@@ -41,7 +41,7 @@ rokka_cli:
 ```
 
 The commands `organization:create` and `user:create` have a `--save-as-default` option to create and save
-the new values to the `rokka.yml` defaults file. 
+the new values to the `rokka.yml` defaults file.
 
 ## Installation: Composer
 
