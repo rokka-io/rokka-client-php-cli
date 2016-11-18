@@ -40,6 +40,7 @@
             <call method="add"><argument type="service" id="rokkacli.stack_info_command" /></call>
             <call method="add"><argument type="service" id="rokkacli.stack_list_command" /></call>
             <call method="add"><argument type="service" id="rokkacli.stack_clone_command" /></call>
+            <call method="add"><argument type="service" id="rokkacli.stack_create_command" /></call>
             <call method="add"><argument type="service" id="rokkacli.stack_clone_all_command" /></call>
             <call method="add"><argument type="service" id="rokkacli.stack_delete_command" /></call>
 
@@ -118,6 +119,9 @@
             <argument type="service" id="rokkacli.configuration" />
         </service>
         <service id="rokkacli.stack_clone_command" class="RokkaCli\Command\StackCloneCommand">
+            <argument type="service" id="rokkacli.configuration" />
+        </service>
+        <service id="rokkacli.stack_create_command" class="RokkaCli\Command\StackCreateCommand">
             <argument type="service" id="rokkacli.configuration" />
         </service>
         <service id="rokkacli.stack_clone_all_command" class="RokkaCli\Command\StackCloneAllCommand">
