@@ -94,8 +94,8 @@ class StackCreateCommand extends BaseRokkaCliCommand
 
     protected function displayResume($output){
         $output->write("Creation of a new stack [<info>{$this->collectedData['name']}</info>]", true);
-        foreach($this->collectedData['operations'] as $name => $options){
-            $output->write(" * Operation [<info>$name</info>] with ".json_encode($options), true);
+        foreach($this->collectedData['operations'] as $name => $operation) {
+            $output->write(" * Operation [<info>$name</info>] with ".json_encode($operation->options), true);
         }
     }
 
