@@ -23,13 +23,8 @@ class OrganizationMembershipAddCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organizationName = $this->configuration->getOrganizationName($input->getOption('organization'));
-
-        if (!$this->verifyOrganizationName($organizationName, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organizationName, $output)) {
+        $organizationName = $input->getOption('organization');
+        if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {
             return -1;
         }
 

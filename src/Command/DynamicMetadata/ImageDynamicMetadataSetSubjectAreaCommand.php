@@ -27,22 +27,17 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
         $hash = $input->getArgument('hash');
-
-        if (!$this->verifySourceImageHash($hash, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 
         $client = $this->clientProvider->getImageClient($organization);
+        if (!$this->verifySourceImageExists($hash, $organization, $output, $client)) {
+            return -1;
+        }
+
         $subjectArea = $this->buildSubjectArea($input);
         $newHash = $client->setDynamicMetadata($subjectArea, $hash);
 

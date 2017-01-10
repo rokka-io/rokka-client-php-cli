@@ -30,9 +30,9 @@ class Configuration
      *
      * @return mixed
      */
-    public function getOrganizationName($organizationName = null)
+    public function getOrganizationName()
     {
-        return $organizationName ? $organizationName : $this->organization;
+        return $this->organization;
     }
 
     /**

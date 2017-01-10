@@ -48,99 +48,67 @@
             <call method="add"><argument type="service" id="rokkacli.test_test_command" /></call>
         </service>
 
-        <!-- User Commands -->
-        <service id="rokkacli.user_create_command" class="RokkaCli\Command\UserCreateCommand">
-            <argument type="service" id="rokkacli.configuration" />
+
+        <service id="rokkacli.base_command" abstract="true">
+            <argument type="service" id="rokkacli.provider.client"/>
+            <argument type="service" id="rokkacli.helper.rokka"/>
         </service>
+
+        <!-- User Commands -->
+        <service parent="rokkacli.base_command" id="rokkacli.user_create_command" class="RokkaCli\Command\UserCreateCommand"/>
 
         <!-- Organization Commands -->
-        <service id="rokkacli.organization_create_command" class="RokkaCli\Command\OrganizationCreateCommand">
-            <argument type="service" id="rokkacli.configuration" />
+        <service parent="rokkacli.base_command" id="rokkacli.organization_create_command" class="RokkaCli\Command\OrganizationCreateCommand">
+            <argument type="service" id="rokkacli.configuration"/>
         </service>
-        <service id="rokkacli.organization_info_command" class="RokkaCli\Command\OrganizationInfoCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.organization_list_command" class="RokkaCli\Command\OrganizationListCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.organization_membership_add_command" class="RokkaCli\Command\OrganizationMembershipAddCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.organization_membership_info_command" class="RokkaCli\Command\OrganizationMembershipInfoCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
+        <service parent="rokkacli.base_command" id="rokkacli.organization_info_command" class="RokkaCli\Command\OrganizationInfoCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.organization_list_command" class="RokkaCli\Command\OrganizationListCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.organization_membership_add_command" class="RokkaCli\Command\OrganizationMembershipAddCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.organization_membership_info_command" class="RokkaCli\Command\OrganizationMembershipInfoCommand"/>
 
         <!-- Operation Commands -->
-        <service id="rokkacli.operation_list_command" class="RokkaCli\Command\OperationListCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
+        <service parent="rokkacli.base_command" id="rokkacli.operation_list_command" class="RokkaCli\Command\OperationListCommand"/>
 
         <!-- Image Commands -->
-        <service id="rokkacli.image_clone_command" class="RokkaCli\Command\ImageCloneCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_clone_all_command" class="RokkaCli\Command\ImageCloneAllCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_download_command" class="RokkaCli\Command\ImageDownloadCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_list_command" class="RokkaCli\Command\ImageListCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_upload_command" class="RokkaCli\Command\ImageUploadCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_info_command" class="RokkaCli\Command\ImageInfoCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_delete_command" class="RokkaCli\Command\ImageDeleteCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_delete_all_command" class="RokkaCli\Command\ImageDeleteAllCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_render_command" class="RokkaCli\Command\ImageRenderCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
+        <service parent="rokkacli.base_command" id="rokkacli.image_clone_command" class="RokkaCli\Command\ImageCloneCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_clone_all_command" class="RokkaCli\Command\ImageCloneAllCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_download_command" class="RokkaCli\Command\ImageDownloadCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_list_command" class="RokkaCli\Command\ImageListCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_upload_command" class="RokkaCli\Command\ImageUploadCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_info_command" class="RokkaCli\Command\ImageInfoCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_delete_command" class="RokkaCli\Command\ImageDeleteCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_delete_all_command" class="RokkaCli\Command\ImageDeleteAllCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_render_command" class="RokkaCli\Command\ImageRenderCommand"/>
+
         <!-- Dynamic Metadata Commands -->
-        <service id="rokkacli.image_dynamic_metadata_set_subjectarea_command" class="RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataSetSubjectAreaCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.image_dynamic_metadata_delete_subjectarea_command" class="RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataDeleteSubjectAreaCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
+        <service parent="rokkacli.base_command" id="rokkacli.image_dynamic_metadata_set_subjectarea_command" class="RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataSetSubjectAreaCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.image_dynamic_metadata_delete_subjectarea_command" class="RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataDeleteSubjectAreaCommand"/>
 
         <!-- Stack Commands -->
-        <service id="rokkacli.stack_info_command" class="RokkaCli\Command\StackInfoCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.stack_list_command" class="RokkaCli\Command\StackListCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.stack_clone_command" class="RokkaCli\Command\StackCloneCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.stack_create_command" class="RokkaCli\Command\StackCreateCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.stack_clone_all_command" class="RokkaCli\Command\StackCloneAllCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
-        <service id="rokkacli.stack_delete_command" class="RokkaCli\Command\StackDeleteCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
+        <service parent="rokkacli.base_command" id="rokkacli.stack_info_command" class="RokkaCli\Command\StackInfoCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.stack_list_command" class="RokkaCli\Command\StackListCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.stack_clone_command" class="RokkaCli\Command\StackCloneCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.stack_create_command" class="RokkaCli\Command\StackCreateCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.stack_clone_all_command" class="RokkaCli\Command\StackCloneAllCommand"/>
+        <service parent="rokkacli.base_command" id="rokkacli.stack_delete_command" class="RokkaCli\Command\StackDeleteCommand"/>
 
         <!-- Test Commands -->
-        <service id="rokkacli.test_test_command" class="RokkaCli\Command\TestTestCommand">
-            <argument type="service" id="rokkacli.configuration" />
-        </service>
+        <service parent="rokkacli.base_command" id="rokkacli.test_test_command" class="RokkaCli\Command\TestTestCommand"/>
 
+        <!-- utility services -->
         <service id="rokkacli.configuration" class="RokkaCli\Configuration">
             <argument>%rokka_cli.api_uri%</argument>
             <argument>%rokka_cli.api_key%</argument>
             <argument>%rokka_cli.api_secret%</argument>
             <argument>%rokka_cli.organization%</argument>
+        </service>
+
+        <service id="rokkacli.provider.client" class="RokkaCli\Provider\ClientProvider">
+            <argument type="service" id="rokkacli.configuration"/>
+        </service>
+
+        <service id="rokkacli.helper.rokka" class="RokkaCli\RokkaHelper">
+            <argument type="service" id="rokkacli.configuration"/>
         </service>
 
         <service id="symfony.filesystem" class="Symfony\Component\Filesystem\Filesystem">

@@ -24,17 +24,12 @@ class ImageDeleteCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
         $hash = $input->getArgument('hash');
 
-        if (!$this->verifyOrganizationName($organization, $output)) {
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
-            return -1;
-        }
-
         $client = $this->clientProvider->getImageClient($organization);
         if (!$this->verifySourceImageExists($hash, $organization, $output, $client)) {
             return -1;

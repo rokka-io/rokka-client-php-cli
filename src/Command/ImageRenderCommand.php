@@ -30,7 +30,10 @@ class ImageRenderCommand extends BaseRokkaCliCommand
         $hash = $input->getArgument('hash');
         $saveTo = $input->getArgument('save-to');
 
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
+            return -1;
+        }
         $stackName = $input->getArgument('stack-name');
         $pipe = $input->getOption('pipe');
         $format = $input->getOption('format');
@@ -64,18 +67,6 @@ class ImageRenderCommand extends BaseRokkaCliCommand
                     return -1;
                 }
             }
-        }
-
-        if (!$this->verifySourceImageHash($hash, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
-            return -1;
         }
 
         $client = $this->clientProvider->getImageClient($organization);

@@ -3,6 +3,8 @@
 namespace RokkaCli\Command;
 
 use RokkaCli\Configuration;
+use RokkaCli\Provider\ClientProvider;
+use RokkaCli\RokkaHelper;
 use RokkaCli\RokkaLibrary;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,12 +13,26 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrganizationCreateCommand extends BaseRokkaCliCommand
 {
+    private $configuration;
+
+    /**
+     * @param ClientProvider $clientProvider
+     * @param RokkaHelper    $rokkaHelper
+     * @param Configuration  $configuration
+     */
+    public function __construct(ClientProvider $clientProvider, RokkaHelper $rokkaHelper, Configuration $configuration)
+    {
+        parent::__construct($clientProvider, $rokkaHelper);
+
+        $this->configuration = $configuration;
+    }
+
     protected function configure()
     {
         $this
             ->setName('organization:create')
             ->setDescription('Create a new organization')
-            ->addArgument('name', InputArgument::REQUIRED, 'The organization name')
+            ->addArgument('organizationName', InputArgument::REQUIRED, 'The organization name')
             ->addArgument('email', InputArgument::REQUIRED, 'The organization billing email')
             ->addOption('display-name', null, InputOption::VALUE_REQUIRED, 'Specify the display name for the organization', '')
             ->addOption('save-as-default', null, InputOption::VALUE_NONE, 'Save the registered organization in the local .rokka.yml setting file (overwrite)')
@@ -25,27 +41,25 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $name = $input->getArgument('name');
+        $organizationName = $input->getArgument('name');
         $email = $input->getArgument('email');
         $displayName = $input->getOption('display-name');
 
         $client = $this->clientProvider->getUserClient();
 
-        $org = RokkaLibrary::getOrganization($client, $name);
-
-        if ($org) {
+        if ($this->rokkaHelper->organizationExists($client, $organizationName)) {
             $output->writeln($this->formatterHelper->formatBlock([
                 'Error!',
-                'The "'.$name.'" organization already exists!',
+                'The "'.$organizationName.'" organization already exists!',
             ], 'error', true));
 
             return -1;
         } else {
-            $org = $client->createOrganization($name, $email, $displayName);
+            $org = $client->createOrganization($organizationName, $email, $displayName);
             $output->writeln('Organization created');
         }
 
-        if ($org && $org->getName() == $name) {
+        if ($org && $org->getName() == $organizationName) {
             self::outputOrganizationInfo($org, $output);
         }
 
@@ -60,7 +74,7 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
                 $org->getName()
             );
 
-            $ret = RokkaLibrary::updateConfigToFile($configFile, $conf);
+            $ret = $this->updateConfigToFile($configFile, $conf);
             if ($ret === false) {
                 $output->writeln($this->formatterHelper->formatBlock([
                     'Error!',

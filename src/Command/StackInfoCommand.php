@@ -21,14 +21,9 @@ class StackInfoCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
         $stackName = $input->getArgument('stack-name');
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 

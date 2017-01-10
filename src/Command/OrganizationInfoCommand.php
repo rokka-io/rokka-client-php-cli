@@ -19,13 +19,8 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getArgument('organization'));
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        $organization = $input->getArgument('organization');
+        if (!$organizationName = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 

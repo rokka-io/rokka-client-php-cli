@@ -21,13 +21,8 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        $organization = $input->getOption('organization');
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 

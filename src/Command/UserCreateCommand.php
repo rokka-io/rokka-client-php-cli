@@ -43,7 +43,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
                 $this->configuration->getOrganizationName()
             );
 
-            $ret = RokkaLibrary::updateConfigToFile($configFile, $conf);
+            $ret = $this->updateConfigToFile($configFile, $conf);
             if ($ret === false) {
                 $output->writeln($this->formatterHelper->formatBlock([
                     'Error!',

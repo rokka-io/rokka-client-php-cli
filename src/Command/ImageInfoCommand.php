@@ -22,24 +22,19 @@ class ImageInfoCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organizationName = $input->getOption('organization');
         $hash = $input->getArgument('hash');
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
+        if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {
             return -1;
         }
 
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        // Getting the client here, and reuse it later.
+        $client = $this->clientProvider->getImageClient($organizationName);
+        if (!$this->verifySourceImageExists($hash, $organizationName, $output, $client)) {
             return -1;
         }
 
-        // Getting th client here, and reuse it later.
-        $client = $this->clientProvider->getImageClient($organization);
-        if (!$this->verifySourceImageExists($hash, $organization, $output, $client)) {
-            return -1;
-        }
-
-        $sourceImage = RokkaLibrary::getSourceImage($client, $hash, $organization);
+        $sourceImage = $client->getSourceImage($hash, false, $organizationName);
         self::outputImageInfo($sourceImage, $output);
 
         return 0;

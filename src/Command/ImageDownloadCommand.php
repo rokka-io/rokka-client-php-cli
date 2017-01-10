@@ -2,6 +2,8 @@
 
 namespace RokkaCli\Command;
 
+use Rokka\Client\Core\SourceImage;
+use Rokka\Client\Image;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -29,7 +31,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
         $saveTo = $input->getOption('save-to');
         $overwrite = $input->getOption('overwrite');
 
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
         $pipe = $input->getOption('pipe');
         $saveAsHash = $input->getOption('save-as-hash');
 
@@ -38,15 +40,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
             $saveTo = 'php://stdout';
         }
 
-        if (!$this->verifySourceImageHash($hash, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 
@@ -92,5 +86,50 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
         }
 
         return 0;
+    }
+
+    /**
+     * Downloads and saves an image from Rokka.
+     *
+     * @param Image           $client    The Image client to use
+     * @param SourceImage     $image     The image to download
+     * @param string          $saveTo    The destination stream to save the image to
+     * @param OutputInterface $output    The output interface to display messages
+     * @param null            $stackName The stack name to use, leave empty to use the source image on Rokka
+     * @param string          $format    The file format to retrieve the image if using a Stack
+     *
+     * @return bool The status of the operation, True if the image has been saved correctly, false otherwise.
+     */
+    private function saveImageContents(Image $client, SourceImage $image, $saveTo, OutputInterface $output, $stackName = null, $format = 'jpg')
+    {
+        if (!$stackName) {
+            $output->writeln('Getting source image contents for <info>'.$image->hash.'</info> from <comment>'.$image->organization.'</comment>');
+        } else {
+            $output->writeln('Rendering image  <info>'.$image->hash.'</info> from <comment>'.$image->organization.'</comment> on stack <info>'.$stackName.'</info>');
+        }
+
+        $contents = $this->rokkaHelper->getSourceImageContents($client, $image->hash, $image->organization, $stackName, $format);
+        if (!$contents) {
+            $output->writeln($this->formatterHelper->formatBlock([
+                'Error!',
+                'Error getting image contents from Rokka.io!',
+            ], 'error', true));
+
+            return false;
+        }
+
+        $ret = file_put_contents($saveTo, $contents, FILE_BINARY);
+        if (false == $ret) {
+            $output->writeln($this->formatterHelper->formatBlock([
+                'Error!',
+                'Error writing image contents to <info>'.$saveTo.'</info>!',
+            ], 'error', true));
+
+            return false;
+        }
+
+        $output->writeln('Image saved to <info>'.$saveTo.'</info>');
+
+        return true;
     }
 }

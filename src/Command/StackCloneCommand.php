@@ -27,22 +27,13 @@ class StackCloneCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $sourceOrganization = $this->configuration->getOrganizationName($input->getOption('source-organization'));
-        if (!$this->verifyOrganizationName($sourceOrganization, $output)) {
+        $sourceOrganization = $input->getOption('source-organization');
+        if (!$sourceOrganization = $this->resolveOrganizationName($sourceOrganization, $output)) {
             return -1;
         }
 
-        if (!$this->verifyOrganizationExists($sourceOrganization, $output)) {
-            return -1;
-        }
-
-        $destOrganization = $this->configuration->getOrganizationName($input->getOption('dest-organization'));
-
-        if ($sourceOrganization !== $destOrganization && !$this->verifyOrganizationName($destOrganization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($destOrganization, $output)) {
+        $destOrganization = $input->getOption('dest-organization');
+        if (!$destOrganization = $this->resolveOrganizationName($destOrganization, $output)) {
             return -1;
         }
 
@@ -102,11 +93,12 @@ class StackCloneCommand extends BaseRokkaCliCommand
      */
     protected function cloneStack(Stack $stack, $destOrganization, $destStackName = null, $overwrite = false)
     {
+        $destImageClient = $this->clientProvider->getImageClient($destOrganization);
         $destStackName = $destStackName ? $destStackName : $stack->getName();
 
-        if (RokkaLibrary::stackExists($this->clientProvider->getImageClient(), $destStackName, $destOrganization)) {
+        if ($this->rokkaHelper->stackExists($destImageClient, $destStackName, $destOrganization)) {
             if ($overwrite) {
-                if (!$this->clientProvider->getImageClient()->deleteStack($destStackName, $destOrganization)) {
+                if (!$destImageClient->deleteStack($destStackName, $destOrganization)) {
                     throw new \ErrorException('Stack can not be removed from "'.$destOrganization.'" organization.');
                 }
             } else {
@@ -125,7 +117,7 @@ class StackCloneCommand extends BaseRokkaCliCommand
             $operation->options = $options;
         }
 
-        $ret = $this->clientProvider->getImageClient()->createStack(
+        $ret = $destImageClient->createStack(
             $destStackName ? $destStackName : $stack->getName(),
             $operations,
             $destOrganization
