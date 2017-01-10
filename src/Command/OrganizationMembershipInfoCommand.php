@@ -27,7 +27,6 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
         $organizationName = $this->configuration->getOrganizationName($input->getOption('organization'));
 
         if (!$this->verifyOrganizationName($organizationName, $output)) {

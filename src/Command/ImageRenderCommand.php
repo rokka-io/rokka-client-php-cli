@@ -27,7 +27,6 @@ class ImageRenderCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
         $hash = $input->getArgument('hash');
         $saveTo = $input->getArgument('save-to');
 

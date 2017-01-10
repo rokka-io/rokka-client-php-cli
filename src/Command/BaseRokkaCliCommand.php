@@ -16,6 +16,7 @@ use RokkaCli\Configuration;
 use RokkaCli\RokkaLibrary;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\FormatterHelper;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class BaseRokkaCliCommand extends Command
@@ -88,9 +89,9 @@ abstract class BaseRokkaCliCommand extends Command
     /**
      * @param OutputInterface $output
      */
-    protected function displayWarningOverridenAPI(OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        if ($this->isDefaultRokkaAPIUri()) {
+        if ($this->configuration->getApiUri() == Base::DEFAULT_API_BASE_URL) {
             return;
         }
 
@@ -98,14 +99,6 @@ abstract class BaseRokkaCliCommand extends Command
             'Warning!',
             'Rokka API Uri has been overridden, API calls are performed to "'.$this->configuration->getApiUri().'".',
         ], 'comment', true));
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isDefaultRokkaAPIUri()
-    {
-        return $this->configuration->getApiUri() == Base::DEFAULT_API_BASE_URL;
     }
 
     /**

@@ -19,7 +19,6 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
         $organization = $this->configuration->getOrganizationName($input->getArgument('organization'));
 
         if (!$this->verifyOrganizationName($organization, $output)) {

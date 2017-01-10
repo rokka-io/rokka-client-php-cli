@@ -25,7 +25,6 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
         $hash = $input->getArgument('hash');
         $saveTo = $input->getOption('save-to');
         $overwrite = $input->getOption('overwrite');
