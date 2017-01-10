@@ -23,7 +23,6 @@ class StackDeleteCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
         $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
         $stackName = $input->getArgument('stack-name');
 

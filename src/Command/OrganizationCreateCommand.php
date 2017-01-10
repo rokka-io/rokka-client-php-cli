@@ -25,8 +25,6 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
-
         $name = $input->getArgument('name');
         $email = $input->getArgument('email');
         $displayName = $input->getOption('display-name');

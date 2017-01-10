@@ -27,7 +27,6 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
         $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
         $hash = $input->getArgument('hash');
 

@@ -24,8 +24,6 @@ class StackCloneAllCommand extends StackCloneCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayWarningOverridenAPI($output);
-
         $sourceOrganization = $this->configuration->getOrganizationName($input->getOption('source-organization'));
         if (!$this->verifyOrganizationName($sourceOrganization, $output)) {
             return -1;
