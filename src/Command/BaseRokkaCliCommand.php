@@ -10,9 +10,9 @@ use Rokka\Client\Core\Organization;
 use Rokka\Client\Core\SourceImage;
 use Rokka\Client\Core\Stack;
 use Rokka\Client\User;
-use Rokka\Client\Factory;
 use Rokka\Client\Image;
 use RokkaCli\Configuration;
+use RokkaCli\Provider\ClientProvider;
 use RokkaCli\RokkaLibrary;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\FormatterHelper;
@@ -21,69 +21,27 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class BaseRokkaCliCommand extends Command
 {
-    /** @var Configuration */
+    /**
+     * @var ClientProvider
+     */
+    protected $clientProvider;
+
+    /**
+     * @var Configuration
+     */
     protected $configuration;
 
-    /** @var Image */
-    protected static $imageClient = null;
-
-    /** @var User */
-    protected static $userClient = null;
-
-    /** @var FormatterHelper */
+    /**
+     * @var FormatterHelper
+     */
     protected $formatterHelper = null;
 
-    public function __construct(Configuration $configuration)
+    public function __construct(ClientProvider $clientProvider, Configuration $configuration)
     {
-        // Saving the default configuration to be used later.
+        $this->clientProvider = $clientProvider;
         $this->configuration = $configuration;
         $this->formatterHelper = new FormatterHelper();
         parent::__construct();
-    }
-
-    /**
-     * @param $reset
-     *
-     * @return \Rokka\Client\User
-     */
-    protected function getUserClient($reset = false)
-    {
-        if (!static::$userClient || $reset) {
-            static::$userClient = Factory::getUserClient(
-                $this->configuration->getApiUri()
-            );
-
-            static::$userClient->setCredentials(
-                $this->configuration->getApiKey(),
-                $this->configuration->getApiSecret()
-            );
-        }
-
-        return static::$userClient;
-    }
-
-    /**
-     * @param $organization
-     * @param $reset
-     *
-     * @return \Rokka\Client\Image
-     */
-    protected function getImageClient($organization = null, $reset = false)
-    {
-        if (!$organization) {
-            $organization = $this->configuration->getOrganizationName();
-        }
-
-        if (!static::$imageClient || $reset) {
-            static::$imageClient = Factory::getImageClient(
-                $organization,
-                $this->configuration->getApiKey(),
-                $this->configuration->getApiSecret(),
-                $this->configuration->getApiUri()
-            );
-        }
-
-        return static::$imageClient;
     }
 
     /**
@@ -113,7 +71,7 @@ abstract class BaseRokkaCliCommand extends Command
      */
     public function verifyStackExists($stackName, $organization, OutputInterface $output, Image $client = null)
     {
-        $client = $client ? $client : $this->getImageClient($organization);
+        $client = $client ? $client : $this->clientProvider->getImageClient($organization);
 
         if (!$stackName || !RokkaLibrary::stackExists($client, $stackName, $organization)) {
             $output->writeln(
@@ -162,7 +120,7 @@ abstract class BaseRokkaCliCommand extends Command
             return false;
         }
 
-        $client = $client ? $client : $this->getUserClient();
+        $client = $client ? $client : $this->clientProvider->getUserClient();
 
         if (RokkaLibrary::organizationExists($client, $organization)) {
             return true;
@@ -214,7 +172,7 @@ abstract class BaseRokkaCliCommand extends Command
             return false;
         }
 
-        $client = $client ? $client : $this->getImageClient($organization);
+        $client = $client ? $client : $this->clientProvider->getImageClient($organization);
         $image = RokkaLibrary::getSourceImage($client, $hash, $organization);
 
         if ($image instanceof SourceImage && $image->hash == $hash) {

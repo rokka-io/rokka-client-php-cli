@@ -32,7 +32,7 @@ class ImageListCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
         $limit = $input->getOption('limit');
         $images = $client->listSourceImages($limit);
 

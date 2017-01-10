@@ -37,7 +37,7 @@ class ImageUploadCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $imageClient = $this->getImageClient();
+        $imageClient = $this->clientProvider->getImageClient();
         $contents = file_get_contents($image);
         $binaryHash = sha1_file($image);
 

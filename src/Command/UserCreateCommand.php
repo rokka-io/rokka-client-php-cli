@@ -24,7 +24,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $email = $input->getArgument('email');
-        $user = $this->getUserClient()->createUser($email);
+        $user = $this->clientProvider->getUserClient()->createUser($email);
 
         $output->writeln('User successfully created:');
         $output->writeln('  ID: <info>'.$user->getId().'</info>');

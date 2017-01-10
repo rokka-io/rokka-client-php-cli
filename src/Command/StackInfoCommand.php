@@ -32,7 +32,7 @@ class StackInfoCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         if (!$this->verifyStackExists($stackName, $organization, $output, $client)) {
             return -1;

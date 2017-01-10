@@ -29,7 +29,7 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
         $email = $input->getArgument('email');
         $displayName = $input->getOption('display-name');
 
-        $client = $this->getUserClient();
+        $client = $this->clientProvider->getUserClient();
 
         $org = RokkaLibrary::getOrganization($client, $name);
 

@@ -50,7 +50,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         if (!$this->verifySourceImageExists($hash, $organization, $output, $client)) {
             return -1;

@@ -51,7 +51,7 @@ class ImageCloneAllCommand extends ImageCloneCommand
             return -1;
         }
 
-        $client = $this->getImageClient($orgSource);
+        $client = $this->clientProvider->getImageClient($orgSource);
 
         $limit = 20;
         $images = $client->listSourceImages($limit);

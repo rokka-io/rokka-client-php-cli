@@ -29,7 +29,7 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $organization = $this->getUserClient()->getOrganization($organization);
+        $organization = $this->clientProvider->getUserClient()->getOrganization($organization);
 
         self::outputOrganizationInfo($organization, $output);
 

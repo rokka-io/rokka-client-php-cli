@@ -47,7 +47,7 @@ class StackDeleteCommand extends BaseRokkaCliCommand
             }
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         if (!$client->deleteStack($stackName, $organization)) {
             $output->writeln($this->formatterHelper->formatBlock([

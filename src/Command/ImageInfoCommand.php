@@ -34,7 +34,7 @@ class ImageInfoCommand extends BaseRokkaCliCommand
         }
 
         // Getting th client here, and reuse it later.
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
         if (!$this->verifySourceImageExists($hash, $organization, $output, $client)) {
             return -1;
         }

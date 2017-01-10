@@ -20,7 +20,7 @@ class OperationListCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $imageClient = $this->getImageClient();
+        $imageClient = $this->clientProvider->getImageClient();
         $operations = $imageClient->listOperations();
 
         $table = new Table($output);

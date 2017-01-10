@@ -39,7 +39,7 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
 
         $email = $input->getArgument('email');
 
-        $client = $this->getUserClient();
+        $client = $this->clientProvider->getUserClient();
         $membership = $client->getMembership($organizationName, $email);
 
         $output->writeln('Membership');

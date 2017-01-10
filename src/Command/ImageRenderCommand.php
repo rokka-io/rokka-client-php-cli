@@ -78,7 +78,7 @@ class ImageRenderCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         if (null !== $stackName && !$this->verifyStackExists($stackName, $organization, $output)) {
             return -1;

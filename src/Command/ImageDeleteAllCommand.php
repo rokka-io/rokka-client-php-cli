@@ -40,7 +40,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
             }
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         $limit = 20;
         $images = $client->listSourceImages($limit);

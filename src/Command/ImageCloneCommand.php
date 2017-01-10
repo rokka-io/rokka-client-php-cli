@@ -44,7 +44,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $client = $this->getImageClient($orgSource);
+        $client = $this->clientProvider->getImageClient($orgSource);
 
         $hash = $input->getArgument('hash');
         if (!$this->verifySourceImageExists($hash, $orgSource, $output, $client)) {

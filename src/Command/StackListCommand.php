@@ -35,7 +35,7 @@ class StackListCommand extends BaseRokkaCliCommand
 
         $limit = $input->getOption('limit');
 
-        $imageClient = $this->getImageClient();
+        $imageClient = $this->clientProvider->getImageClient();
         $stacks = $imageClient->listStacks($limit, null, $organization);
         $table = new Table($output);
 

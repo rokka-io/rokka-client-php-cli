@@ -36,7 +36,7 @@ class OrganizationMembershipAddCommand extends BaseRokkaCliCommand
         $role = $input->getArgument('role');
         $email = $input->getArgument('email');
 
-        $client = $this->getUserClient();
+        $client = $this->clientProvider->getUserClient();
 
         if ($client->createMembership($organizationName, $email, $role)) {
             $membership = $client->getMembership($organizationName, $email);

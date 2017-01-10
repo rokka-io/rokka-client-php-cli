@@ -30,7 +30,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->collectedData['operations'] = [];
         $this->displayResume($output);
 
-        $imageClient = $this->getImageClient();
+        $imageClient = $this->clientProvider->getImageClient();
         $operations = [];
         foreach($imageClient->listOperations()->getOperations() as $op){
             $operations[$op->name] = $op;
@@ -46,7 +46,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->displayResume($output);
         $confirm = new ConfirmationQuestion( "\nDo you really want to create the stack? (y/n)");
         if ($this->getHelper('question')->ask($input, $output, $confirm)) {
-            $this->getImageClient()->createStack($this->collectedData['name'], $this->collectedData['operations']);
+            $this->clientProvider->getImageClient()->createStack($this->collectedData['name'], $this->collectedData['operations']);
         }
     }
 

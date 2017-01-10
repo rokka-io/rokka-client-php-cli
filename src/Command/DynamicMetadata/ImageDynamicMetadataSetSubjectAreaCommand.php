@@ -42,7 +42,7 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
         $subjectArea = $this->buildSubjectArea($input);
         $newHash = $client->setDynamicMetadata($subjectArea, $hash);
 
