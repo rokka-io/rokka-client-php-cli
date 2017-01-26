@@ -13,7 +13,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:delete-all')
-            ->setDescription('Remove all images from Rokka')
+            ->setDescription('Remove all images of an organization from Rokka')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to delete the images from')
             ->addOption('yes', null, InputOption::VALUE_NONE, 'Confirm the deletion of all images')
         ;

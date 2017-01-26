@@ -4,12 +4,14 @@ namespace RokkaCli;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use Rokka\Client\Base;
 use Rokka\Client\Core\SourceImage;
 use Rokka\Client\Image;
 use Rokka\Client\User;
 
-class RokkaHelper
+/**
+ * Utility functions to work with the rokka API.
+ */
+class RokkaApiHelper
 {
     /**
      * @var Configuration
@@ -19,16 +21,6 @@ class RokkaHelper
     public function __construct(Configuration $configuration)
     {
         $this->configuration = $configuration;
-    }
-
-    public function isDefaultApiUri()
-    {
-        return $this->configuration->getApiUri() === Base::DEFAULT_API_BASE_URL;
-    }
-
-    public function getApiUri()
-    {
-        return $this->configuration->getApiUri();
     }
 
     public function getDefaultOrganizationName()
@@ -156,23 +148,5 @@ class RokkaHelper
 
             return $resp->getBody()->getContents();
         }
-    }
-
-    /**
-     * Build a string representation for the StackOperation's options attribute.
-     *
-     * @param array $settings
-     *
-     * @return string
-     */
-    public function formatStackOperationOptions(array $settings)
-    {
-        $data = [];
-
-        foreach ($settings as $name => $value) {
-            $data[] = $name.':'.$value;
-        }
-
-        return implode(' | ', $data);
     }
 }

@@ -2,11 +2,9 @@
 
 namespace RokkaCli\Command;
 
-use Rokka\Client\Core\Stack;
 use Rokka\Client\Core\StackOperation;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
@@ -30,16 +28,10 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->collectedData['operations'] = [];
         $this->displayResume($output);
 
-        $imageClient = $this->clientProvider->getImageClient();
-        $operations = [];
-        foreach($imageClient->listOperations()->getOperations() as $op){
-            $operations[$op->name] = $op;
-        };
-
         $moreOperation = new ConfirmationQuestion("\nDo you add one more operation? (y/n)");
         while(count($this->collectedData['operations']) == 0 || $this->getHelper('question')->ask($input, $output, $moreOperation)) {
             $output->write('', true);
-            $this->askForOperation($operations, $input, $output);
+            $this->askForOperation($input, $output);
             $this->displayResume($output);
         }
 
@@ -50,7 +42,16 @@ class StackCreateCommand extends BaseRokkaCliCommand
         }
     }
 
-    protected function askForOperation($operations, $input, $output) {
+    private function askForOperation($input, $output)
+    {
+        static $operations;
+        if (!$operations) {
+            $imageClient = $this->clientProvider->getImageClient();
+            $operations = [];
+            foreach($imageClient->listOperations()->getOperations() as $op){
+                $operations[$op->name] = $op;
+            };
+        }
 
         $question = new ChoiceQuestion('Please select an operation', array_keys($operations));
         $question->setErrorMessage('Operation [%s] is invalid.');
@@ -69,11 +70,11 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->collectedData['operations'][$operationName] = new StackOperation($operationName, $options);
     }
 
-    protected function askForOption($propertyName, $propertyType, InputInterface $input, OutputInterface $output) {
+    private function askForOption($propertyName, $propertyType, InputInterface $input, OutputInterface $output) {
         $question = new Question("\nChoose $propertyName, type [$propertyType]:");
         while(true){
             $data = $this->getHelper('question')->ask($input, $output, $question);
-            if ($propertyType == 'integer' || $propertyType == 'number') {
+            if ($propertyType === 'integer' || $propertyType == 'number') {
                 if ($data !== '0' && (int)$data === 0) {
                     $output->write("<error>Invalid $propertyType value [$data]</error>");
                     continue;

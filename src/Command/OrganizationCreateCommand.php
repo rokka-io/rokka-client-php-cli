@@ -3,9 +3,9 @@
 namespace RokkaCli\Command;
 
 use RokkaCli\Configuration;
+use RokkaCli\EditableConfiguration;
 use RokkaCli\Provider\ClientProvider;
-use RokkaCli\RokkaHelper;
-use RokkaCli\RokkaLibrary;
+use RokkaCli\RokkaApiHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -13,14 +13,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrganizationCreateCommand extends BaseRokkaCliCommand
 {
+    /**
+     * @var EditableConfiguration|Configuration
+     */
     private $configuration;
 
     /**
      * @param ClientProvider $clientProvider
-     * @param RokkaHelper    $rokkaHelper
+     * @param RokkaApiHelper $rokkaHelper
      * @param Configuration  $configuration
      */
-    public function __construct(ClientProvider $clientProvider, RokkaHelper $rokkaHelper, Configuration $configuration)
+    public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper, Configuration $configuration)
     {
         parent::__construct($clientProvider, $rokkaHelper);
 
@@ -35,8 +38,10 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
             ->addArgument('organizationName', InputArgument::REQUIRED, 'The organization name')
             ->addArgument('email', InputArgument::REQUIRED, 'The organization billing email')
             ->addOption('display-name', null, InputOption::VALUE_REQUIRED, 'Specify the display name for the organization', '')
-            ->addOption('save-as-default', null, InputOption::VALUE_NONE, 'Save the registered organization in the local .rokka.yml setting file (overwrite)')
         ;
+        if ($this->configuration instanceof EditableConfiguration) {
+            $this->addOption('save-as-default', null, InputOption::VALUE_NONE, 'Save the registered organization in the local .rokka.yml setting file (overwrite)');
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -60,21 +65,19 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
         }
 
         if ($org && $org->getName() == $organizationName) {
-            self::outputOrganizationInfo($org, $output);
+            $this->formatterHelper->outputOrganizationInfo($org, $output);
         }
 
-        $save = $input->getOption('save-as-default');
+        $save = $input->hasOption('save-as-default') && $input->getOption('save-as-default');
         if ($save) {
-            $configFile = getcwd().DIRECTORY_SEPARATOR.'rokka.yml';
-
             $conf = new Configuration(
                 $this->configuration->getApiUri(),
                 $this->configuration->getApiKey(),
                 $this->configuration->getApiSecret(),
                 $org->getName()
             );
-
-            $ret = $this->updateConfigToFile($configFile, $conf);
+            $configFile = $this->configuration->getConfigFileName();
+            $ret = $this->configuration->updateConfigToFile($configFile, $conf);
             if ($ret === false) {
                 $output->writeln($this->formatterHelper->formatBlock([
                     'Error!',

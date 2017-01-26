@@ -2,7 +2,6 @@
 
 namespace RokkaCli\Command;
 
-use RokkaCli\RokkaLibrary;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -35,7 +34,7 @@ class ImageInfoCommand extends BaseRokkaCliCommand
         }
 
         $sourceImage = $client->getSourceImage($hash, false, $organizationName);
-        self::outputImageInfo($sourceImage, $output);
+        $this->formatterHelper->outputImageInfo($sourceImage, $output);
 
         return 0;
     }

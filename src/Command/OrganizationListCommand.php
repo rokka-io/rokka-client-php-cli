@@ -12,7 +12,7 @@ class OrganizationListCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('organization:list')
-            ->setDescription('List all the organizations for the current user')
+            ->setDescription('List all organizations (that you are allowed to see)')
         ;
     }
 

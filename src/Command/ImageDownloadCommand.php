@@ -118,6 +118,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
             return false;
         }
 
+        // TODO: verify if target file exists, ask for permission to overwrite unless --force
         $ret = file_put_contents($saveTo, $contents, FILE_BINARY);
         if (false == $ret) {
             $output->writeln($this->formatterHelper->formatBlock([

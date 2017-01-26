@@ -54,7 +54,7 @@ class ImageUploadCommand extends BaseRokkaCliCommand
             $output->writeln(' <info>Done</info>');
             $output->writeln('');
 
-            self::outputImageInfo($sourceImage, $output);
+            $this->formatterHelper->outputImageInfo($sourceImage, $output);
         }
 
         return 0;

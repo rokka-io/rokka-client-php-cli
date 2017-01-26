@@ -2,7 +2,6 @@
 
 namespace RokkaCli\Command;
 
-use RokkaCli\RokkaLibrary;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,7 +46,7 @@ class StackListCommand extends BaseRokkaCliCommand
                 $data = [
                     null, null,
                     $operation->name,
-                    $this->rokkaHelper->formatStackOperationOptions($operation->options),
+                    $this->formatterHelper->formatStackOperationOptions($operation->options),
                 ];
 
                 $table->addRow($data);
@@ -59,5 +58,7 @@ class StackListCommand extends BaseRokkaCliCommand
         }
 
         $table->render();
+
+        return 0;
     }
 }

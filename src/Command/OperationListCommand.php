@@ -65,7 +65,7 @@ class OperationListCommand extends BaseRokkaCliCommand
      *
      * @return string
      */
-    protected function getPropertySettings($property)
+    private function getPropertySettings($property)
     {
         $data = [];
         $settings = [

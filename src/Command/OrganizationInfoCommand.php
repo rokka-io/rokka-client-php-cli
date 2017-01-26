@@ -21,12 +21,13 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
     {
         $organization = $input->getArgument('organization');
         if (!$organizationName = $this->resolveOrganizationName($organization, $output)) {
+
             return -1;
         }
 
         $organization = $this->clientProvider->getUserClient()->getOrganization($organization);
 
-        self::outputOrganizationInfo($organization, $output);
+        $this->formatterHelper->outputOrganizationInfo($organization, $output);
 
         return 0;
     }

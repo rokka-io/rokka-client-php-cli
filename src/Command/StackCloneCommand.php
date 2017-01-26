@@ -3,7 +3,6 @@
 namespace RokkaCli\Command;
 
 use Rokka\Client\Core\Stack;
-use RokkaCli\RokkaLibrary;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

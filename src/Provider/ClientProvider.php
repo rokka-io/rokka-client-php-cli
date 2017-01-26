@@ -2,6 +2,7 @@
 
 namespace RokkaCli\Provider;
 
+use Rokka\Client\Base;
 use Rokka\Client\Factory;
 use Rokka\Client\Image;
 use Rokka\Client\User;
@@ -38,6 +39,22 @@ class ClientProvider
         if ($imageClient) {
             $this->imageClient[$configuration->getOrganizationName()] = $imageClient;
         }
+    }
+
+    /**
+     * @return bool Whether this client is configured to work against the default rokka API URI.
+     */
+    public function isDefaultApiUri()
+    {
+        return $this->configuration->getApiUri() === Base::DEFAULT_API_BASE_URL;
+    }
+
+    /**
+     * @return string The rokka API URI
+     */
+    public function getApiUri()
+    {
+        return $this->configuration->getApiUri();
     }
 
     /**

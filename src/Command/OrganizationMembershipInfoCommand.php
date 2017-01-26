@@ -38,7 +38,7 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
         $membership = $client->getMembership($organizationName, $email);
 
         $output->writeln('Membership');
-        self::outputOrganizationMembershipInfo($membership, $output);
+        $this->formatterHelper->outputOrganizationMembershipInfo($membership, $output);
 
         return 0;
     }

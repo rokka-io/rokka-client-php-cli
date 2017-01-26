@@ -3,7 +3,9 @@
 namespace RokkaCli\Command;
 
 use RokkaCli\Configuration;
-use RokkaCli\RokkaLibrary;
+use RokkaCli\EditableConfiguration;
+use RokkaCli\Provider\ClientProvider;
+use RokkaCli\RokkaApiHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,14 +13,35 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UserCreateCommand extends BaseRokkaCliCommand
 {
+    /**
+     * @var EditableConfiguration|Configuration
+     */
+    private $configuration;
+
+    /**
+     * @param ClientProvider $clientProvider
+     * @param RokkaApiHelper $rokkaHelper
+     * @param Configuration  $configuration
+     */
+    public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper, Configuration $configuration)
+    {
+        parent::__construct($clientProvider, $rokkaHelper);
+
+        $this->configuration = $configuration;
+    }
+
     protected function configure()
     {
         $this
             ->setName('user:create')
             ->setDescription('Create a new user on Rokka')
             ->addArgument('email', InputArgument::REQUIRED, 'User eMail')
-            ->addOption('save-as-default', null, InputOption::VALUE_NONE, 'Save the registered user in the local .rokka.yml setting file (overwrite)')
         ;
+
+        if ($this->configuration instanceof EditableConfiguration) {
+            $this->addOption('save-as-default', null, InputOption::VALUE_NONE, 'Save the registered organization in the local .rokka.yml setting file (overwrite)');
+        }
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -32,18 +55,16 @@ class UserCreateCommand extends BaseRokkaCliCommand
         $output->writeln('  API-Key: <info>'.$user->getApiKey().'</info>');
         $output->writeln('  API-Secret: <info>'.$user->getApiSecret().'</info>');
 
-        $save = $input->getOption('save-as-default');
+        $save = $input->hasOption('save-as-default') && $input->getOption('save-as-default');
         if ($save) {
-            $configFile = getcwd().DIRECTORY_SEPARATOR.'rokka.yml';
-
             $conf = new Configuration(
                 $this->configuration->getApiUri(),
                 $user->apiKey,
                 $user->apiSecret,
                 $this->configuration->getOrganizationName()
             );
-
-            $ret = $this->updateConfigToFile($configFile, $conf);
+            $configFile = $this->configuration->getConfigFileName();
+            $ret = $this->configuration->updateConfigToFile($configFile, $conf);
             if ($ret === false) {
                 $output->writeln($this->formatterHelper->formatBlock([
                     'Error!',
