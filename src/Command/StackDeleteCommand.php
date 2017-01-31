@@ -36,7 +36,7 @@ class StackDeleteCommand extends BaseRokkaCliCommand
         $confirm = $input->getOption('yes');
         if (!$confirm) {
             $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('Continue with removing <info>'.$stackName.'</info> from <info>'.$organization.'</info>? [y/n] ', false);
+            $question = new ConfirmationQuestion('Continue with removing <info>'.$stackName.'</info> stack from <info>'.$organization.'</info> organization? [y/n] ', false);
             if (!$helper->ask($input, $output, $question)) {
                 return 0;
             }
@@ -53,7 +53,7 @@ class StackDeleteCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $output->writeln('Stack <info>'.$stackName.'</info> removed from <info>'.$organization.'</info>.');
+        $output->writeln('Stack <info>'.$stackName.'</info> removed from <info>'.$organization.'</info> organization.');
 
         return 0;
     }
