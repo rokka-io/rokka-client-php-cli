@@ -84,7 +84,12 @@ class ImageRenderCommand extends BaseRokkaCliCommand
         if ($getUri) {
             $output->writeln('Rendered Image URI: <info>'.$url->__toString().'</info>');
         } else {
-            file_put_contents($saveTo, $url->__toString(), FILE_TEXT);
+            if (!file_put_contents($saveTo, $url->__toString(), FILE_TEXT)) {
+                return -1;
+            }
+            if (!$pipe) {
+                $output->writeln('Image rendered and downloaded to: <info>'.$saveTo.'</info>');
+            }
         }
 
         return 0;
