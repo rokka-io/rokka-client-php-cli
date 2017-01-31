@@ -35,18 +35,23 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
         $this
             ->setName('organization:create')
             ->setDescription('Create a new organization')
-            ->addArgument('organizationName', InputArgument::REQUIRED, 'The organization name')
+            ->addArgument('organization-name', InputArgument::REQUIRED, 'The organization name')
             ->addArgument('email', InputArgument::REQUIRED, 'The organization billing email')
             ->addOption('display-name', null, InputOption::VALUE_REQUIRED, 'Specify the display name for the organization', '')
         ;
         if ($this->configuration instanceof EditableConfiguration) {
-            $this->addOption('save-as-default', null, InputOption::VALUE_NONE, 'Save the registered organization in the local .rokka.yml setting file (overwrite)');
+            $this->addOption(
+                'save-as-default',
+                null,
+                InputOption::VALUE_NONE,
+                'Save the registered organization in the local "rokka.yml" setting file (overwrite)'
+            );
         }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organizationName = $input->getArgument('name');
+        $organizationName = $input->getArgument('organization-name');
         $email = $input->getArgument('email');
         $displayName = $input->getOption('display-name');
 

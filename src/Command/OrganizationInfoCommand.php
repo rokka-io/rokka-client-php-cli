@@ -13,19 +13,23 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
         $this
             ->setName('organization:info')
             ->setDescription('Get the associated information of a the given Organization')
-            ->addArgument('organization', InputArgument::OPTIONAL, 'The organization to retrieve the details from')
+            ->addArgument(
+                'organization-name',
+                InputArgument::OPTIONAL,
+                'The organization to retrieve the details from; if none the organization from your configuration will be used'
+            )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $input->getArgument('organization');
-        if (!$organizationName = $this->resolveOrganizationName($organization, $output)) {
+        $organizationName = $input->getArgument('organization-name');
+        if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {
 
             return -1;
         }
 
-        $organization = $this->clientProvider->getUserClient()->getOrganization($organization);
+        $organization = $this->clientProvider->getUserClient()->getOrganization($organizationName);
 
         $this->formatterHelper->outputOrganizationInfo($organization, $output);
 

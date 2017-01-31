@@ -94,7 +94,7 @@ abstract class BaseRokkaCliCommand extends Command
     public function resolveOrganizationName($organizationName, OutputInterface $output)
     {
         if (!$organizationName) {
-            return $this->rokkaHelper->getDefaultOrganizationName();
+            $organizationName = $this->rokkaHelper->getDefaultOrganizationName();
         }
 
         if (!$this->rokkaHelper->validateOrganizationName($organizationName)) {
@@ -109,7 +109,7 @@ abstract class BaseRokkaCliCommand extends Command
         $client = $this->clientProvider->getUserClient();
 
         if ($this->rokkaHelper->organizationExists($client, $organizationName)) {
-            return true;
+            return $organizationName;
         }
 
         $output->writeln($this->formatterHelper->formatBlock([
