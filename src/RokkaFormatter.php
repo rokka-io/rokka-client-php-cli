@@ -8,6 +8,7 @@ use Rokka\Client\Core\Membership;
 use Rokka\Client\Core\Organization;
 use Rokka\Client\Core\SourceImage;
 use Rokka\Client\Core\Stack;
+use Rokka\Client\Core\User;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -78,10 +79,12 @@ class RokkaFormatter extends FormatterHelper
      */
     public function outputOrganizationInfo(Organization $org, OutputInterface $output)
     {
-        $output->writeln('  ID: <info>'.$org->getId().'</info>');
-        $output->writeln('  Name: <info>'.$org->getName().'</info>');
-        $output->writeln('  Display Name: <info>'.$org->getDisplayName().'</info>');
-        $output->writeln('  Billing eMail: <info>'.$org->getBillingEmail().'</info>');
+        $output->writeln([
+            '  ID: <info>'.$org->getId().'</info>',
+            '  Name: <info>'.$org->getName().'</info>',
+            '  Display Name: <info>'.$org->getDisplayName().'</info>',
+            '  Billing eMail: <info>'.$org->getBillingEmail().'</info>',
+        ]);
     }
 
     /**
@@ -92,9 +95,11 @@ class RokkaFormatter extends FormatterHelper
      */
     public function outputOrganizationMembershipInfo(Membership $membership, OutputInterface $output)
     {
-        $output->writeln('  ID: <info>'.$membership->userId.'</info>');
-        $output->writeln('  Role: <info>'.$membership->role.'</info>');
-        $output->writeln('  Active: <info>'.($membership->active ? 'True' : 'False').'</info>');
+        $output->writeln([
+            '  ID: <info>'.$membership->userId.'</info>',
+            '  Role: <info>'.$membership->role.'</info>',
+            '  Active: <info>'.($membership->active ? 'True' : 'False').'</info>',
+        ]);
     }
 
     /**
@@ -126,6 +131,22 @@ class RokkaFormatter extends FormatterHelper
                 $output->writeln('<info>'.$value.'</info>');
             }
         }
+    }
+
+    /**
+     * Print information about a rokka user.
+     *
+     * @param User            $user
+     * @param OutputInterface $output
+     */
+    public function outputUserInfo(User $user, OutputInterface $output)
+    {
+        $output->writeln([
+            '  ID: <info>'.$user->getId().'</info>',
+            '  eMail: <info>'.$user->getEmail().'</info>',
+            '  API-Key: <info>'.$user->getApiKey().'</info>',
+            '  API-Secret: <info>'.$user->getApiSecret().'</info>',
+        ]);
     }
 
     /**

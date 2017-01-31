@@ -50,10 +50,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
         $user = $this->clientProvider->getUserClient()->createUser($email);
 
         $output->writeln('User successfully created:');
-        $output->writeln('  ID: <info>'.$user->getId().'</info>');
-        $output->writeln('  eMail: <info>'.$user->getEmail().'</info>');
-        $output->writeln('  API-Key: <info>'.$user->getApiKey().'</info>');
-        $output->writeln('  API-Secret: <info>'.$user->getApiSecret().'</info>');
+        $this->formatterHelper->outputUserInfo($user, $output);
 
         $save = $input->hasOption('save-as-default') && $input->getOption('save-as-default');
         if ($save) {
