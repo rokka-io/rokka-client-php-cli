@@ -20,7 +20,7 @@ class OperationListCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $imageClient = $this->getImageClient();
+        $imageClient = $this->clientProvider->getImageClient();
         $operations = $imageClient->listOperations();
 
         $table = new Table($output);
@@ -65,7 +65,7 @@ class OperationListCommand extends BaseRokkaCliCommand
      *
      * @return string
      */
-    protected function getPropertySettings($property)
+    private function getPropertySettings($property)
     {
         $data = [];
         $settings = [

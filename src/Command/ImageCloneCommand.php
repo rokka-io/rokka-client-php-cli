@@ -25,26 +25,26 @@ class ImageCloneCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $orgSource = $this->configuration->getOrganizationName($input->getOption('source-organization'));
-
-        if (!$this->verifyOrganizationName($orgSource, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($orgSource, $output)) {
+        $orgSource = $input->getOption('source-organization');
+        if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
             return -1;
         }
 
         $orgDest = $input->getArgument('dest-organization');
-        if (!$this->verifyOrganizationName($orgDest, $output)) {
+        if (!$orgDest = $this->resolveOrganizationName($orgDest, $output)) {
             return -1;
         }
 
-        if (!$this->verifyOrganizationExists($orgDest, $output)) {
+        if ($orgSource === $orgDest) {
+            $output->writeln($this->formatterHelper->formatBlock([
+                'Error!',
+                'The organizations to clone images between must not be the same: "'.$orgSource.'"!',
+            ], 'error', true));
+
             return -1;
         }
 
-        $client = $this->getImageClient($orgSource);
+        $client = $this->clientProvider->getImageClient($orgSource);
 
         $hash = $input->getArgument('hash');
         if (!$this->verifySourceImageExists($hash, $orgSource, $output, $client)) {

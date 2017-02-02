@@ -24,28 +24,20 @@ class StackCloneAllCommand extends StackCloneCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $sourceOrganization = $this->configuration->getOrganizationName($input->getOption('source-organization'));
-        if (!$this->verifyOrganizationName($sourceOrganization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($sourceOrganization, $output)) {
+        $sourceOrganization = $input->getOption('source-organization');
+        if (!$sourceOrganization = $this->resolveOrganizationName($sourceOrganization, $output)) {
             return -1;
         }
 
         $destOrganization = $input->getArgument('dest-organization');
-        if (!$this->verifyOrganizationName($destOrganization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($destOrganization, $output)) {
+        if (!$destOrganization = $this->resolveOrganizationName($destOrganization, $output)) {
             return -1;
         }
 
         if ($sourceOrganization == $destOrganization) {
             $output->writeln($this->formatterHelper->formatBlock([
-                'Error',
-                'Could not clone stacks to the same organization',
+                'Error!',
+                'The organizations to clone all stacks must not be the same: "'.$sourceOrganization.'"!',
             ], 'error', true));
 
             return -1;
@@ -53,7 +45,7 @@ class StackCloneAllCommand extends StackCloneCommand
 
         $overwrite = $input->getOption('overwrite');
 
-        $client = $this->getImageClient($sourceOrganization);
+        $client = $this->clientProvider->getImageClient($sourceOrganization);
         $skipped = $cloned = $errors = 0;
 
         $list = $client->listStacks();

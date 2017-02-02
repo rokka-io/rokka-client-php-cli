@@ -15,38 +15,33 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:set-subjectarea')
-            ->setDescription('Get the SubjectArea for the given image')
+            ->setDescription('Set the SubjectArea for the given image')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addArgument('area-x', InputArgument::REQUIRED, 'The SubjectArea start point (X pos)')
             ->addArgument('area-y', InputArgument::REQUIRED, 'The SubjectArea start point (Y pos)')
             ->addArgument('area-width',  InputArgument::OPTIONAL, 'The SubjectArea height', 0)
             ->addArgument('area-height', InputArgument::OPTIONAL, 'The SubjectArea width', 0)
-            ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to retrieve the images from')
+            ->addOption('organization-name', null, InputOption::VALUE_REQUIRED, 'The organization to retrieve the images from')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organizationName = $input->getOption('organization-name');
         $hash = $input->getArgument('hash');
-
-        if (!$this->verifySourceImageHash($hash, $output)) {
+        if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {
             return -1;
         }
 
-        if (!$this->verifyOrganizationName($organization, $output)) {
+        $client = $this->clientProvider->getImageClient($organizationName);
+        if (!$this->verifySourceImageExists($hash, $organizationName, $output, $client)) {
             return -1;
         }
 
-        if (!$this->verifyOrganizationExists($organization, $output)) {
-            return -1;
-        }
-
-        $client = $this->getImageClient($organization);
         $subjectArea = $this->buildSubjectArea($input);
         $newHash = $client->setDynamicMetadata($subjectArea, $hash);
 
-        $output->writeln('Image DynamicMetadata saved.');
+        $output->writeln('Image DynamicMetadata saved: added/updated SubjectArea.');
 
         if ($hash !== $newHash) {
             $output->writeln('New image Hash: <info>'.$newHash.'</info>');

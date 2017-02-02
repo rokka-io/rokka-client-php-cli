@@ -13,26 +13,21 @@ class StackInfoCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('stack:info')
-            ->setDescription('Delete the given Stack from an Organization.')
-            ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack name to load')
+            ->setDescription('Print information about the specified Stack')
+            ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack name to show')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to load the Stacks from')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
         $stackName = $input->getArgument('stack-name');
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 
-        if (!$this->verifyOrganizationExists($organization, $output)) {
-            return -1;
-        }
-
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         if (!$this->verifyStackExists($stackName, $organization, $output, $client)) {
             return -1;
@@ -40,7 +35,7 @@ class StackInfoCommand extends BaseRokkaCliCommand
 
         $stack = $client->getStack($stackName, $organization);
 
-        $this->outputStackInfo($stack, $output);
+        $this->formatterHelper->outputStackInfo($stack, $output);
 
         return 0;
     }

@@ -13,7 +13,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:delete-all')
-            ->setDescription('Remove all images from Rokka')
+            ->setDescription('Remove all images of an organization from Rokka')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to delete the images from')
             ->addOption('yes', null, InputOption::VALUE_NONE, 'Confirm the deletion of all images')
         ;
@@ -21,13 +21,8 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        $organization = $input->getOption('organization');
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 
@@ -40,7 +35,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
             }
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         $limit = 20;
         $images = $client->listSourceImages($limit);

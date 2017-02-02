@@ -23,26 +23,21 @@ class OrganizationMembershipAddCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organizationName = $this->configuration->getOrganizationName($input->getOption('organization'));
-
-        if (!$this->verifyOrganizationName($organizationName, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organizationName, $output)) {
+        $organizationName = $input->getOption('organization');
+        if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {
             return -1;
         }
 
         $role = $input->getArgument('role');
         $email = $input->getArgument('email');
 
-        $client = $this->getUserClient();
+        $client = $this->clientProvider->getUserClient();
 
         if ($client->createMembership($organizationName, $email, $role)) {
             $membership = $client->getMembership($organizationName, $email);
 
             $output->writeln('Membership');
-            self::outputOrganizationMembershipInfo($membership, $output);
+            $this->formatterHelper->outputOrganizationMembershipInfo($membership, $output);
         }
 
         return 0;

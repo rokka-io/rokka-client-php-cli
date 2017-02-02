@@ -22,13 +22,8 @@ class ImageUploadCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        $organization = $input->getOption('organization');
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 
@@ -37,7 +32,7 @@ class ImageUploadCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $imageClient = $this->getImageClient();
+        $imageClient = $this->clientProvider->getImageClient();
         $contents = file_get_contents($image);
         $binaryHash = sha1_file($image);
 
@@ -59,7 +54,7 @@ class ImageUploadCommand extends BaseRokkaCliCommand
             $output->writeln(' <info>Done</info>');
             $output->writeln('');
 
-            self::outputImageInfo($sourceImage, $output);
+            $this->formatterHelper->outputImageInfo($sourceImage, $output);
         }
 
         return 0;

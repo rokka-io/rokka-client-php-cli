@@ -4,10 +4,10 @@ namespace RokkaCli;
 
 class Configuration
 {
-    protected $apiUri;
-    protected $organization;
-    protected $apiSecret;
-    protected $apiKey;
+    private $apiUri;
+    private $organization;
+    private $apiSecret;
+    private $apiKey;
 
     public function __construct($apiUri, $apiKey, $apiSecret, $organization)
     {
@@ -18,7 +18,7 @@ class Configuration
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getApiUri()
     {
@@ -26,17 +26,15 @@ class Configuration
     }
 
     /**
-     * @param string $organizationName
-     *
-     * @return mixed
+     * @return string
      */
-    public function getOrganizationName($organizationName = null)
+    public function getOrganizationName()
     {
-        return $organizationName ? $organizationName : $this->organization;
+        return $this->organization;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getApiSecret()
     {
@@ -44,7 +42,7 @@ class Configuration
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getApiKey()
     {

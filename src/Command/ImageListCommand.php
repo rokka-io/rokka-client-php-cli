@@ -22,17 +22,12 @@ class ImageListCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
+        $organization = $input->getOption('organization');
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 
-        if (!$this->verifyOrganizationExists($organization, $output)) {
-            return -1;
-        }
-
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
         $limit = $input->getOption('limit');
         $images = $client->listSourceImages($limit);
 

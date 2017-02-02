@@ -30,7 +30,10 @@ class ImageRenderCommand extends BaseRokkaCliCommand
         $hash = $input->getArgument('hash');
         $saveTo = $input->getArgument('save-to');
 
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
+            return -1;
+        }
         $stackName = $input->getArgument('stack-name');
         $pipe = $input->getOption('pipe');
         $format = $input->getOption('format');
@@ -66,19 +69,7 @@ class ImageRenderCommand extends BaseRokkaCliCommand
             }
         }
 
-        if (!$this->verifySourceImageHash($hash, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
-            return -1;
-        }
-
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         if (null !== $stackName && !$this->verifyStackExists($stackName, $organization, $output)) {
             return -1;
@@ -93,7 +84,12 @@ class ImageRenderCommand extends BaseRokkaCliCommand
         if ($getUri) {
             $output->writeln('Rendered Image URI: <info>'.$url->__toString().'</info>');
         } else {
-            file_put_contents($saveTo, $url->__toString(), FILE_TEXT);
+            if (!file_put_contents($saveTo, $url->__toString(), FILE_TEXT)) {
+                return -1;
+            }
+            if (!$pipe) {
+                $output->writeln('Image rendered and downloaded to: <info>'.$saveTo.'</info>');
+            }
         }
 
         return 0;

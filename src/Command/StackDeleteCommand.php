@@ -14,7 +14,7 @@ class StackDeleteCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('stack:delete')
-            ->setDescription('Delete the given Stack from an Organization.')
+            ->setDescription('Delete the specified Stack from an Organization.')
             ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack name to delete')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to delete the Stacks from')
             ->addOption('yes', null, InputOption::VALUE_NONE, 'Confirm the deletion of the stack')
@@ -23,14 +23,9 @@ class StackDeleteCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $this->configuration->getOrganizationName($input->getOption('organization'));
+        $organization = $input->getOption('organization');
         $stackName = $input->getArgument('stack-name');
-
-        if (!$this->verifyOrganizationName($organization, $output)) {
-            return -1;
-        }
-
-        if (!$this->verifyOrganizationExists($organization, $output)) {
+        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
             return -1;
         }
 
@@ -41,13 +36,13 @@ class StackDeleteCommand extends BaseRokkaCliCommand
         $confirm = $input->getOption('yes');
         if (!$confirm) {
             $helper = $this->getHelper('question');
-            $question = new ConfirmationQuestion('Continue with removing <info>'.$stackName.'</info> from <info>'.$organization.'</info>? [y/n] ', false);
+            $question = new ConfirmationQuestion('Continue with removing <info>'.$stackName.'</info> stack from <info>'.$organization.'</info> organization? [y/n] ', false);
             if (!$helper->ask($input, $output, $question)) {
                 return 0;
             }
         }
 
-        $client = $this->getImageClient($organization);
+        $client = $this->clientProvider->getImageClient($organization);
 
         if (!$client->deleteStack($stackName, $organization)) {
             $output->writeln($this->formatterHelper->formatBlock([
@@ -58,7 +53,7 @@ class StackDeleteCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $output->writeln('Stack <info>'.$stackName.'</info> removed from <info>'.$organization.'</info>.');
+        $output->writeln('Stack <info>'.$stackName.'</info> removed from <info>'.$organization.'</info> organization.');
 
         return 0;
     }
