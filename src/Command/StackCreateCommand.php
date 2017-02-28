@@ -6,10 +6,9 @@ use Rokka\Client\Core\StackOperation;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-
 
 class StackCreateCommand extends BaseRokkaCliCommand
 {
@@ -31,6 +30,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
                 'Error!',
                 'Error creating new stack "'.$stackName.'": Stack already exists',
             ], 'error', true));
+
             return -1;
         }
 
@@ -39,20 +39,19 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->displayResume($output);
 
         $moreOperation = new ConfirmationQuestion("\nDo you add one more operation? (y/n) ");
-        while(count($this->collectedData['operations']) == 0 || $this->getHelper('question')->ask($input, $output, $moreOperation)) {
+        while (count($this->collectedData['operations']) == 0 || $this->getHelper('question')->ask($input, $output, $moreOperation)) {
             $output->write('', true);
             $this->askForOperation($input, $output);
             $this->displayResume($output);
         }
 
         $this->displayResume($output);
-        $confirm = new ConfirmationQuestion( "\nDo you really want to create the stack? (y/n) ");
+        $confirm = new ConfirmationQuestion("\nDo you really want to create the stack? (y/n) ");
         if ($this->getHelper('question')->ask($input, $output, $confirm)) {
             $stack = $imageClient->createStack($this->collectedData['name'], $this->collectedData['operations']);
             if ($stack) {
                 $output->writeln('Stack <info>'.$stack->getName().'</info> Created');
             }
-
         }
     }
 
@@ -66,9 +65,9 @@ class StackCreateCommand extends BaseRokkaCliCommand
         if (!$operations) {
             $imageClient = $this->clientProvider->getImageClient();
             $operations = [];
-            foreach($imageClient->listOperations()->getOperations() as $op){
+            foreach ($imageClient->listOperations()->getOperations() as $op) {
                 $operations[$op->name] = $op;
-            };
+            }
         }
 
         $question = new ChoiceQuestion('Please select an operation:', array_keys($operations));
@@ -91,17 +90,19 @@ class StackCreateCommand extends BaseRokkaCliCommand
     /**
      * @param $propertyName
      * @param $propertyType
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @return mixed
      */
-    private function askForOption($propertyName, $propertyType, InputInterface $input, OutputInterface $output) {
+    private function askForOption($propertyName, $propertyType, InputInterface $input, OutputInterface $output)
+    {
         $question = new Question("\nChoose $propertyName, type [$propertyType]: ");
         $data = null;
-        while(true){
+        while (true) {
             $data = $this->getHelper('question')->ask($input, $output, $question);
             if ($propertyType === 'integer' || $propertyType == 'number') {
-                if ($data !== '0' && (int)$data === 0) {
+                if ($data !== '0' && (int) $data === 0) {
                     $output->write("<error>Invalid $propertyType value [$data]</error>");
                     continue;
                 }
@@ -109,13 +110,14 @@ class StackCreateCommand extends BaseRokkaCliCommand
             }
             if ($propertyType == 'bool' || $propertyType == 'boolean') {
                 if ($data !== 'false' && $data !== 'true' && $data !== '1' && $data !== '0') {
-                    $output->write("<error>Boolean expected choose 0 or 1</error>");
+                    $output->write('<error>Boolean expected choose 0 or 1</error>');
                     continue;
                 }
                 $data = (bool) $data;
             }
             break;
         }
+
         return $data;
     }
 
@@ -124,11 +126,11 @@ class StackCreateCommand extends BaseRokkaCliCommand
      *
      * @param $output OutputInterface
      */
-    protected function displayResume(OutputInterface $output){
+    protected function displayResume(OutputInterface $output)
+    {
         $output->write("Creation of a new stack [<info>{$this->collectedData['name']}</info>]", true);
-        foreach($this->collectedData['operations'] as $name => $operation) {
+        foreach ($this->collectedData['operations'] as $name => $operation) {
             $output->write(" * Operation [<info>$name</info>] with ".json_encode($operation->options), true);
         }
     }
-
 }

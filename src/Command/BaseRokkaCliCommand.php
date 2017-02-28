@@ -89,7 +89,7 @@ abstract class BaseRokkaCliCommand extends Command
      * @param string          $organizationName The organization name or an empty value if none is specified
      * @param OutputInterface $output           Console to write information for the user
      *
-     * @return string|bool The organization name to use or false if the provided name is not valid.
+     * @return string|bool the organization name to use or false if the provided name is not valid
      */
     public function resolveOrganizationName($organizationName, OutputInterface $output)
     {

@@ -2,9 +2,9 @@
 
 namespace RokkaCli\DependencyInjection;
 
+use Rokka\Client\Base as RokkaBase;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Rokka\Client\Base as RokkaBase;
 
 class Configuration implements ConfigurationInterface
 {

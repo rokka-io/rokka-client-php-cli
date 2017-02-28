@@ -42,7 +42,7 @@ class ClientProvider
     }
 
     /**
-     * @return bool Whether this client is configured to work against the default rokka API URI.
+     * @return bool whether this client is configured to work against the default rokka API URI
      */
     public function isDefaultApiUri()
     {

@@ -98,7 +98,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
      * @param null            $stackName The stack name to use, leave empty to use the source image on Rokka
      * @param string          $format    The file format to retrieve the image if using a Stack
      *
-     * @return bool The status of the operation, True if the image has been saved correctly, false otherwise.
+     * @return bool the status of the operation, True if the image has been saved correctly, false otherwise
      */
     private function saveImageContents(Image $client, SourceImage $image, $saveTo, OutputInterface $output, $stackName = null, $format = 'jpg')
     {

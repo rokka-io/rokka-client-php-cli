@@ -42,7 +42,6 @@ class UserCreateCommand extends BaseRokkaCliCommand
         if ($this->configuration instanceof EditableConfiguration) {
             $this->addOption('save-as-default', null, InputOption::VALUE_NONE, 'Save the registered organization in the local .rokka.yml setting file (overwrite)');
         }
-
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

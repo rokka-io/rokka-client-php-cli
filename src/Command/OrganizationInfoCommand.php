@@ -25,7 +25,6 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
     {
         $organizationName = $input->getArgument('organization-name');
         if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {
-
             return -1;
         }
 
