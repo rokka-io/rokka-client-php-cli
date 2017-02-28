@@ -133,8 +133,8 @@ class RokkaApiHelper
      * @param Image  $client
      * @param string $hash
      * @param string $organizationName
-     * @param string $stackName Optional, if not specified the unmodified source is downloaded
-     * @param string $format    Defaults to jpg
+     * @param string $stackName        Optional, if not specified the unmodified source is downloaded
+     * @param string $format           Defaults to jpg
      *
      * @return string The binary data for the image
      */

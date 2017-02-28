@@ -19,7 +19,7 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addArgument('area-x', InputArgument::REQUIRED, 'The SubjectArea start point (X pos)')
             ->addArgument('area-y', InputArgument::REQUIRED, 'The SubjectArea start point (Y pos)')
-            ->addArgument('area-width',  InputArgument::OPTIONAL, 'The SubjectArea height', 1)
+            ->addArgument('area-width', InputArgument::OPTIONAL, 'The SubjectArea height', 1)
             ->addArgument('area-height', InputArgument::OPTIONAL, 'The SubjectArea width', 1)
             ->addOption('organization-name', null, InputOption::VALUE_REQUIRED, 'The organization to retrieve the images from')
         ;

@@ -7,7 +7,7 @@ use Symfony\Component\Yaml\Yaml;
 class EditableConfiguration extends Configuration
 {
     /**
-     * @param string $fileName
+     * @param string        $fileName
      * @param Configuration $config
      *
      * @return int|bool Bytes written or false if writing failed

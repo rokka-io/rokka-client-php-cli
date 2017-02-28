@@ -32,7 +32,7 @@ class ImageListCommand extends BaseRokkaCliCommand
         $images = $client->listSourceImages($limit);
 
         $table = new Table($output);
-        $table->setHeaders(array('Name', 'HASH', 'Organization', 'Created', 'Size'));
+        $table->setHeaders(['Name', 'HASH', 'Organization', 'Created', 'Size']);
 
         /** @var SourceImage $image */
         foreach ($images->getSourceImages() as $key => $image) {
