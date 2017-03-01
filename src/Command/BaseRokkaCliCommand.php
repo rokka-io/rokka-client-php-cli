@@ -36,21 +36,6 @@ abstract class BaseRokkaCliCommand extends Command
     }
 
     /**
-     * @param OutputInterface $output
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        if ($this->clientProvider->isDefaultApiUri()) {
-            return;
-        }
-
-        $output->writeln($this->formatterHelper->formatBlock([
-            'Warning!',
-            'Rokka API Uri has been overridden, API calls are performed to "'.$this->clientProvider->getApiUri().'".',
-        ], 'comment', true));
-    }
-
-    /**
      * Ensures that the given Stack exists for the input Organization.
      *
      * @param $stackName
@@ -171,5 +156,20 @@ abstract class BaseRokkaCliCommand extends Command
         }
 
         return true;
+    }
+
+    /**
+     * @param OutputInterface $output
+     */
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        if ($this->clientProvider->isDefaultApiUri()) {
+            return;
+        }
+
+        $output->writeln($this->formatterHelper->formatBlock([
+            'Warning!',
+            'Rokka API Uri has been overridden, API calls are performed to "'.$this->clientProvider->getApiUri().'".',
+        ], 'comment', true));
     }
 }

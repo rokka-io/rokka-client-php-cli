@@ -86,9 +86,9 @@ class StackCloneCommand extends BaseRokkaCliCommand
      * @param string $destStackName
      * @param bool   $overwrite
      *
-     * @return bool
-     *
      * @throws \ErrorException|\LogicException
+     *
+     * @return bool
      */
     protected function cloneStack(Stack $stack, $destOrganization, $destStackName = null, $overwrite = false)
     {

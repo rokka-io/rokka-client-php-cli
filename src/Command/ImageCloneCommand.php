@@ -11,75 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageCloneCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
-    {
-        $this
-            ->setName('image:clone')
-            ->setDescription('Clones an image to another organization')
-            ->addArgument('hash', InputArgument::REQUIRED, 'The Image Hash to to copy')
-            ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')
-            ->addOption('source-organization', null, InputOption::VALUE_REQUIRED, 'The source organization to copy images from', null)
-            ->addOption('stack-name', null, InputOption::VALUE_REQUIRED, 'ImageStack to use to download source images', null)
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $orgSource = $input->getOption('source-organization');
-        if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
-            return -1;
-        }
-
-        $orgDest = $input->getArgument('dest-organization');
-        if (!$orgDest = $this->resolveOrganizationName($orgDest, $output)) {
-            return -1;
-        }
-
-        if ($orgSource === $orgDest) {
-            $output->writeln($this->formatterHelper->formatBlock([
-                'Error!',
-                'The organizations to clone images between must not be the same: "'.$orgSource.'"!',
-            ], 'error', true));
-
-            return -1;
-        }
-
-        $client = $this->clientProvider->getImageClient($orgSource);
-
-        $hash = $input->getArgument('hash');
-        if (!$this->verifySourceImageExists($hash, $orgSource, $output, $client)) {
-            return -1;
-        }
-
-        $stackName = $input->getOption('stack-name');
-        if ($stackName && !$this->verifyStackExists($stackName, $orgSource, $output)) {
-            return -1;
-        }
-
-        $image = $client->getSourceImage($hash, null, $orgSource);
-
-        // Avoid further processing if no stacks have been loaded.
-        if (empty($image)) {
-            $output->write('Image not found in <info>'.$orgSource.'</info> organization.');
-
-            return 0;
-        }
-
-        try {
-            $this->cloneImage($image, $orgSource, $orgDest, $stackName, $client, $output);
-        } catch (\Exception $e) {
-            $output->writeln('');
-            $output->writeln($this->formatterHelper->formatBlock([
-                'Error: Exception',
-                $e->getMessage(),
-            ], 'error', true));
-        }
-
-        $output->writeln('');
-
-        return 0;
-    }
-
     /**
      * @param SourceImage $image
      * @param $orgSource
@@ -88,9 +19,9 @@ class ImageCloneCommand extends BaseRokkaCliCommand
      * @param Image           $imageClient
      * @param OutputInterface $output
      *
-     * @return int
-     *
      * @throws \Exception
+     *
+     * @return int
      */
     public function cloneImage(SourceImage $image, $orgSource, $orgDest, $stackName, Image $imageClient, OutputInterface $output)
     {
@@ -166,5 +97,74 @@ class ImageCloneCommand extends BaseRokkaCliCommand
         }
 
         return true;
+    }
+
+    protected function configure()
+    {
+        $this
+            ->setName('image:clone')
+            ->setDescription('Clones an image to another organization')
+            ->addArgument('hash', InputArgument::REQUIRED, 'The Image Hash to to copy')
+            ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')
+            ->addOption('source-organization', null, InputOption::VALUE_REQUIRED, 'The source organization to copy images from', null)
+            ->addOption('stack-name', null, InputOption::VALUE_REQUIRED, 'ImageStack to use to download source images', null)
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $orgSource = $input->getOption('source-organization');
+        if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
+            return -1;
+        }
+
+        $orgDest = $input->getArgument('dest-organization');
+        if (!$orgDest = $this->resolveOrganizationName($orgDest, $output)) {
+            return -1;
+        }
+
+        if ($orgSource === $orgDest) {
+            $output->writeln($this->formatterHelper->formatBlock([
+                'Error!',
+                'The organizations to clone images between must not be the same: "'.$orgSource.'"!',
+            ], 'error', true));
+
+            return -1;
+        }
+
+        $client = $this->clientProvider->getImageClient($orgSource);
+
+        $hash = $input->getArgument('hash');
+        if (!$this->verifySourceImageExists($hash, $orgSource, $output, $client)) {
+            return -1;
+        }
+
+        $stackName = $input->getOption('stack-name');
+        if ($stackName && !$this->verifyStackExists($stackName, $orgSource, $output)) {
+            return -1;
+        }
+
+        $image = $client->getSourceImage($hash, null, $orgSource);
+
+        // Avoid further processing if no stacks have been loaded.
+        if (empty($image)) {
+            $output->write('Image not found in <info>'.$orgSource.'</info> organization.');
+
+            return 0;
+        }
+
+        try {
+            $this->cloneImage($image, $orgSource, $orgDest, $stackName, $client, $output);
+        } catch (\Exception $e) {
+            $output->writeln('');
+            $output->writeln($this->formatterHelper->formatBlock([
+                'Error: Exception',
+                $e->getMessage(),
+            ], 'error', true));
+        }
+
+        $output->writeln('');
+
+        return 0;
     }
 }
