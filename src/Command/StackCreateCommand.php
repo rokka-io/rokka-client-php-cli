@@ -56,6 +56,19 @@ class StackCreateCommand extends BaseRokkaCliCommand
     }
 
     /**
+     * Display a summary of the stack that will be created.
+     *
+     * @param $output OutputInterface
+     */
+    protected function displayResume(OutputInterface $output)
+    {
+        $output->write("Creation of a new stack [<info>{$this->collectedData['name']}</info>]", true);
+        foreach ($this->collectedData['operations'] as $name => $operation) {
+            $output->write(" * Operation [<info>$name</info>] with ".json_encode($operation->options), true);
+        }
+    }
+
+    /**
      * @param $input  InputInterface
      * @param $output OutputInterface
      */
@@ -119,18 +132,5 @@ class StackCreateCommand extends BaseRokkaCliCommand
         }
 
         return $data;
-    }
-
-    /**
-     * Display a summary of the stack that will be created.
-     *
-     * @param $output OutputInterface
-     */
-    protected function displayResume(OutputInterface $output)
-    {
-        $output->write("Creation of a new stack [<info>{$this->collectedData['name']}</info>]", true);
-        foreach ($this->collectedData['operations'] as $name => $operation) {
-            $output->write(" * Operation [<info>$name</info>] with ".json_encode($operation->options), true);
-        }
     }
 }

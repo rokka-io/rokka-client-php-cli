@@ -65,10 +65,9 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
             ], 'error', true));
 
             return -1;
-        } else {
-            $org = $client->createOrganization($organizationName, $email, $displayName);
-            $output->writeln('Organization created');
         }
+        $org = $client->createOrganization($organizationName, $email, $displayName);
+        $output->writeln('Organization created');
 
         if ($org && $org->getName() == $organizationName) {
             $this->formatterHelper->outputOrganizationInfo($org, $output);

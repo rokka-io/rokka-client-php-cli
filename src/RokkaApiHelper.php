@@ -142,11 +142,10 @@ class RokkaApiHelper
     {
         if (!$stackName) {
             return $client->getSourceImageContents($hash, $organizationName);
-        } else {
-            $uri = $client->getSourceImageUri($hash, $stackName, $format, null, $organizationName);
-            $resp = (new Client())->get($uri);
-
-            return $resp->getBody()->getContents();
         }
+        $uri = $client->getSourceImageUri($hash, $stackName, $format, null, $organizationName);
+        $resp = (new Client())->get($uri);
+
+        return $resp->getBody()->getContents();
     }
 }
