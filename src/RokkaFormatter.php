@@ -159,8 +159,8 @@ class RokkaFormatter extends FormatterHelper
     private function formatDynamicMetadata(DynamicMetadataInterface $metadata)
     {
         $info = null;
-        switch ($metadata->getName()) {
-            case 'SubjectArea':
+        switch ($metadata::getName()) {
+            case SubjectArea::getName():
                 $data = [];
                 /* @var SubjectArea $metadata */
                 foreach (['x', 'y', 'width', 'height'] as $property) {

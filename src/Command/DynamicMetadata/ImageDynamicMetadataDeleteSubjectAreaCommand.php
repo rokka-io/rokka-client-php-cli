@@ -2,6 +2,7 @@
 
 namespace RokkaCli\Command\DynamicMetadata;
 
+use Rokka\Client\Core\DynamicMetadata\SubjectArea;
 use RokkaCli\Command\BaseRokkaCliCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +34,7 @@ class ImageDynamicMetadataDeleteSubjectAreaCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $newHash = $client->deleteDynamicMetadata('SubjectArea', $hash);
+        $newHash = $client->deleteDynamicMetadata(SubjectArea::getName(), $hash);
 
         $output->writeln('Image DynamicMetadata saved: removed SubjectArea.');
 

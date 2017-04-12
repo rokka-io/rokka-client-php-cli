@@ -65,20 +65,10 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
      */
     protected function buildSubjectArea(InputInterface $input)
     {
-        $x = $y = $width = $height = null;
-
-        if (($x = $input->getArgument('area-x')) && $x < 0) {
-            return false;
-        }
-        if (($y = $input->getArgument('area-y')) && $y < 0) {
-            return false;
-        }
-        if (($width = $input->getArgument('area-width')) && $width < 1) {
-            return false;
-        }
-        if (($height = $input->getArgument('area-height')) && $height < 1) {
-            return false;
-        }
+        $x = $input->getArgument('area-x');
+        $y = $input->getArgument('area-y');
+        $width = $input->getArgument('area-width');
+        $height = $input->getArgument('area-height');
 
         return new SubjectArea($x, $y, $width, $height);
     }

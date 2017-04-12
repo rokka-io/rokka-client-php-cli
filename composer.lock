@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "917ec01f4bf301bb79f921683aef027a",
+    "content-hash": "dd50531ad84da6383565d7f0a7ede373",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -276,21 +276,21 @@
         },
         {
             "name": "rokka/client",
-            "version": "0.4.3",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rokka-io/rokka-client-php.git",
-                "reference": "75c140b115dadf3803a37619ce06f37a63664ccc"
+                "reference": "4b0aed80af0b82f12785019b487cdc86f63f3b5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/75c140b115dadf3803a37619ce06f37a63664ccc",
-                "reference": "75c140b115dadf3803a37619ce06f37a63664ccc",
+                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/4b0aed80af0b82f12785019b487cdc86f63f3b5c",
+                "reference": "4b0aed80af0b82f12785019b487cdc86f63f3b5c",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.0",
-                "php": ">=5.5.0"
+                "php": "^5.5 || ^7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*"
@@ -298,7 +298,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.2.x-dev"
+                    "dev-master": "0.6.x-dev"
                 }
             },
             "autoload": {
@@ -333,7 +333,7 @@
                 "rokka",
                 "rokka.io"
             ],
-            "time": "2016-12-01T14:56:13+00:00"
+            "time": "2017-04-12T07:13:39+00:00"
         },
         {
             "name": "symfony/config",
