@@ -15,7 +15,7 @@ Available commands:
  * `image:delete-all`: Delete all images from a Rokka organization
  * `image:download`: Download a source image from Rokka, given its hash
  * `image:info`: Given an image hash, output its details (name, filesize, metadatas)
- * `image:list`: List all uploaded images
+ * `image:list`: List all uploaded images (includes offset, limit, sort and image-search options)
  * `image:render`: Render and download an image from Rokka given its hash
  * `image:set-subjectarea`: Updates/adds the SubjectArea metadata to a given image
  * `image:upload`: Upload a given image file to Rokka.io
