@@ -33,7 +33,7 @@ class ImageInfoCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $sourceImage = $client->getSourceImage($hash, false, $organizationName);
+        $sourceImage = $client->getSourceImage($hash, $organizationName);
         $this->formatterHelper->outputImageInfo($sourceImage, $output);
 
         return 0;

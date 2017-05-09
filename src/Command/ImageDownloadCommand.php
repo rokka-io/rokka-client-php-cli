@@ -50,7 +50,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $image = $client->getSourceImage($hash, false, $organization);
+        $image = $client->getSourceImage($hash, $organization);
 
         // If the save-to filename is empty, compute the destination filename.
         if (empty($saveTo)) {
