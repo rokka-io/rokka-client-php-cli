@@ -144,7 +144,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $image = $client->getSourceImage($hash, null, $orgSource);
+        $image = $client->getSourceImage($hash, $orgSource);
 
         // Avoid further processing if no stacks have been loaded.
         if (empty($image)) {

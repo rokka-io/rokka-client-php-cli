@@ -115,7 +115,7 @@ class RokkaApiHelper
     public function imageExists(Image $client, $hash, $organizationName = '')
     {
         try {
-            $sourceImage = $client->getSourceImage($hash, false, $organizationName);
+            $sourceImage = $client->getSourceImage($hash, $organizationName);
 
             return $sourceImage instanceof SourceImage && $sourceImage->hash === $hash;
         } catch (ClientException $e) {
