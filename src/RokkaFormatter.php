@@ -167,6 +167,7 @@ class RokkaFormatter extends FormatterHelper
                     $data[] = $property.':'.$metadata->$property;
                 }
                 $info = implode('|', $data);
+
                 break;
         }
 

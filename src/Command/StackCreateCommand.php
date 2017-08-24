@@ -117,6 +117,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
             if ($propertyType === 'integer' || $propertyType == 'number') {
                 if ($data !== '0' && (int) $data === 0) {
                     $output->write("<error>Invalid $propertyType value [$data]</error>");
+
                     continue;
                 }
                 $data = (int) $data;
@@ -124,10 +125,12 @@ class StackCreateCommand extends BaseRokkaCliCommand
             if ($propertyType == 'bool' || $propertyType == 'boolean') {
                 if ($data !== 'false' && $data !== 'true' && $data !== '1' && $data !== '0') {
                     $output->write('<error>Boolean expected choose 0 or 1</error>');
+
                     continue;
                 }
                 $data = (bool) $data;
             }
+
             break;
         }
 
