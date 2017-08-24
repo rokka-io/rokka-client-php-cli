@@ -29,7 +29,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'user:create')
+            ->setName('user:create')
             ->setDescription('Create a new user on Rokka')
             ->addArgument('email', InputArgument::REQUIRED, 'User eMail')
         ;

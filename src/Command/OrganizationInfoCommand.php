@@ -11,7 +11,7 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'organization:info')
+            ->setName('organization:info')
             ->setDescription('Get the associated information of a the given Organization')
             ->addArgument(
                 'organization-name',

@@ -12,7 +12,7 @@ class OrganizationMembershipAddCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'organization:membership:add')
+            ->setName('organization:membership:add')
             ->setDescription('Add a new membership to an organization')
             ->addArgument('email', InputArgument::REQUIRED, 'The user email')
             ->addArgument('role', InputArgument::REQUIRED, 'The roles for this membership (read, write, admin)')

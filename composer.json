@@ -30,6 +30,5 @@
     "psr-4": {
       "RokkaCli\\": "src/"
     }
-  },
-  "bin": ["bin/rokka-cli"]
+  }
 }

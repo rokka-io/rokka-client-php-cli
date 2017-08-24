@@ -29,7 +29,7 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'organization:create')
+            ->setName('organization:create')
             ->setDescription('Create a new organization')
             ->addArgument('organization-name', InputArgument::REQUIRED, 'The organization name')
             ->addArgument('email', InputArgument::REQUIRED, 'The organization billing email')

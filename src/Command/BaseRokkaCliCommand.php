@@ -32,7 +32,7 @@ abstract class BaseRokkaCliCommand extends Command
      *
      * @var string
      */
-    protected $namePrefix;
+    private $namePrefix;
 
     public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper, $namePrefix = '')
     {
@@ -41,6 +41,16 @@ abstract class BaseRokkaCliCommand extends Command
         $this->formatterHelper = new RokkaFormatter();
         $this->namePrefix = $namePrefix;
         parent::__construct();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Overwritten to prepend the name prefix to all command names.
+     */
+    public function setName($name)
+    {
+        parent::setName($this->namePrefix.$name);
     }
 
     /**

@@ -13,7 +13,7 @@ class StackDeleteCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'stack:delete')
+            ->setName('stack:delete')
             ->setDescription('Delete the specified Stack from an Organization.')
             ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack name to delete')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to delete the Stacks from')

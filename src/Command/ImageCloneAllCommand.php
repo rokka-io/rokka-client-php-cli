@@ -13,7 +13,7 @@ class ImageCloneAllCommand extends ImageCloneCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'image:clone-all')
+            ->setName('image:clone-all')
             ->setDescription('Clone all the available Images from the source organization')
             ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')
             ->addOption('source-organization', null, InputOption::VALUE_REQUIRED, 'The source organization to copy images from', null)

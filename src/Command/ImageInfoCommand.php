@@ -12,7 +12,7 @@ class ImageInfoCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'image:info')
+            ->setName('image:info')
             ->setDescription('Get the associated information of a the given image stored on Rokka')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to retrieve the images from')

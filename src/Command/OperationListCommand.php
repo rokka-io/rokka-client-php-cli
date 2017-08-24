@@ -13,7 +13,7 @@ class OperationListCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'operation:list')
+            ->setName('operation:list')
             ->setDescription('List all available operations from Rokka')
         ;
     }

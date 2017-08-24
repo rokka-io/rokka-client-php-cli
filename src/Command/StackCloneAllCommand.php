@@ -12,7 +12,7 @@ class StackCloneAllCommand extends StackCloneCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'stack:clone-all')
+            ->setName('stack:clone-all')
             ->setDescription('Clone available Stacks between organizations')
 
             ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy Stacks to')

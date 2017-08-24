@@ -14,7 +14,7 @@ class ImageDynamicMetadataDeleteSubjectAreaCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'image:delete-subjectarea')
+            ->setName('image:delete-subjectarea')
             ->setDescription('Delete the SubjectArea for the given image')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addOption('organization-name', null, InputOption::VALUE_REQUIRED, 'The organization to retrieve the images from')

@@ -10,7 +10,7 @@ class TestTestCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'test:test')
+            ->setName('test:test')
             ->setDescription('Empty test command')
         ;
     }

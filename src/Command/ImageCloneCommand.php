@@ -102,7 +102,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'image:clone')
+            ->setName('image:clone')
             ->setDescription('Clones an image to another organization')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Image Hash to to copy')
             ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')

@@ -13,7 +13,7 @@ class ImageListCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName($this->namePrefix.'image:list')
+            ->setName('image:list')
             ->setDescription('List all images stored in an organization')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to list images from')
             ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Limit the number of images', 20)
