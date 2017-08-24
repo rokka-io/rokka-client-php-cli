@@ -1,14 +1,13 @@
 <?xml version="1.0" ?>
 
-<!-- File: config/services.xml -->
-
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="symfony.application" class="Symfony\Component\Console\Application">
-            <argument key="name">Rokka CLI</argument>
-            <argument key="version">@package_version@</argument>
+        <service id="symfony.application" class="RokkaCli\ConsoleApplication">
+            <argument>Rokka CLI</argument>
+            <argument>@package_version@</argument>
+            <argument>%rokka_cli.organization%</argument>
         </service>
 
         <service id="rokkacli.configuration" class="RokkaCli\EditableConfiguration">
@@ -18,15 +17,14 @@
             <argument>%rokka_cli.organization%</argument>
         </service>
 
-        <service id="symfony.filesystem" class="Symfony\Component\Filesystem\Filesystem">
-        </service>
+        <service id="symfony.filesystem" class="Symfony\Component\Filesystem\Filesystem"/>
 
         <service id="symfony.console_logger" class="Symfony\Component\Console\Logger\ConsoleLogger">
             <argument type="service" id="symfony.console_output" />
         </service>
 
         <service id="symfony.console_output"
-                 class="Symfony\Component\Console\Output\ConsoleOutput">
-        </service>
+                 class="Symfony\Component\Console\Output\ConsoleOutput"
+        />
     </services>
 </container>

@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+
+<!-- File: config/services.xml -->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="rokkacli.base_command" abstract="true">
+            <argument type="service" id="rokkacli.provider.client"/>
+            <argument type="service" id="rokkacli.helper.rokka"/>
+        </service>
+
+        <service parent="rokkacli.base_command"
+                 id="rokkacli.user_create_command"
+                 class="RokkaCli\Command\UserCreateCommand"
+        >
+            <argument type="service" id="rokkacli.configuration"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service parent="rokkacli.base_command"
+                 id="rokkacli.organization_create_command"
+                 class="RokkaCli\Command\OrganizationCreateCommand"
+        >
+            <argument type="service" id="rokkacli.configuration"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service parent="rokkacli.base_command"
+                 id="rokkacli.operation_list_command"
+                 class="RokkaCli\Command\OperationListCommand"
+        >
+            <tag name="console.command"/>
+        </service>
+
+        <service parent="rokkacli.base_command"
+                 id="rokkacli.test_test_command"
+                 class="RokkaCli\Command\TestTestCommand"
+        >
+            <tag name="console.command"/>
+        </service>
+
+    </services>
+</container>

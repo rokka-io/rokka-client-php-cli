@@ -2,9 +2,11 @@
 <?php
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 // installed via composer?
 if (file_exists($a = __DIR__.'/../../../autoload.php')) {
@@ -17,11 +19,13 @@ $container = new ContainerBuilder();
 
 $extension = new \RokkaCli\DependencyInjection\RokkaCliExtension();
 $container->registerExtension($extension);
+$configured = false;
 
 if (file_exists(getcwd().'/rokka.yml')) {
     $configLoader = new YamlFileLoader($container, new FileLocator(getcwd()));
+    $configured = true;
 } else {
-    // Try to load the defaul configuration
+    // Load the default empty configuration
     $configLoader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../src/config'));
 }
 
@@ -30,15 +34,21 @@ $configLoader->load('rokka.yml');
 // Loading the services
 $serviceLoader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../src/config'));
 $serviceLoader->load('services.xml');
-
+$serviceLoader->load('commands.xml');
+if ($configured) {
+    $serviceLoader->load('restricted_commands.xml');
+}
 $serviceLoader->load('application.xml');
 
 $applicationDefinition = $container->getDefinition('symfony.application');
+
 foreach ($container->findTaggedServiceIds('console.command') as $id => $options) {
-    $applicationDefinition->addMethodCall('add', [new \Symfony\Component\DependencyInjection\Reference($id)]);
+    $applicationDefinition->addMethodCall('add', [new Reference($id)]);
 }
 $container->compile();
 
+/** @var OutputInterface $output */
 $output = $container->get('symfony.console_output');
+
 $application = $container->get('symfony.application');
 $application->run(null, $output);
