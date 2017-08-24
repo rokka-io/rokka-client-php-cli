@@ -14,7 +14,7 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('image:set-subjectarea')
+            ->setName($this->namePrefix.'image:set-subjectarea')
             ->setDescription('Set the SubjectArea for the given image')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addArgument('area-x', InputArgument::REQUIRED, 'The SubjectArea start point (X pos)')

@@ -12,7 +12,7 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('organization:membership:info')
+            ->setName($this->namePrefix.'organization:membership:info')
             ->setDescription('Get membership data from a user and organization')
             ->addArgument('email', InputArgument::REQUIRED, 'The user email')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to add the membership to (default: current organization)')

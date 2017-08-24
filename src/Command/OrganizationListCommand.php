@@ -11,7 +11,7 @@ class OrganizationListCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('organization:list')
+            ->setName($this->namePrefix.'organization:list')
             ->setDescription('List all organizations (that you are allowed to see)')
         ;
     }

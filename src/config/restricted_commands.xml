@@ -8,132 +8,132 @@
     <services>
 
         <!-- Organization Commands -->
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.organization_info_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.organization_info"
                  class="RokkaCli\Command\OrganizationInfoCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.organization_list_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.organization_list"
                  class="RokkaCli\Command\OrganizationListCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.organization_membership_add_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.organization_membership_add"
                  class="RokkaCli\Command\OrganizationMembershipAddCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.organization_membership_info_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.organization_membership_info"
                  class="RokkaCli\Command\OrganizationMembershipInfoCommand"
         >
             <tag name="console.command"/>
         </service>
 
         <!-- Image Commands -->
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_clone_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_clone"
                  class="RokkaCli\Command\ImageCloneCommand">
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_clone_all_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_clone_all"
                  class="RokkaCli\Command\ImageCloneAllCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_download_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_download"
                  class="RokkaCli\Command\ImageDownloadCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_list_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_list"
                  class="RokkaCli\Command\ImageListCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_upload_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_upload"
                  class="RokkaCli\Command\ImageUploadCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_info_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_info"
                  class="RokkaCli\Command\ImageInfoCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_delete_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_delete"
                  class="RokkaCli\Command\ImageDeleteCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_delete_all_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_delete_all"
                  class="RokkaCli\Command\ImageDeleteAllCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_render_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_render"
                  class="RokkaCli\Command\ImageRenderCommand"
         >
             <tag name="console.command"/>
         </service>
 
         <!-- Dynamic Metadata Commands -->
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_dynamic_metadata_set_subjectarea_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_dynamic_metadata_set_subjectarea"
                  class="RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataSetSubjectAreaCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.image_dynamic_metadata_delete_subjectarea_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_dynamic_metadata_delete_subjectarea"
                  class="RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataDeleteSubjectAreaCommand"
         >
             <tag name="console.command"/>
         </service>
 
         <!-- Stack Commands -->
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.stack_info_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.stack_info"
                  class="RokkaCli\Command\StackInfoCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.stack_list_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.stack_list"
                  class="RokkaCli\Command\StackListCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.stack_clone_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.stack_clone"
                  class="RokkaCli\Command\StackCloneCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.stack_create_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.stack_create"
                  class="RokkaCli\Command\StackCreateCommand">
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.stack_clone_all_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.stack_clone_all"
                  class="RokkaCli\Command\StackCloneAllCommand"
         >
             <tag name="console.command"/>
         </service>
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.stack_delete_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.stack_delete"
                  class="RokkaCli\Command\StackDeleteCommand"
         >
             <tag name="console.command"/>

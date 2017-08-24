@@ -16,7 +16,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
 
     protected function configure()
     {
-        $this->setName('stack:create');
+        $this->setName($this->namePrefix.'stack:create');
         $this->setDescription('Create a new Stack');
         $this->addArgument('stack-name', InputArgument::REQUIRED, 'The name of the stack to create');
     }

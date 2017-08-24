@@ -14,7 +14,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('image:download')
+            ->setName($this->namePrefix.'image:download')
             ->setDescription('Download the given image from Roka, saves it to the original filename.')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addOption('save-to', null, InputOption::VALUE_REQUIRED, 'Filename where to store the Source Image, use --pipe to output its contents.')

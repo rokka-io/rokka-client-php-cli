@@ -12,7 +12,7 @@ class StackInfoCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('stack:info')
+            ->setName($this->namePrefix.'stack:info')
             ->setDescription('Print information about the specified Stack')
             ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack name to show')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to load the Stacks from')

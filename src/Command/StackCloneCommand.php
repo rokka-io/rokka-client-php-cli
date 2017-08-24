@@ -13,7 +13,7 @@ class StackCloneCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('stack:clone')
+            ->setName($this->namePrefix.'stack:clone')
             ->setDescription('Clones a Stack')
             ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack to be cloned')
             ->addArgument('dest-stack-name', InputArgument::REQUIRED, 'Clone the given the given stack with a new name')

@@ -7,36 +7,44 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service id="rokkacli.base_command" abstract="true">
-            <argument type="service" id="rokkacli.provider.client"/>
-            <argument type="service" id="rokkacli.helper.rokka"/>
+        <service id="rokka.provider.client" class="RokkaCli\Provider\ClientProvider" public="false">
+            <argument type="service" id="rokka.configuration"/>
         </service>
 
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.user_create_command"
+        <service id="rokka.helper.rokka" class="RokkaCli\RokkaApiHelper" public="false">
+            <argument type="service" id="rokka.configuration"/>
+        </service>
+
+        <service id="rokka.command.base" abstract="true">
+            <argument type="service" id="rokka.provider.client"/>
+            <argument type="service" id="rokka.helper.rokka"/>
+        </service>
+
+        <service parent="rokka.command.base"
+                 id="rokka.command.user_create"
                  class="RokkaCli\Command\UserCreateCommand"
         >
-            <argument type="service" id="rokkacli.configuration"/>
+            <argument type="service" id="rokka.configuration"/>
             <tag name="console.command"/>
         </service>
 
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.organization_create_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.organization_create"
                  class="RokkaCli\Command\OrganizationCreateCommand"
         >
-            <argument type="service" id="rokkacli.configuration"/>
+            <argument type="service" id="rokka.configuration"/>
             <tag name="console.command"/>
         </service>
 
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.operation_list_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.operation_list"
                  class="RokkaCli\Command\OperationListCommand"
         >
             <tag name="console.command"/>
         </service>
 
-        <service parent="rokkacli.base_command"
-                 id="rokkacli.test_test_command"
+        <service parent="rokka.command.base"
+                 id="rokka.command.test_test"
                  class="RokkaCli\Command\TestTestCommand"
         >
             <tag name="console.command"/>

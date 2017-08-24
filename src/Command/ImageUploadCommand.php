@@ -13,7 +13,7 @@ class ImageUploadCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('image:upload')
+            ->setName($this->namePrefix.'image:upload')
             ->setDescription('Upload a given image to Rokka')
             ->addArgument('image-file', InputArgument::REQUIRED, 'The image file to upload')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'Specify the Organization to upload the image to.')

@@ -18,23 +18,18 @@ class UserCreateCommand extends BaseRokkaCliCommand
      */
     private $configuration;
 
-    /**
-     * @param ClientProvider $clientProvider
-     * @param RokkaApiHelper $rokkaHelper
-     * @param Configuration  $configuration
-     */
-    public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper, Configuration $configuration)
+    public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper, Configuration $configuration, $namePrefix = '')
     {
         // Store the configuration before the parent's constructor, as the `->configure()` method is invoked there.
         $this->configuration = $configuration;
 
-        parent::__construct($clientProvider, $rokkaHelper);
+        parent::__construct($clientProvider, $rokkaHelper, $namePrefix);
     }
 
     protected function configure()
     {
         $this
-            ->setName('user:create')
+            ->setName($this->namePrefix.'user:create')
             ->setDescription('Create a new user on Rokka')
             ->addArgument('email', InputArgument::REQUIRED, 'User eMail')
         ;

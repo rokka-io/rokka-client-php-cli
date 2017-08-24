@@ -13,7 +13,7 @@ class StackListCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('stack:list')
+            ->setName($this->namePrefix.'stack:list')
             ->setDescription('List all available Stacks from Rokka')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to list Stacks from')
             ->addOption('limit', null, InputOption::VALUE_REQUIRED, 'Limit the number of Stacks to retrieve', 20)

@@ -12,7 +12,7 @@ class ImageRenderCommand extends BaseRokkaCliCommand
     protected function configure()
     {
         $this
-            ->setName('image:render')
+            ->setName($this->namePrefix.'image:render')
             ->setDescription('Render and download a given image from Rokka.')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash to render.')
             ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack to to use to get the image.')
