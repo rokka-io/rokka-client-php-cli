@@ -33,7 +33,6 @@ $configLoader->load('rokka.yml');
 
 // Loading the services
 $serviceLoader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../src/config'));
-$serviceLoader->load('services.xml');
 $serviceLoader->load('commands.xml');
 if ($configured) {
     $serviceLoader->load('restricted_commands.xml');

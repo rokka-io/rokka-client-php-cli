@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e14483f3a71906b9b8b7d6a49b76227",
+    "content-hash": "bfbdccd650ebc09e62bc2d53964aa357",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -335,16 +335,16 @@
         },
         {
             "name": "rokka/client",
-            "version": "0.7.0",
+            "version": "0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rokka-io/rokka-client-php.git",
-                "reference": "bbc5498305634b37ae2eb7adf36f1555b45ccdd7"
+                "reference": "721b3caf83095238a8740ae0daa9c57f9d1974d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/bbc5498305634b37ae2eb7adf36f1555b45ccdd7",
-                "reference": "bbc5498305634b37ae2eb7adf36f1555b45ccdd7",
+                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/721b3caf83095238a8740ae0daa9c57f9d1974d8",
+                "reference": "721b3caf83095238a8740ae0daa9c57f9d1974d8",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +392,7 @@
                 "rokka",
                 "rokka.io"
             ],
-            "time": "2017-05-12T09:39:55+00:00"
+            "time": "2017-06-12T12:04:00+00:00"
         },
         {
             "name": "symfony/config",

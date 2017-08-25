@@ -10,7 +10,7 @@
             <argument>%rokka_cli.organization%</argument>
         </service>
 
-        <service id="rokkacli.configuration" class="RokkaCli\EditableConfiguration">
+        <service id="rokka.configuration" class="RokkaCli\EditableConfiguration">
             <argument>%rokka_cli.api_uri%</argument>
             <argument>%rokka_cli.api_key%</argument>
             <argument>%rokka_cli.api_secret%</argument>

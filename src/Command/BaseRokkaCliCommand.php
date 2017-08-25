@@ -27,12 +27,30 @@ abstract class BaseRokkaCliCommand extends Command
      */
     protected $formatterHelper = null;
 
-    public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper)
+    /**
+     * Prefix for command names. E.g. "rokka:".
+     *
+     * @var string
+     */
+    private $namePrefix;
+
+    public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper, $namePrefix = '')
     {
         $this->clientProvider = $clientProvider;
         $this->rokkaHelper = $rokkaHelper;
         $this->formatterHelper = new RokkaFormatter();
+        $this->namePrefix = $namePrefix;
         parent::__construct();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Overwritten to prepend the name prefix to all command names.
+     */
+    public function setName($name)
+    {
+        parent::setName($this->namePrefix.$name);
     }
 
     /**
