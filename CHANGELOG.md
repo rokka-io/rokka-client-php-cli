@@ -5,9 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.1.0...master)
 ### Added
+- [PR-29](https://github.com/rokka-io/rokka-client-php-cli/pull/29): Prepare for API changes of Rokka Client PHP
+- [PR-31](https://github.com/rokka-io/rokka-client-php-cli/pull/31): When no configuration is found, do not show commands that can not be executed
 ### Changed
+- [PR-30](https://github.com/rokka-io/rokka-client-php-cli/pull/30): Implement reusable commands
 ### Deprecated
 ### Fixed
+- [PR-32](https://github.com/rokka-io/rokka-client-php-cli/pull/32): Apply fixes from StyleCI
 ### Removed
 ### Security
 
