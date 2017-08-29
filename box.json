@@ -4,7 +4,6 @@
     "src"
   ],
   "files": [
-    "/src/config/rokka.yml",
     "/vendor/symfony/dependency-injection/Loader/schema/dic/services/services-1.0.xsd"
   ],
   "finder": [

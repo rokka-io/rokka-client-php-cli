@@ -64,5 +64,6 @@ Rokka-CLI uses [Box](http://box-project.github.io/box2/) to build executable Pha
 
  - Checkout the GIT repository
  - globally install the `box2` tool
+ - run `compsoser install --no-dev` (install only the required libraries, excluding any development dependencies)
  - run `box build` in the project root to build `rokka-cli.phar`.
 
