@@ -50,7 +50,7 @@ abstract class BaseRokkaCliCommand extends Command
      */
     public function setName($name)
     {
-        parent::setName($this->namePrefix.$name);
+        return parent::setName($this->namePrefix.$name);
     }
 
     /**
