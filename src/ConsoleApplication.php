@@ -10,7 +10,7 @@ use Symfony\Component\Console\Application;
 class ConsoleApplication extends Application
 {
     /**
-     * @var
+     * @var string|null
      */
     private $organization;
 
@@ -41,7 +41,7 @@ class ConsoleApplication extends Application
         if ($this->organization) {
             $version .= sprintf(' <info>(configured organization: %s)</info>', $this->organization);
         } else {
-            $version .= ' <info>(unconfigured, only limited set of commands available)</info>';
+            $version .= ' <info>(unconfigured, only limited set of commands available. Missing rokka.yml configuration?)</info>';
         }
 
         return $version;
