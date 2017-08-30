@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.2.0...master)
 ### Added
 ### Changed
+
+- [PR-33](https://github.com/rokka-io/rokka-client-php-cli/pull/33): Relax version constraints of symfony components to also allow 2.7 and 2.8
+
 ### Deprecated
 ### Fixed
 ### Removed

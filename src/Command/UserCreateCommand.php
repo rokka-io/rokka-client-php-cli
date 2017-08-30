@@ -39,7 +39,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
                 'save-as-default',
                 null,
                 InputOption::VALUE_NONE,
-                'Save the registered organization in the local rokka.yml setting file (overwrite)'
+                'Save the user created in the local rokka.yml setting file (overwrite)'
             );
         }
     }
