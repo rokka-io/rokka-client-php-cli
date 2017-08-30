@@ -3,18 +3,19 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.2.0...master)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.2.1...master)
 ### Added
 ### Changed
-
-- [PR-33](https://github.com/rokka-io/rokka-client-php-cli/pull/33): Relax version constraints of symfony components to also allow 2.7 and 2.8
-
 ### Deprecated
 ### Fixed
 ### Removed
 ### Security
 
-## [1.2.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.2.0) - 2017-08-29
+## [1.2.1 - Murano](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.2.1) - 2017-08-30
+### Changed
+- [PR-33](https://github.com/rokka-io/rokka-client-php-cli/pull/33): Relax version constraints of symfony components to also allow 2.7 and 2.8
+
+## [1.2.0 - Venezia](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.2.0) - 2017-08-29
 ### Added
 - [PR-29](https://github.com/rokka-io/rokka-client-php-cli/pull/29): Prepare for API changes of Rokka Client PHP
 - [PR-31](https://github.com/rokka-io/rokka-client-php-cli/pull/31): When no configuration is found, do not show commands that can not be executed
