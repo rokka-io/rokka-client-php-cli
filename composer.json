@@ -16,7 +16,7 @@
   ],
   "require": {
     "php": "^5.5.0|^7.0.0",
-    "rokka/client": "^0.8.0",
+    "rokka/client": "^0.8.0 || ^0.10.0 || ^0.11.0",
     "symfony/console" : "^2.7.0 || ^3.0.0",
     "symfony/finder" : "^2.7.0 || ^3.0.0",
     "symfony/config": "^2.7.0 || ^3.0.0",
