@@ -3,13 +3,18 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.2.1...master)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.3.0...master)
 ### Added
 ### Changed
 ### Deprecated
 ### Fixed
 ### Removed
 ### Security
+
+## [1.3.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.3.0) - 2017-11.04
+### Changed
+- Depends on rokka/client ^1.0.0
+- Removed PHP 5.5 support
 
 ## [1.2.1 - Murano](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.2.1) - 2017-08-30
 ### Changed
