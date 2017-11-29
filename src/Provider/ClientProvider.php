@@ -46,7 +46,7 @@ class ClientProvider
      */
     public function isDefaultApiUri()
     {
-        return $this->configuration->getApiUri() === Base::DEFAULT_API_BASE_URL;
+        return Base::DEFAULT_API_BASE_URL === $this->configuration->getApiUri();
     }
 
     /**

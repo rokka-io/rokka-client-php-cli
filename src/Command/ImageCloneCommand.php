@@ -55,7 +55,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
         // Uploading image to destination
         $collection = $imageClient->uploadSourceImage($contents, $image->name, $orgDest);
 
-        if ($collection->count() != 1) {
+        if (1 != $collection->count()) {
             throw new \Exception('Error while uploading image to destination organization');
         }
 

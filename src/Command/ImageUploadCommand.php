@@ -39,7 +39,7 @@ class ImageUploadCommand extends BaseRokkaCliCommand
         $output->write('Uploading image: <info>'.$image.'</info> to <comment>'.$organization.'</comment> ...');
 
         $ret = $imageClient->uploadSourceImage($contents, basename($image), $organization);
-        if ($ret instanceof SourceImageCollection && $ret->count() == 1) {
+        if ($ret instanceof SourceImageCollection && 1 == $ret->count()) {
             // We, at least, uploaded the image correctly. Check the binary hash to confirm it.
             $sourceImage = $ret->getSourceImages()[0];
             if ($sourceImage->binaryHash != $binaryHash) {

@@ -41,7 +41,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->displayResume($output);
 
         $moreOperation = new ConfirmationQuestion("\nDo you add one more operation? (y/n) ");
-        while (count($this->collectedData['operations']) == 0 || $this->getHelper('question')->ask($input, $output, $moreOperation)) {
+        while (0 == count($this->collectedData['operations']) || $this->getHelper('question')->ask($input, $output, $moreOperation)) {
             $output->write('', true);
             $this->askForOperation($input, $output);
             $this->displayResume($output);
@@ -116,16 +116,16 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $data = null;
         while (true) {
             $data = $this->getHelper('question')->ask($input, $output, $question);
-            if ($propertyType === 'integer' || $propertyType == 'number') {
-                if ($data !== '0' && (int) $data === 0) {
+            if ('integer' === $propertyType || 'number' == $propertyType) {
+                if ('0' !== $data && 0 === (int) $data) {
                     $output->write("<error>Invalid $propertyType value [$data]</error>");
 
                     continue;
                 }
                 $data = (int) $data;
             }
-            if ($propertyType == 'bool' || $propertyType == 'boolean') {
-                if ($data !== 'false' && $data !== 'true' && $data !== '1' && $data !== '0') {
+            if ('bool' == $propertyType || 'boolean' == $propertyType) {
+                if ('false' !== $data && 'true' !== $data && '1' !== $data && '0' !== $data) {
                     $output->write('<error>Boolean expected choose 0 or 1</error>');
 
                     continue;

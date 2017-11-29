@@ -62,7 +62,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
             );
             $configFile = $this->configuration->getConfigFileName();
             $ret = $this->configuration->updateConfigToFile($configFile, $conf);
-            if ($ret === false) {
+            if (false === $ret) {
                 $output->writeln($this->formatterHelper->formatBlock([
                     'Error!',
                     'Error saving new configuration to "'.$configFile."''",

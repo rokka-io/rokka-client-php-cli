@@ -100,7 +100,7 @@ class RokkaApiHelper
      */
     public function validateImageHash($hash)
     {
-        return preg_match('/^[a-f0-9]{40}$/', $hash) == 1;
+        return 1 == preg_match('/^[a-f0-9]{40}$/', $hash);
     }
 
     /**
