@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.3.0...master)
 ### Added
+- Symfony 4 support
 ### Changed
 ### Deprecated
 ### Fixed
