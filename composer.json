@@ -26,6 +26,9 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.1"
   },
+  "conflicts": {
+    "rokka/client-bundle": "<=1.0.1"
+  },
   "autoload": {
     "psr-4": {
       "RokkaCli\\": "src/"
