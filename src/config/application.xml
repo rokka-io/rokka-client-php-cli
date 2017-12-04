@@ -4,7 +4,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="symfony.application" class="RokkaCli\ConsoleApplication">
+        <service id="symfony.application"
+                 class="RokkaCli\ConsoleApplication"
+                 public="true"
+        >
             <argument>Rokka CLI</argument>
             <argument>@package_version@</argument>
             <argument>%rokka_cli.organization%</argument>
@@ -25,6 +28,7 @@
 
         <service id="symfony.console_output"
                  class="Symfony\Component\Console\Output\ConsoleOutput"
+                 public="true"
         />
     </services>
 </container>
