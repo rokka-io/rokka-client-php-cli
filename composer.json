@@ -27,7 +27,7 @@
     "friendsofphp/php-cs-fixer": "^2.1"
   },
   "conflict": {
-    "rokka/client-bundle": "<=1.0.1"
+    "rokka/client-bundle": "<1.1.0"
   },
   "autoload": {
     "psr-4": {
