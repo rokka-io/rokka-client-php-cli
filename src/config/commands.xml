@@ -25,7 +25,7 @@
                  class="RokkaCli\Command\UserCreateCommand"
         >
             <argument type="service" id="rokka.configuration"/>
-            <tag name="console.command"/>
+            <tag name="console.command" command="user:create"/>
         </service>
 
         <service parent="rokka.command.base"
@@ -33,21 +33,21 @@
                  class="RokkaCli\Command\OrganizationCreateCommand"
         >
             <argument type="service" id="rokka.configuration"/>
-            <tag name="console.command"/>
+            <tag name="console.command" command="organization:create"/>
         </service>
 
         <service parent="rokka.command.base"
                  id="rokka.command.operation_list"
                  class="RokkaCli\Command\OperationListCommand"
         >
-            <tag name="console.command"/>
+            <tag name="console.command" command="operation:list"/>
         </service>
 
         <service parent="rokka.command.base"
                  id="rokka.command.test_test"
                  class="RokkaCli\Command\TestTestCommand"
         >
-            <tag name="console.command"/>
+            <tag name="console.command" command="test:test"/>
         </service>
 
     </services>
