@@ -5,13 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.3.0...master)
 ### Added
+- Symfony 4 support
 ### Changed
 ### Deprecated
 ### Fixed
 ### Removed
 ### Security
 
-## [1.3.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.3.0) - 2017-11.04
+## [1.4.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.4.0) - 2017-12-05
+### Added
+- Symfony 4 support
+
+## [1.3.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.3.0) - 2017-11-04
 ### Changed
 - Depends on rokka/client ^1.0.0
 - Removed PHP 5.5 support
