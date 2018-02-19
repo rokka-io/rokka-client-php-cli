@@ -16,7 +16,6 @@
         <service id="rokka.configuration" class="RokkaCli\EditableConfiguration">
             <argument>%rokka_cli.api_uri%</argument>
             <argument>%rokka_cli.api_key%</argument>
-            <argument>%rokka_cli.api_secret%</argument>
             <argument>%rokka_cli.organization%</argument>
         </service>
 

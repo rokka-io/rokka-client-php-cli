@@ -73,7 +73,6 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
             $conf = new Configuration(
                 $this->configuration->getApiUri(),
                 $this->configuration->getApiKey(),
-                $this->configuration->getApiSecret(),
                 $org->getName()
             );
             $configFile = $this->configuration->getConfigFileName();

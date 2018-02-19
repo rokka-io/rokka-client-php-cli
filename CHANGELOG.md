@@ -5,12 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.3.0...master)
 ### Added
-- Symfony 4 support
 ### Changed
 ### Deprecated
 ### Fixed
 ### Removed
 ### Security
+
+## [1.5.0](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.0...master) - 2018-02-19
+### Fixed
+- Fixed an issue with stack lists.
+### Removed
+- Removed $apiSecret, but backwards compatibility is kept.
 
 ## [1.4.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.4.0) - 2017-12-05
 ### Added

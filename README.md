@@ -40,7 +40,6 @@ Create a file with the following contents, and run `bin/rokka-cli`.
 ```
 rokka_cli:
     api_key: your-api-key
-    api_secret: your-api-secret
     organization: organization-name
 ```
 

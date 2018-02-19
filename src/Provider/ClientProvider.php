@@ -68,8 +68,7 @@ class ClientProvider
             );
 
             $this->userClient->setCredentials(
-                $this->configuration->getApiKey(),
-                $this->configuration->getApiSecret()
+                $this->configuration->getApiKey()
             );
         }
 
@@ -91,7 +90,6 @@ class ClientProvider
             $this->imageClient[$organization] = Factory::getImageClient(
                 $organization,
                 $this->configuration->getApiKey(),
-                $this->configuration->getApiSecret(),
                 $this->configuration->getApiUri()
             );
         }
