@@ -39,7 +39,7 @@ class StackListCommand extends BaseRokkaCliCommand
         foreach ($stacks->getStacks() as $i => $stack) {
             $table->addRow([
                 '<comment>'.$stack->getName().'</comment>',
-                $stack->created->format('Y-m-d H:i:s'),
+                $stack->getCreated()->format('Y-m-d H:i:s'),
             ]);
 
             foreach ($stack->getStackOperations() as $operation) {

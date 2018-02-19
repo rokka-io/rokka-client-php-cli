@@ -16,7 +16,6 @@ class RokkaCliExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('rokka_cli.api_uri', $config['api_uri']);
-        $container->setParameter('rokka_cli.api_secret', $config['api_secret']);
         $container->setParameter('rokka_cli.api_key', $config['api_key']);
         $container->setParameter('rokka_cli.organization', $config['organization']);
     }

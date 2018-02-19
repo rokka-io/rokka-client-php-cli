@@ -145,7 +145,6 @@ class RokkaFormatter extends FormatterHelper
             '  ID: <info>'.$user->getId().'</info>',
             '  eMail: <info>'.$user->getEmail().'</info>',
             '  API-Key: <info>'.$user->getApiKey().'</info>',
-            '  API-Secret: <info>'.$user->getApiSecret().'</info>',
         ]);
     }
 

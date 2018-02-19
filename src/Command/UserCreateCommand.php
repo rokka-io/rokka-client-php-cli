@@ -57,7 +57,6 @@ class UserCreateCommand extends BaseRokkaCliCommand
             $conf = new Configuration(
                 $this->configuration->getApiUri(),
                 $user->apiKey,
-                $user->apiSecret,
                 $this->configuration->getOrganizationName()
             );
             $configFile = $this->configuration->getConfigFileName();

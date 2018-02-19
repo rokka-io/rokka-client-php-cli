@@ -16,7 +16,6 @@ class EditableConfiguration extends Configuration
     {
         $configArray = [
             'api_key' => $config->getApiKey(),
-            'api_secret' => $config->getApiSecret(),
             'api_uri' => $config->getApiUri(),
             'organization' => $config->getOrganizationName() ? $config->getOrganizationName() : '',
         ];
