@@ -339,12 +339,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rokka-io/rokka-client-php.git",
-                "reference": "102734f54e6276e9bcb7ca145e85bc5d0160a424"
+                "reference": "378978c1b7046924a9f38032c0e763c36e45a542"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/102734f54e6276e9bcb7ca145e85bc5d0160a424",
-                "reference": "102734f54e6276e9bcb7ca145e85bc5d0160a424",
+                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/378978c1b7046924a9f38032c0e763c36e45a542",
+                "reference": "378978c1b7046924a9f38032c0e763c36e45a542",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +392,7 @@
                 "rokka",
                 "rokka.io"
             ],
-            "time": "2018-03-03 11:46:38"
+            "time": "2018-03-03 12:29:00"
         },
         {
             "name": "symfony/config",
