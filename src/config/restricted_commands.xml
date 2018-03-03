@@ -77,6 +77,12 @@
             <tag name="console.command" command="image:delete"/>
         </service>
         <service parent="rokka.command.base"
+                 id="rokka.command.image_restore"
+                 class="RokkaCli\Command\ImageRestoreCommand"
+        >
+            <tag name="console.command" command="image:restore"/>
+        </service>
+        <service parent="rokka.command.base"
                  id="rokka.command.image_delete_all"
                  class="RokkaCli\Command\ImageDeleteAllCommand"
         >

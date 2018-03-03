@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.0...master)
 ### Added
+- Added image:restore
+
 ### Changed
 ### Deprecated
 ### Fixed
