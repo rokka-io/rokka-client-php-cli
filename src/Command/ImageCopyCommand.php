@@ -2,12 +2,10 @@
 
 namespace RokkaCli\Command;
 
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class ImageCopyCommand extends BaseRokkaCliCommand
 {
@@ -42,7 +40,7 @@ class ImageCopyCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $output->writeln('Image <info>'.$hash.'</info> copied from <comment>'.$organization.'</comment> to <comment>'. $destination .'</comment>.');
+        $output->writeln('Image <info>'.$hash.'</info> copied from <comment>'.$organization.'</comment> to <comment>'.$destination.'</comment>.');
 
         return 0;
     }
