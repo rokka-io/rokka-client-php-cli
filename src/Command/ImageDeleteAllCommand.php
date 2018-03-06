@@ -54,7 +54,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
                             ], 'error', true));
                             $skipped[$image->hash] = true;
                         }
-                        $output->writeln('Image <info>'.$image->name.'</info> ('.$image->hash.') removed from <info>'.$organization.'</info>.');
+                        $output->writeln('Image <info>'.$image->name.'</info> ('.$image->shortHash.') removed from <info>'.$organization.'</info>.');
                     }
                 } catch (\Exception $e) {
                     $output->writeln('');
