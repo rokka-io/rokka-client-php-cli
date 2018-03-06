@@ -14,7 +14,7 @@ class ImageCloneAllCommand extends ImageCloneCommand
     {
         $this
             ->setName('image:clone-all')
-            ->setDescription('Clone all the available Images from the source organization')
+            ->setDescription('Deprecated! Use image:copy-all instead.')
             ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')
             ->addOption('source-organization', null, InputOption::VALUE_REQUIRED, 'The source organization to copy images from', null)
             ->addOption('stack-name', null, InputOption::VALUE_REQUIRED, 'ImageStack to use to download source images', null)
@@ -23,6 +23,11 @@ class ImageCloneAllCommand extends ImageCloneCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln($this->formatterHelper->formatBlock([
+            'Deprecated!',
+            'This command is deprecated. Please use image:copy-all instead.',
+        ], 'comment', true));
+
         $orgSource = $input->getOption('source-organization');
         if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
             return -1;

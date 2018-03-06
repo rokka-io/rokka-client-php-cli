@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added image:restore
 - Added image:copy
 - Added image:copy-all
+- Deprecated image:clone
+- Deprecated image:clone-all
 
 ### Changed
 ### Deprecated
