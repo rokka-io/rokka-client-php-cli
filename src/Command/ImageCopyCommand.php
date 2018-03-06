@@ -15,33 +15,56 @@ class ImageCopyCommand extends BaseRokkaCliCommand
             ->setName('image:copy')
             ->setDescription('Copy the given image to another organization')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
-            ->addArgument('destination', InputArgument::REQUIRED, 'The destination organization')
-            ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to delete the images from')
+            ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')
+            ->addOption('source-organization', null, InputOption::VALUE_REQUIRED, 'The source organization to copy images from', null)
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $organization = $input->getOption('organization');
-        $hash = $input->getArgument('hash');
-        $destination = $input->getArgument('destination');
 
-        if (!$organization = $this->resolveOrganizationName($organization, $output)) {
+        $sourceOrg = $input->getOption('source-organization');
+        $destOrg = $input->getArgument('dest-organization');
+        $hash = $input->getArgument('hash');
+
+        if (!$sourceOrg = $this->resolveOrganizationName($sourceOrg, $output)) {
             return -1;
         }
-        $client = $this->clientProvider->getImageClient($organization);
 
-        if (!$client->copySourceImage($hash, $destination, $organization)) {
+        if (!$destOrg = $this->resolveOrganizationName($destOrg, $output)) {
+            return -1;
+        }
+
+        if ($sourceOrg === $destOrg) {
             $output->writeln($this->formatterHelper->formatBlock([
                 'Error!',
-                'Error copying the given image!',
+                'The organizations to copy images between must not be the same: "'.$sourceOrg.'"!',
             ], 'error', true));
 
             return -1;
         }
 
-        $output->writeln('Image <info>'.$hash.'</info> copied from <comment>'.$organization.'</comment> to <comment>'.$destination.'</comment>.');
+        $client = $this->clientProvider->getImageClient($sourceOrg);
 
-        return 0;
+        try {
+            $this->copyImage($destOrg, $sourceOrg, $hash, $output, $client);
+            $output->writeln('Image <info>' . $hash . '</info> copied from <comment>' . $sourceOrg . '</comment> to <comment>' . $destOrg . '</comment>.');
+            return 0;
+        } catch (\Exception $e) {
+            $output->writeln('');
+            $output->writeln($this->formatterHelper->formatBlock([
+                'Error: Exception',
+                $e->getMessage(),
+            ], 'error', true));
+            return -1;
+        }
+    }
+
+    protected function copyImage($destOrg, $sourceOrg, $hash, OutputInterface $output, $client)
+    {
+        if (!$client->copySourceImage($hash, $destOrg, $sourceOrg)) {
+            throw new \Exception('Image with hash '.$hash. ' not found on organization '.$sourceOrg .' !');
+        }
+
     }
 }
