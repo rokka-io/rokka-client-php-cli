@@ -121,7 +121,6 @@ class ImageCloneCommand extends BaseRokkaCliCommand
             'This command is deprecated. Please use image:copy instead.',
         ], 'comment', true));
 
-
         $orgSource = $input->getOption('source-organization');
         if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
             return -1;

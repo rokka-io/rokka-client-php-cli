@@ -55,7 +55,7 @@ class ImageCopyAllCommand extends ImageCopyCommand
             foreach ($images->getSourceImages() as $image) {
                 try {
                     $this->copyImage($orgDest, $orgSource, $image->hash, $output, $client);
-                    $output->writeln('Image  <info>'.$image->name.'</info> ('.$image->hash.') copied from <comment>' . $image->organization . '</comment> to <comment>' . $orgDest . '</comment>.');
+                    $output->writeln('Image  <info>'.$image->name.'</info> ('.$image->hash.') copied from <comment>'.$image->organization.'</comment> to <comment>'.$orgDest.'</comment>.');
 
                     ++$clonedImages;
                 } catch (\Exception $e) {

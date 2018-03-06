@@ -22,7 +22,6 @@ class ImageCopyCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $sourceOrg = $input->getOption('source-organization');
         $destOrg = $input->getArgument('dest-organization');
         $hash = $input->getArgument('hash');
@@ -48,7 +47,8 @@ class ImageCopyCommand extends BaseRokkaCliCommand
 
         try {
             $this->copyImage($destOrg, $sourceOrg, $hash, $output, $client);
-            $output->writeln('Image <info>' . $hash . '</info> copied from <comment>' . $sourceOrg . '</comment> to <comment>' . $destOrg . '</comment>.');
+            $output->writeln('Image <info>'.$hash.'</info> copied from <comment>'.$sourceOrg.'</comment> to <comment>'.$destOrg.'</comment>.');
+
             return 0;
         } catch (\Exception $e) {
             $output->writeln('');
@@ -56,6 +56,7 @@ class ImageCopyCommand extends BaseRokkaCliCommand
                 'Error: Exception',
                 $e->getMessage(),
             ], 'error', true));
+
             return -1;
         }
     }
@@ -63,8 +64,7 @@ class ImageCopyCommand extends BaseRokkaCliCommand
     protected function copyImage($destOrg, $sourceOrg, $hash, OutputInterface $output, $client)
     {
         if (!$client->copySourceImage($hash, $destOrg, $sourceOrg)) {
-            throw new \Exception('Image with hash '.$hash. ' not found on organization '.$sourceOrg .' !');
+            throw new \Exception('Image with hash '.$hash.' not found on organization '.$sourceOrg.' !');
         }
-
     }
 }
