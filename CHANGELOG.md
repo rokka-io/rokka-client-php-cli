@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added image:copy-all
 - Deprecated image:clone
 - Deprecated image:clone-all
+- Fixed image:delete-all
 
 ### Changed
 ### Deprecated
