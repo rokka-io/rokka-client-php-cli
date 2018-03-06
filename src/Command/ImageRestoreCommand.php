@@ -13,9 +13,9 @@ class ImageRestoreCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:restore')
-            ->setDescription('Restore the given image from Rokka')
+            ->setDescription('Restore the given image.')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
-            ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to delete the images from')
+            ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to restore the image from')
         ;
     }
 
@@ -38,7 +38,7 @@ class ImageRestoreCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $output->writeln('Image <info>'.$hash.'</info> restored from <comment>'.$organization.'</comment>.');
+        $output->writeln('Image <info>'.$hash.'</info> restored on <comment>'.$organization.'</comment>.');
 
         return 0;
     }
