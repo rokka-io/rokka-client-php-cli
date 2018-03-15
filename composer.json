@@ -23,7 +23,8 @@
     "symfony/yaml": "^2.7 || ^3.0 || ^4.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.1"
+    "friendsofphp/php-cs-fixer": "^2.1",
+    "phpunit/phpunit": "^5.7"
   },
   "conflict": {
     "rokka/client-bundle": "<1.1.0"
