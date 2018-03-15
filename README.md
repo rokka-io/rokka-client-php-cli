@@ -1,5 +1,7 @@
 # Rokka PHP CLI
 
+
+[![Build Status](https://api.travis-ci.org/rokka-io/rokka-client-php-cli.svg?branch=master)](https://travis-ci.org/rokka-io/rokka-client-php-cli)
 [![StyleCI](https://styleci.io/repos/54209439/shield)](https://styleci.io/repos/54209439)
 [![Latest Stable Version](https://poser.pugx.org/rokka/client-cli/version.png)](https://packagist.org/packages/rokka/client-cli)
 
