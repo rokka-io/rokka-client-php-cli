@@ -14,7 +14,7 @@ class Configuration
     {
         if (4 === func_num_args()) {
             // if old sig (with $apiSecret as 3rd arg) was used
-            $organization == func_get_arg(3);
+            $organization = func_get_arg(3);
         }
 
         $this->apiUri = $apiUri;

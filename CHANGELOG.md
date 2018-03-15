@@ -3,13 +3,17 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.3.0...master)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.0...master)
 ### Added
 ### Changed
 ### Deprecated
 ### Fixed
 ### Removed
 ### Security
+
+## [1.5.1](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.1...master) - 2018-03-15
+### Fixed
+- Fixed bug introduced in 1.5.0 that made the configuration not see the organization parameter in BC mode.
 
 ## [1.5.0](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.0...master) - 2018-02-19
 ### Fixed
