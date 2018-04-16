@@ -11,14 +11,15 @@ A stand-alone console client for Rokka, build with Symfony components.
 
 Available commands:
 
- * `image:clone`: Copies an image between organizations
- * `image:clone-all`: Copies all existing image between organizations
+ * `image:copy`: Copy the given image to another organization
+ * `image:copy-all`: Copies all existing image between organizations
  * `image:delete`: Delete an image from a Rokka organization by its hash
  * `image:delete-all`: Delete all images from a Rokka organization
  * `image:download`: Download a source image from Rokka, given its hash
  * `image:info`: Given an image hash, output its details (name, filesize, metadatas)
  * `image:list`: List all uploaded images (includes offset, limit, sort and image-search options)
  * `image:render`: Render and download an image from Rokka given its hash
+ * `image:restore`: Restore the given image.
  * `image:set-subjectarea`: Updates/adds the SubjectArea metadata to a given image
  * `image:upload`: Upload a given image file to Rokka.io
 

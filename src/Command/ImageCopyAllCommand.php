@@ -8,26 +8,20 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ImageCloneAllCommand extends ImageCloneCommand
+class ImageCopyAllCommand extends ImageCopyCommand
 {
     protected function configure()
     {
         $this
-            ->setName('image:clone-all')
-            ->setDescription('Deprecated! Use image:copy-all instead.')
+            ->setName('image:copy-all')
+            ->setDescription('copy all the available Images from the source organization')
             ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')
             ->addOption('source-organization', null, InputOption::VALUE_REQUIRED, 'The source organization to copy images from', null)
-            ->addOption('stack-name', null, InputOption::VALUE_REQUIRED, 'ImageStack to use to download source images', null)
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln($this->formatterHelper->formatBlock([
-            'Deprecated!',
-            'This command is deprecated. Please use image:copy-all instead.',
-        ], 'comment', true));
-
         $orgSource = $input->getOption('source-organization');
         if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
             return -1;
@@ -41,32 +35,28 @@ class ImageCloneAllCommand extends ImageCloneCommand
         if ($orgSource === $orgDest) {
             $output->writeln($this->formatterHelper->formatBlock([
                 'Error!',
-                'The organizations to clone images between must not be the same: "'.$orgSource.'"!',
+                'The organizations to copy images between must not be the same: "'.$orgSource.'"!',
             ], 'error', true));
 
             return -1;
         }
 
-        $stackName = $input->getOption('stack-name');
         $stopOnError = false;
         $clonedImages = 0;
-
-        // Checking if the stack on source organization exists
-        if ($stackName && !$this->verifyStackExists($stackName, $orgSource, $output)) {
-            return -1;
-        }
 
         $client = $this->clientProvider->getImageClient($orgSource);
 
         $limit = 20;
-        $images = $client->listSourceImages($limit);
-        $output->write('Reading images to be cloned from <info>'.$orgSource.'</info> to <info>'.$orgDest.'</info>');
+        $images = $client->searchSourceImages([], [], $limit);
+        $output->writeln('Reading images to be cloned from <info>'.$orgSource.'</info> to <info>'.$orgDest.'</info>');
 
         while ($images->count() > 0) {
             /** @var SourceImage $image */
             foreach ($images->getSourceImages() as $image) {
                 try {
-                    $this->cloneImage($image, $orgSource, $orgDest, $stackName, $client, $output);
+                    $this->copyImage($orgDest, $orgSource, $image->hash, $output, $client);
+                    $output->writeln('Image  <info>'.$image->name.'</info> ('.$image->shortHash.') copied from <comment>'.$image->organization.'</comment> to <comment>'.$orgDest.'</comment>.');
+
                     ++$clonedImages;
                 } catch (\Exception $e) {
                     $output->writeln('');
@@ -80,8 +70,7 @@ class ImageCloneAllCommand extends ImageCloneCommand
                 }
             }
 
-            $output->write('Reading images to be cloned from <info>'.$orgSource.'</info> to <info>'.$orgDest.'</info>');
-            $images = $client->listSourceImages($limit);
+            $images = $client->searchSourceImages([], [], $limit, $images->getCursor());
         }
 
         // Avoid further processing if no stacks have been loaded.

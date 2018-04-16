@@ -77,14 +77,32 @@
             <tag name="console.command" command="image:delete"/>
         </service>
         <service parent="rokka.command.base"
-                 id="rokka.command.image_delete_all"
-                 class="RokkaCli\Command\ImageDeleteAllCommand"
+                 id="rokka.command.image_restore"
+                 class="RokkaCli\Command\ImageRestoreCommand"
         >
             <tag name="console.command" command="image:delete-all"/>
         </service>
         <service parent="rokka.command.base"
                  id="rokka.command.image_render"
                  class="RokkaCli\Command\ImageRenderCommand"
+        >
+            <tag name="console.command" command="image:restore"/>
+        </service>
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_copy"
+                 class="RokkaCli\Command\ImageCopyCommand"
+        >
+            <tag name="console.command" command="image:copy"/>
+        </service>
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_copy_all"
+                 class="RokkaCli\Command\ImageCopyAllCommand"
+        >
+            <tag name="console.command" command="image:copy-all"/>
+        </service>
+        <service parent="rokka.command.base"
+                 id="rokka.command.image_delete_all"
+                 class="RokkaCli\Command\ImageDeleteAllCommand"
         >
             <tag name="console.command" command="image:render"/>
         </service>

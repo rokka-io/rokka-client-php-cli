@@ -38,7 +38,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
         $client = $this->clientProvider->getImageClient($organization);
 
         $limit = 20;
-        $images = $client->listSourceImages($limit);
+        $images = $client->searchSourceImages([], [], $limit);
         $skipped = [];
         $stopOnError = false;
 
@@ -54,7 +54,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
                             ], 'error', true));
                             $skipped[$image->hash] = true;
                         }
-                        $output->writeln('Image <info>'.$image->name.'</info> ('.$image->hash.') removed from <info>'.$organization.'</info>.');
+                        $output->writeln('Image <info>'.$image->name.'</info> ('.$image->shortHash.') removed from <info>'.$organization.'</info>.');
                     }
                 } catch (\Exception $e) {
                     $output->writeln('');
@@ -69,8 +69,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
                 }
             }
 
-            // We need to increment the limit here, to avoid to get stuck with retrieving all skipped images!
-            $images = $client->listSourceImages($limit + count($skipped));
+            $images = $client->searchSourceImages([], [], $limit, $images->getCursor());
         }
 
         return 0;

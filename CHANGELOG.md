@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.0...master)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.6.0...master)
+
 ### Added
 ### Changed
 ### Deprecated
@@ -11,11 +12,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 ### Security
 
-## [1.5.1](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.1...master) - 2018-03-15
+
+## [1.6.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.6.0) - 2018-04-16
+### Added
+- Added image:restore
+- Added image:copy
+- Added image:copy-all
+- Fixed image:delete-all
+### Deprecated
+- Deprecated image:clone
+- Deprecated image:clone-all
+
+## [1.5.1](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.5.1) - 2018-03-15
 ### Fixed
 - Fixed bug introduced in 1.5.0 that made the configuration not see the organization parameter in BC mode.
 
-## [1.5.0](https://github.com/rokka-io/rokka-client-php-cli/compare/1.5.0...master) - 2018-02-19
+## [1.5.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.5.0) - 2018-02-19
 ### Fixed
 - Fixed an issue with stack lists.
 ### Removed

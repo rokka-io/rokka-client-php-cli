@@ -9,6 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @deprecated 2.0.0 Use the image:copy command instead
+ */
 class ImageCloneCommand extends BaseRokkaCliCommand
 {
     /**
@@ -103,7 +106,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:clone')
-            ->setDescription('Clones an image to another organization')
+            ->setDescription('Deprecated! Use image:copy instead.')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Image Hash to to copy')
             ->addArgument('dest-organization', InputArgument::REQUIRED, 'The destination organization to copy images to')
             ->addOption('source-organization', null, InputOption::VALUE_REQUIRED, 'The source organization to copy images from', null)
@@ -113,6 +116,11 @@ class ImageCloneCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln($this->formatterHelper->formatBlock([
+            'Deprecated!',
+            'This command is deprecated. Please use image:copy instead.',
+        ], 'comment', true));
+
         $orgSource = $input->getOption('source-organization');
         if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
             return -1;
