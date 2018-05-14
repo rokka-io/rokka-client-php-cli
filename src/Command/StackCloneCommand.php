@@ -105,7 +105,7 @@ class StackCloneCommand extends BaseRokkaCliCommand
             }
         }
 
-        $stack->setName($destStackName );
+        $stack->setName($destStackName);
         $stack->setOrganization($destOrganization);
         $ret = $destImageClient->saveStack($stack, ['overwrite' => $overwrite]);
 
