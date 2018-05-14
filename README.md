@@ -69,3 +69,9 @@ Rokka-CLI uses [Box](http://box-project.github.io/box2/) to build executable Pha
  - run `compsoser install --no-dev` (install only the required libraries, excluding any development dependencies)
  - run `box build` in the project root to build `rokka-cli.phar`.
 
+## Running PHP-CS-Fixer
+
+```
+curl http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar > /tmp/php-cs-fixer.phar
+php /tmp/php-cs-fixer.phar  fix -v --diff --using-cache=yes src/
+```
