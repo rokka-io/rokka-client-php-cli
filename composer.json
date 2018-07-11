@@ -29,6 +29,9 @@
   "conflict": {
     "rokka/client-bundle": "<1.1.0"
   },
+  "bin": [
+    "bin/rokka-cli"
+  ],
   "autoload": {
     "psr-4": {
       "RokkaCli\\": "src/"

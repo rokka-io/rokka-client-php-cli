@@ -12,10 +12,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 ### Security
 
+## [1.6.2](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.6.2) - 2018-07-11
+### Fixed
+- Fixed installation of bin/rokka-cli into bin folder.
+
 ## [1.6.1](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.6.1) - 2018-05-14
 ### Fixed
 - Fixed stack:clone command. It was not working properly at all.
-
 
 ## [1.6.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.6.0) - 2018-04-16
 ### Added
