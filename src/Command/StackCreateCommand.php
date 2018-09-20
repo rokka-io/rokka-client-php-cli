@@ -41,7 +41,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->displayResume($output);
 
         $moreOperation = new ConfirmationQuestion("\nDo you add one more operation? (y/n) ");
-        while (0 == count($this->collectedData['operations']) || $this->getHelper('question')->ask($input, $output, $moreOperation)) {
+        while (0 == \count($this->collectedData['operations']) || $this->getHelper('question')->ask($input, $output, $moreOperation)) {
             $output->write('', true);
             $this->askForOperation($input, $output);
             $this->displayResume($output);
@@ -92,7 +92,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
 
         $options = [];
         foreach ($operation->getProperties() as $optionName => $property) {
-            if (!in_array($optionName, $operation->getRequired())) {
+            if (!\in_array($optionName, $operation->getRequired())) {
                 if (!$this->getHelper('question')->ask($input, $output, new ConfirmationQuestion("\nDo you want to use the option [$optionName]? (y/n) "))) {
                     continue;
                 }

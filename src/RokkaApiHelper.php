@@ -41,7 +41,7 @@ class RokkaApiHelper
      */
     public function validateOrganizationName($organizationName)
     {
-        return is_string($organizationName) && '' !== $organizationName;
+        return \is_string($organizationName) && '' !== $organizationName;
     }
 
     /**

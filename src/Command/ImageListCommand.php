@@ -70,7 +70,7 @@ class ImageListCommand extends BaseRokkaCliCommand
         foreach ($searchFilters as $filter) {
             $parts = explode(' ', trim($filter), 2);
 
-            if (empty($parts) || 2 !== count($parts)) {
+            if (empty($parts) || 2 !== \count($parts)) {
                 continue;
             }
             $search[$parts[0]] = $parts[1];
@@ -96,7 +96,7 @@ class ImageListCommand extends BaseRokkaCliCommand
                 continue;
             }
 
-            if (1 === count($parts)) {
+            if (1 === \count($parts)) {
                 $sorting[$parts[0]] = true;
             } else {
                 $sorting[$parts[0]] = $parts[1];

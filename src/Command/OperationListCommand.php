@@ -38,7 +38,7 @@ class OperationListCommand extends BaseRokkaCliCommand
             foreach ($operation->getProperties() as $name => $property) {
                 $data = [
                     null,
-                    $name.(in_array($name, $operation->getRequired()) ? '*' : ''),
+                    $name.(\in_array($name, $operation->getRequired()) ? '*' : ''),
                     $property['type'],
                     isset($property['default']) ? $property['default'] : '',
                     $this->getPropertySettings($property),

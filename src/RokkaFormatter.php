@@ -60,7 +60,7 @@ class RokkaFormatter extends FormatterHelper
         if (!empty($sourceImage->dynamicMetadata)) {
             if (!$output->isVerbose()) {
                 $metaNames = array_keys($sourceImage->dynamicMetadata);
-                $output->writeln('  DynamicMetadatas ('.count($metaNames).'): '.implode(', ', $metaNames));
+                $output->writeln('  DynamicMetadatas ('.\count($metaNames).'): '.implode(', ', $metaNames));
             } else {
                 $output->writeln('  DynamicMetadatas:');
                 /** @var DynamicMetadataInterface $meta */

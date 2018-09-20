@@ -43,7 +43,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
         $stopOnError = false;
 
         // Skipped images must be not considered in the counting here
-        while ($images->count() - count($skipped) > 0) {
+        while ($images->count() - \count($skipped) > 0) {
             foreach ($images->getSourceImages() as $image) {
                 try {
                     if (!array_key_exists($image->hash, $skipped)) {

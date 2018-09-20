@@ -32,6 +32,6 @@ class EditableConfiguration extends Configuration
 
     public function getConfigFileName()
     {
-        return getcwd().DIRECTORY_SEPARATOR.'rokka.yml';
+        return getcwd().\DIRECTORY_SEPARATOR.'rokka.yml';
     }
 }

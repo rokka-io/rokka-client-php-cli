@@ -11,3 +11,4 @@ rokka.yml
 
 # PHP Storm
 /.idea
+/.php_cs.cache
