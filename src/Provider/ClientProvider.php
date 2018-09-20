@@ -64,7 +64,7 @@ class ClientProvider
     {
         if (!$this->userClient) {
             $this->userClient = Factory::getUserClient(
-                $this->configuration->getApiUri()
+                [Factory::API_BASE_URL => $this->configuration->getApiUri()]
             );
 
             $this->userClient->setCredentials(
@@ -90,7 +90,7 @@ class ClientProvider
             $this->imageClient[$organization] = Factory::getImageClient(
                 $organization,
                 $this->configuration->getApiKey(),
-                $this->configuration->getApiUri()
+                [Factory::API_BASE_URL => $this->configuration->getApiUri()]
             );
         }
 
