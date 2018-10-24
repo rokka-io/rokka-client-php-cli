@@ -97,8 +97,9 @@ class RokkaFormatter extends FormatterHelper
     {
         $output->writeln([
             '  ID: <info>'.$membership->userId.'</info>',
-            '  Role: <info>'.$membership->role.'</info>',
+            '  Roles: <info>'.json_encode($membership->roles).'</info>',
             '  Active: <info>'.($membership->active ? 'True' : 'False').'</info>',
+            '  Last Access: <info>'.$membership->lastAccess->format('c').'</info>',
         ]);
     }
 
