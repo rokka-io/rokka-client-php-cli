@@ -14,8 +14,8 @@ class OrganizationMembershipAddCommand extends BaseRokkaCliCommand
         $this
             ->setName('organization:membership:add')
             ->setDescription('Add a new membership to an organization')
-            ->addArgument('email', InputArgument::REQUIRED, 'The user email')
-            ->addArgument('role', InputArgument::REQUIRED, 'The roles for this membership (read, write, admin)')
+            ->addArgument('user_id', InputArgument::REQUIRED, 'The user id')
+            ->addArgument('roles', InputArgument::REQUIRED, 'The roles for this membership (read, write, upload, admin). Comma seperated')
 
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to add the membership to (default: current organization)')
         ;
@@ -28,17 +28,15 @@ class OrganizationMembershipAddCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $role = $input->getArgument('role');
-        $email = $input->getArgument('email');
+        $roles = explode(',', $input->getArgument('roles'));
+        $user_id = $input->getArgument('user_id');
 
         $client = $this->clientProvider->getUserClient();
 
-        if ($client->createMembership($organizationName, $email, $role)) {
-            $membership = $client->getMembership($organizationName, $email);
+        $membership = $client->createMembership($user_id, $roles, $organizationName);
 
-            $output->writeln('Membership');
-            $this->formatterHelper->outputOrganizationMembershipInfo($membership, $output);
-        }
+        $output->writeln('Membership');
+        $this->formatterHelper->outputOrganizationMembershipInfo($membership, $output);
 
         return 0;
     }
