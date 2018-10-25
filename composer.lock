@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5cfa063dba7f6889818f18b30fa60fb8",
+    "content-hash": "82ad2753dc5adb76ffb6b01a294e7224",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -389,16 +389,16 @@
         },
         {
             "name": "rokka/client",
-            "version": "dev-new-membership-methods",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rokka-io/rokka-client-php.git",
-                "reference": "51b93866924e05ec51376997b04e185efde7a01e"
+                "reference": "d73bc9b0ee61a7a84e0a6732c2017d5d1fae7ca4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/51b93866924e05ec51376997b04e185efde7a01e",
-                "reference": "51b93866924e05ec51376997b04e185efde7a01e",
+                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/d73bc9b0ee61a7a84e0a6732c2017d5d1fae7ca4",
+                "reference": "d73bc9b0ee61a7a84e0a6732c2017d5d1fae7ca4",
                 "shasum": ""
             },
             "require": {
@@ -447,7 +447,7 @@
                 "rokka",
                 "rokka.io"
             ],
-            "time": "2018-10-24T09:26:16+00:00"
+            "time": "2018-10-25T08:06:25+00:00"
         },
         {
             "name": "symfony/config",
@@ -2996,18 +2996,9 @@
             "time": "2018-01-29T19:49:41+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "1.7.0",
-            "alias_normalized": "1.7.0.0",
-            "version": "dev-new-membership-methods",
-            "package": "rokka/client"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "rokka/client": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

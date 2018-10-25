@@ -3,7 +3,16 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.6.2...master)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.7.0...master)
+
+### Added
+### Changed
+### Deprecated
+### Fixed
+### Removed
+### Security
+
+## [1.7.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.7.0) - 2018-10-25
 
 ### Added
 -  `organization:membership:add` takes now multiple roles, instead of just one
@@ -11,10 +20,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Adjusted to new rokka/client 1.7.0 membership methods
 - Membership methods take a user_id instead of an email now (email still works, but is deprecated)
-### Deprecated
-### Fixed
-### Removed
-### Security
 
 ## [1.6.2](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.6.2) - 2018-07-11
 ### Fixed
