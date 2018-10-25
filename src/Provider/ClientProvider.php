@@ -58,17 +58,15 @@ class ClientProvider
     }
 
     /**
+     * @throws \RuntimeException
+     *
      * @return User
      */
     public function getUserClient()
     {
         if (!$this->userClient) {
             $this->userClient = Factory::getUserClient(
-                [Factory::API_BASE_URL => $this->configuration->getApiUri()]
-            );
-
-            $this->userClient->setCredentials(
-                $this->configuration->getApiKey()
+                null, $this->configuration->getApiKey(), [Factory::API_BASE_URL => $this->configuration->getApiUri()]
             );
         }
 
@@ -76,7 +74,9 @@ class ClientProvider
     }
 
     /**
-     * @param $organization
+     * @param null|string $organization
+     *
+     * @throws \RuntimeException
      *
      * @return Image
      */

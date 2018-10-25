@@ -14,7 +14,7 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
         $this
             ->setName('organization:membership:info')
             ->setDescription('Get membership data from a user and organization')
-            ->addArgument('email', InputArgument::REQUIRED, 'The user email')
+            ->addArgument('user_id', InputArgument::REQUIRED, 'The user id')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to add the membership to (default: current organization)')
         ;
     }
@@ -22,6 +22,9 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     *
+     * @throws \RuntimeException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      *
      * @return int
      */
@@ -32,10 +35,10 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
             return -1;
         }
 
-        $email = $input->getArgument('email');
+        $userid = $input->getArgument('user_id');
 
         $client = $this->clientProvider->getUserClient();
-        $membership = $client->getMembership($organizationName, $email);
+        $membership = $client->getMembership($userid, $organizationName);
 
         $output->writeln('Membership');
         $this->formatterHelper->outputOrganizationMembershipInfo($membership, $output);

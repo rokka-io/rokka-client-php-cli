@@ -110,7 +110,6 @@ abstract class BaseRokkaCliCommand extends Command
         }
 
         $client = $this->clientProvider->getUserClient();
-
         if ($this->rokkaHelper->organizationExists($client, $organizationName)) {
             return $organizationName;
         }
