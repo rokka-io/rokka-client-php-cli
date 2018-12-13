@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82ad2753dc5adb76ffb6b01a294e7224",
+    "content-hash": "ca28a7495db70ce6ba43b21f3915767e",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -431,16 +431,16 @@
         },
         {
             "name": "rokka/client",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rokka-io/rokka-client-php.git",
-                "reference": "e3fb24a20a38f6269c264969d79ddf035dce5c75"
+                "reference": "c6ad2d4560d53f0c72fe074257c32e1039fab76c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/e3fb24a20a38f6269c264969d79ddf035dce5c75",
-                "reference": "e3fb24a20a38f6269c264969d79ddf035dce5c75",
+                "url": "https://api.github.com/repos/rokka-io/rokka-client-php/zipball/c6ad2d4560d53f0c72fe074257c32e1039fab76c",
+                "reference": "c6ad2d4560d53f0c72fe074257c32e1039fab76c",
                 "shasum": ""
             },
             "require": {
@@ -489,7 +489,7 @@
                 "rokka",
                 "rokka.io"
             ],
-            "time": "2018-11-05T10:36:50+00:00"
+            "time": "2018-12-13T10:15:43+00:00"
         },
         {
             "name": "symfony/config",
