@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.7.0...master)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.8.0...master)
 
 ### Added
 ### Changed
@@ -11,6 +11,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 ### Removed
 ### Security
+
+## [1.8.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.8.0) - 2018-12-13
+
+### Changed
+- `image:copy-all` uses the new batch copy of rokka. Makes copying images much faster
 
 ## [1.7.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.7.0) - 2018-10-25
 
