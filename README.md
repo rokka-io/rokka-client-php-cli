@@ -5,7 +5,7 @@
 [![StyleCI](https://styleci.io/repos/54209439/shield)](https://styleci.io/repos/54209439)
 [![Latest Stable Version](https://poser.pugx.org/rokka/client-cli/version.png)](https://packagist.org/packages/rokka/client-cli)
 
-A stand-alone console client for Rokka, build with Symfony components.
+A stand-alone console client for [rokka.io](https://rokka.io), built with Symfony components.
 
 ## Commands
 
