@@ -1,16 +1,22 @@
 language: php
 
 php:
-  - 5.6
   - 7.0
   - 7.1
   - 7.2
   - 7.3
+  - 7.4
 
 matrix:
   include:
-    - php: 5.6
-      env: COMPOSER_FLAGS="--prefer-lowest"
+    - php: 7.0
+      env: SYMFONY_REQUIRE=3.4.* COMPOSER_FLAGS="--prefer-lowest"
+    - php: 7.4
+      env: SYMFONY_REQUIRE=4.3.*
+    - php: 7.4
+      env: SYMFONY_REQUIRE=4.4.*
+    - php: 7.4
+      env: SYMFONY_REQUIRE=5.0.*
 
 branches:
   only:
@@ -18,11 +24,14 @@ branches:
     # Build maintenance branches for older releases if needed. such branches should be named like "1.2"
     - '/^\d+\.\d+$/'
 
-before_script:
-  # Install deps
-  - composer update $COMPOSER_FLAGS --dev --prefer-source --no-interaction
-  - bash -c "if [[ '$TRAVIS_PHP_VERSION' == '7.'* ]] ; then wget https://phar.phpunit.de/phpunit-5.7.phar; fi"
+before_install:
+  - composer global require --no-progress --no-scripts --no-plugins symfony/flex
+  - if ! [ -z "$SYMFONY_REQUIRE" ]; then composer config --unset platform.php; fi;
+
+install:
+  - composer update $COMPOSER_FLAGS --no-interaction
+  - vendor/bin/simple-phpunit install
 
 script:
-  - bash -c "if [[ '$TRAVIS_PHP_VERSION' == '7.'* ]] ; then php phpunit-5.7.phar; fi"
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' \< '7' ]; then phpunit; fi"
+  - composer validate --strict --no-check-lock
+  - vendor/bin/simple-phpunit
