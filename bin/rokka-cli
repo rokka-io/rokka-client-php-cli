@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use RokkaCli\DependencyInjection\RokkaCliExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,19 +18,39 @@ if (file_exists($a = __DIR__.'/../../../autoload.php')) {
 
 $container = new ContainerBuilder();
 
-$extension = new \RokkaCli\DependencyInjection\RokkaCliExtension();
+$extension = new RokkaCliExtension();
 $container->registerExtension($extension);
 $configured = false;
 
-if (file_exists(getcwd().'/rokka.yml')) {
-    $configLoader = new YamlFileLoader($container, new FileLocator(getcwd()));
-    $configured = true;
-} else {
+function loadRokkaConfig()
+{
+    global $configured, $container;
+
+    if (file_exists(getcwd().'/rokka.yml')) {
+        $configured = true;
+        $configLoader = new YamlFileLoader($container, new FileLocator(getcwd()));
+        $configLoader->load('rokka.yml');
+        return;
+    }
+    $home = getenv('HOME');
+    if (!$home && !empty($_SERVER['HOMEDRIVE']) && !empty($_SERVER['HOMEPATH'])) {
+        // home on windows
+        $home = rtrim($_SERVER['HOMEDRIVE'].$_SERVER['HOMEPATH']);
+    }
+
+    if ($home && file_exists($home.'/.rokka.yml')) {
+        $configured = true;
+        $configLoader = new YamlFileLoader($container, new FileLocator($home));
+        $configLoader->load('.rokka.yml');
+        return;
+    }
+
     // Load the default empty configuration
     $configLoader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../src/config'));
+    $configLoader->load('rokka.yml');
 }
 
-$configLoader->load('rokka.yml');
+loadRokkaConfig();
 
 // Loading the services
 $serviceLoader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../src/config'));
