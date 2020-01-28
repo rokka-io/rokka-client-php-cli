@@ -51,4 +51,5 @@ install:
 
 script:
   - composer validate --strict --no-check-lock
+  - bin/rokka-cli
   - vendor/bin/simple-phpunit

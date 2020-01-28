@@ -17,5 +17,6 @@ class TestTestCommand extends BaseRokkaCliCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        return 0;
     }
 }
