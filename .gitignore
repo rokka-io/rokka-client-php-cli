@@ -1,14 +1,8 @@
 # Project
 rokka.yml
+dist/
+tools/
 
 # Composer
 /vendor
-
-# Eclipse
-/.settings
-/.project
-/.buildpath
-
-# PHP Storm
-/.idea
-/.php_cs.cache
+/composer.lock

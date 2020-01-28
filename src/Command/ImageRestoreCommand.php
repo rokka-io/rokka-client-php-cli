@@ -13,7 +13,7 @@ class ImageRestoreCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:restore')
-            ->setDescription('Restore the given image.')
+            ->setDescription('Restore the given image')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to restore the image from')
         ;

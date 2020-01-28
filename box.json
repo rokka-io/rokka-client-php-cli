@@ -4,7 +4,7 @@
     "src"
   ],
   "files": [
-    "/vendor/symfony/dependency-injection/Loader/schema/dic/services/services-1.0.xsd"
+    "vendor/symfony/dependency-injection/Loader/schema/dic/services/services-1.0.xsd"
   ],
   "finder": [
     {
@@ -15,6 +15,6 @@
   ],
   "git-version": "package_version",
   "main": "bin/rokka-cli",
-  "output": "rokka-cli.phar",
-  "stub": true
+  "output": "dist/rokka-cli.phar",
+  "compression": "GZ"
 }

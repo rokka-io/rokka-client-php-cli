@@ -7,6 +7,19 @@
 
 A stand-alone console client for [rokka.io](https://rokka.io), built with Symfony components.
 
+## Download: .phar
+
+The cli is provided as a stand alone tool. Download the .phar from our [releases](https://github.com/rokka-io/rokka-client-php-cli/releases)
+page and put it into e.g. `/usr/local/bin/rokka-cli`.
+
+## Installation: Composer
+
+Note: If you are using Symfony, use the [RokkaClientBundle](https://github.com/rokka-io/rokka-client-bundle/) which
+provides these commands in a Symfony application.
+
+ - `composer require rokka/client-cli`
+ - run the CLI from `vendor/bin/rokka-cli`
+
 ## Commands
 
 Available commands:
@@ -15,12 +28,13 @@ Available commands:
  * `image:copy-all`: Copies all existing image between organizations
  * `image:delete`: Delete an image from a Rokka organization by its hash
  * `image:delete-all`: Delete all images from a Rokka organization
+ * `image:delete-subjectarea`: Remove the subject area metadata from an image
  * `image:download`: Download a source image from Rokka, given its hash
  * `image:info`: Given an image hash, output its details (name, filesize, metadatas)
  * `image:list`: List all uploaded images (includes offset, limit, sort and image-search options)
- * `image:render`: Render and download an image from Rokka given its hash
- * `image:restore`: Restore the given image.
- * `image:set-subjectarea`: Updates/adds the SubjectArea metadata to a given image
+ * `image:render`: Render an image with a specified stack
+ * `image:restore`: Restore the given image
+ * `image:set-subjectarea`: Set the SubjectArea metadata to a given image
  * `image:upload`: Upload a given image file to Rokka.io
 
  * `stack:create`: Create a stack
@@ -37,8 +51,13 @@ Available commands:
 
  * `user:create`: Creates and register a new User on Rokka.io
 
-Default settings are loaded from a `rokka.yml` file, if it exists, from the current location.
-Create a file with the following contents, and run `bin/rokka-cli`.
+## Configuration
+
+Without configuration, the command will only list the operations that are possible when not logged in.
+Use the `organization:create` and `user:create` commands with the `--save-as-default` option to initialize
+the configuration with your user.
+
+If you have an existing account, create the file `rokka.yml` with the following content:
 
 ```
 rokka_cli:
@@ -46,28 +65,17 @@ rokka_cli:
     organization: organization-name
 ```
 
-The commands `organization:create` and `user:create` have a `--save-as-default` option to create and save
-the new values to the `rokka.yml` defaults file.
+`rokka-cli` looks for the configuration file in the current working directory.
 
-## Installation: Composer
+# Development
 
- - `composer require rokka/client-cli`
- - run the CLI from `vendor/bin/rokka-cli`
+## Building rokka-cli.phar
 
-## Installation: GIT
-
- - `git clone https://github.com/rokka-io/rokka-client-php-cli.git`
- - `cd rokka-client-php-cli && composer install`
- - run the CLI from `bin/rokka-cli`
-
-# Building rokka-cli.phar
-
-Rokka-CLI uses [Box](http://box-project.github.io/box2/) to build executable Phars.
+Rokka-CLI uses [Box](https://github.com/humbug/box/) to build executable Phars.
 
  - Checkout the GIT repository
- - globally install the `box2` tool
- - run `compsoser install --no-dev` (install only the required libraries, excluding any development dependencies)
- - run `box build` in the project root to build `rokka-cli.phar`.
+ - Run `make dist`
+ - The .phar should be at dist/rokka-cli.phar
 
 ## Running PHP-CS-Fixer
 

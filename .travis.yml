@@ -18,6 +18,24 @@ matrix:
     - php: 7.4
       env: SYMFONY_REQUIRE=5.0.*
 
+stages:
+  - name: deploy
+    if: tag IS present
+
+jobs:
+  include:
+    - stage: deploy
+      script: skip
+      before_deploy: make dist
+      provider: releases
+      env: COMPOSER_FLAGS=""
+      api_key:
+        secure: a6UEocTNYy3VDqXvf7aV6eQw7QCW9UmUbjzXCJNbPeLs1kqEPiWSaMDdrPiF31eVgNUj8NpgDhUrbFWEysa5n9CPOu9WPyKMiNcBlMvwtRT5RCUBd11Tk5W8raxBqrYZ+qVh4LaKXqcl9Jt2OxHCYxCxbzjISOq7KaOni+JeL+Enn2mbVkJOCAKhntMry9T9HzAekXukWsMDa37uwtVk/ZSA3UiaUGTSIP9MVEXqPLlbBghtXZX7RDUM5rrYIM1DRyJBdwUQCmitMxysvABh0ZnFtQKV2ePYsadQ7swDkOYutXOnreaZDfJpAjkBJc6I30Fs80cPVQaN8f3h2IbD2g1Kp4wwKR/Ug4kbZ8iFtMGLOwYI1OI/rMoUGXQ7k2sUglrkQl2GfG54r7zw/xXBpQnx3Slo7E0xcUryE2JsmjI7C215nLbmFhskMmjGsdIfc84zfpLaiF1ymMrsodCbGqG4+VC/Ew1MQqGMzTJa1Iqhm0ZGJWvJnGc4JUvPeYGRnpClI9t+q+ZNldWveI6DeYWK5WZYpseX/4RrEl4uZbMAGHnaY2vVDgisQ2OsDjljkEJ9/WDJoOVpVDql8QBnc+HI0xdsG7eU8MLR5k7XOD6A3aAsV88BcY5hSvN+/uObDbC7qnh2hLahp1aRErhQe5N97Yb6aYVIAMTc7hrECO4=
+      file: dist/rokka-cli.phar
+      skip_cleanup: true
+      on:
+        tags: true
+
 branches:
   only:
     - master
@@ -26,7 +44,6 @@ branches:
 
 before_install:
   - composer global require --no-progress --no-scripts --no-plugins symfony/flex
-  - if ! [ -z "$SYMFONY_REQUIRE" ]; then composer config --unset platform.php; fi;
 
 install:
   - composer update $COMPOSER_FLAGS --no-interaction

@@ -13,7 +13,7 @@ class ImageRenderCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:render')
-            ->setDescription('Render and download a given image.')
+            ->setDescription('Render an image with a specified stack')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash to render.')
             ->addArgument('stack-name', InputArgument::REQUIRED, 'The Stack to to use to get the image.')
             ->addArgument('save-to', InputArgument::OPTIONAL, 'Filename where to save the image, default to `hash.format`, use --pipe to output its contents.')

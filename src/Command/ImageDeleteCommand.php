@@ -15,7 +15,7 @@ class ImageDeleteCommand extends BaseRokkaCliCommand
     {
         $this
             ->setName('image:delete')
-            ->setDescription('Delete the given image.')
+            ->setDescription('Delete the given image')
             ->addArgument('hash', InputArgument::REQUIRED, 'The Source Image hash')
             ->addOption('organization', null, InputOption::VALUE_REQUIRED, 'The organization to delete the images from')
             ->addOption('yes', null, InputOption::VALUE_NONE, 'Confirm the deletion of the image')
