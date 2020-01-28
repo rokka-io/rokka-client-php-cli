@@ -2,7 +2,7 @@
 
 <phpunit bootstrap="vendor/autoload.php"
          colors="true"
-         syntaxCheck="true">
+>
     <testsuites>
         <testsuite name="rokka-cli tests">
             <directory suffix="Test.php">./tests/</directory>
