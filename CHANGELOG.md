@@ -12,9 +12,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 ### Security
 
-## 1.9.0 (unreleased)
+## [1.9.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.9.0) - 2020-01-28
 
 ### Changed
+- Support configuration file in home directory
 - Allow installation with Symfony 5, drop support for unmaintained versions of Symfony
 - Drop support for PHP 5
 
