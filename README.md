@@ -55,9 +55,9 @@ Available commands:
 
 Without configuration, the command will only list the operations that are possible when not logged in.
 Use the `organization:create` and `user:create` commands with the `--save-as-default` option to initialize
-the configuration with your user.
+the configuration with your user. You can then copy the `rokka.yml` file to `.rokka.yml` in your home directory.
 
-If you have an existing account, create the file `rokka.yml` with the following content:
+If you have an existing account, create the file `.rokka.yml` with the following content in your home directory:
 
 ```
 rokka_cli:
@@ -65,7 +65,7 @@ rokka_cli:
     organization: organization-name
 ```
 
-`rokka-cli` looks for the configuration file in the current working directory.
+`rokka-cli` looks for `rokka.yml` in the current working directory or `.rokka.yml` in your home directory.
 
 # Development
 

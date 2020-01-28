@@ -55,6 +55,8 @@ class StackCreateCommand extends BaseRokkaCliCommand
                 $output->writeln('Stack <info>'.$stack->getName().'</info> Created');
             }
         }
+
+        return 0;
     }
 
     /**

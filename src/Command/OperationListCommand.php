@@ -56,6 +56,8 @@ class OperationListCommand extends BaseRokkaCliCommand
         }
 
         $table->render();
+
+        return 0;
     }
 
     /**
