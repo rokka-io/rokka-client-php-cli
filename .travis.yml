@@ -40,7 +40,7 @@ branches:
   only:
     - master
     # Build maintenance branches for older releases if needed. such branches should be named like "1.2"
-    - '/^\d+\.\d+$/'
+    - '/^\d+(\.\d+)+$/'
 
 before_install:
   - composer global require --no-progress --no-scripts --no-plugins symfony/flex
