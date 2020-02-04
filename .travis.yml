@@ -28,6 +28,7 @@ jobs:
       env: SYMFONY_REQUIRE=5.0.*
 
     - stage: deploy
+      php: 7.1
       script: skip
       before_deploy: make dist
       env: COMPOSER_FLAGS=""
