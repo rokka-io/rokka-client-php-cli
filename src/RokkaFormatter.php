@@ -99,7 +99,7 @@ class RokkaFormatter extends FormatterHelper
             '  ID: <info>'.$membership->userId.'</info>',
             '  Roles: <info>'.json_encode($membership->roles).'</info>',
             '  Active: <info>'.($membership->active ? 'True' : 'False').'</info>',
-            '  Last Access: <info>'.$membership->lastAccess->format('c').'</info>',
+            '  Last Access: <info>'.($membership->lastAccess ? $membership->lastAccess->format('c') : 'Unknown').'</info>',
         ]);
     }
 
