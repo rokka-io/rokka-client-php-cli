@@ -12,10 +12,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 ### Security
 
-## [1.9.7](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.9.7) - 2020-12-15
+## [1.9.8](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.9.8) - 2020-12-15
 
 ### Fixed
 - Fix an error in outputting membership info.
+
+
+## [1.9.7](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.9.7) - 2020-11-14
+
+### Added
+- Support PHP 8.0 in composer.jsom
 
 ## [1.9.6](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.9.6) - 2020-02-10
 
