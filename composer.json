@@ -16,15 +16,15 @@
   "require": {
     "php": "^7.1|^8.0",
     "rokka/client": "^1.9.0",
-    "symfony/console" : "^3.4 || ^4.3 || ^5.0",
-    "symfony/finder" : "^3.4 || ^4.3 || ^5.0",
-    "symfony/config": "^3.4 || ^4.3 || ^5.0",
-    "symfony/dependency-injection": "^3.4 || ^4.3 || ^5.0",
-    "symfony/yaml": "^3.4 || ^4.3 || ^5.0"
+    "symfony/console" : "^3.4 || ^4.3 || ^5.0 || ^6.0",
+    "symfony/finder" : "^3.4 || ^4.3 || ^5.0 || ^6.0",
+    "symfony/config": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+    "symfony/dependency-injection": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+    "symfony/yaml": "^3.4 || ^4.3 || ^5.0 || ^6.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.16.7",
-    "symfony/phpunit-bridge": "^5.0"
+    "symfony/phpunit-bridge": "^5.0 || ^6.0"
   },
   "conflict": {
     "rokka/client-bundle": "<1.1.0"
