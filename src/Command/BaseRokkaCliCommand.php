@@ -48,7 +48,7 @@ abstract class BaseRokkaCliCommand extends Command
      *
      * Overwritten to prepend the name prefix to all command names.
      */
-    public function setName($name)
+    public function setName(string $name): static
     {
         return parent::setName($this->namePrefix.$name);
     }
