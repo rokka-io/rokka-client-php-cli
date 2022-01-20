@@ -1,0 +1,43 @@
+name: release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: none
+          ini-values: phar.readonly=0
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Build phar with makefile
+        run: make dist
+
+      - name: Check if we can run the phar
+        run: ./dist/rokka.phar --version
+
+      - name: Determine version name
+        id: get-version
+        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          # This token is provided by GitHub Actions.
+          # You DO NOT need to create your own token.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ steps.get-version.outputs.version }}
+          tag: ${{ steps.get-version.outputs.version }}
+          body: 'Stable release.'
+          artifacts: ./dist/rokka.phar
+          artifactContentType: application/x-php
