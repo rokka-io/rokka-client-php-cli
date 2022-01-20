@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  latest:
+    name: PHP ${{ matrix.php }} Symfony ${{ matrix.env.SYMFONY_REQUIRE }} ${{ matrix.env.COMPOSER_FLAGS }}
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.0'
+            env:
+              SYMFONY_REQUIRE: "*"
+          - php: '8.1'
+            env:
+              SYMFONY_REQUIRE: "*"
+          - php: '8.0'
+            env:
+              COMPOSER_FLAGS: "--prefer-lowest"
+              SYMFONY_REQUIRE: "5.2.*"
+          - php: '8.1'
+            env:
+              SYMFONY_REQUIRE: "5.*"
+          - php: '8.1'
+            env:
+              SYMFONY_REQUIRE: "6.*"
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install composer dependencies
+        run: |
+          composer global require --no-update --no-scripts --no-plugins --no-ansi symfony/flex
+          composer update --prefer-dist --no-interaction --no-progress --no-ansi ${COMPOSER_FLAGS}
+          vendor/bin/simple-phpunit install
+
+      - name: Execute tests
+        run: |
+          composer validate --strict --no-check-lock
+          bin/rokka-cli
+          vendor/bin/simple-phpunit -v
