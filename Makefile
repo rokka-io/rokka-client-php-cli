@@ -5,7 +5,7 @@ dist/rokka-cli.phar: vendor box.json tools/box bin/rokka-cli $(SRC_FILES) compos
 	./tools/box compile --quiet
 
 tools/box:
-	wget --directory-prefix=tools --quiet https://github.com/box-project/box/releases/download/3.14.1/box.phar
+	wget --directory-prefix=tools --quiet https://github.com/box-project/box/releases/download/3.14.0/box.phar
 	mv tools/box.phar tools/box
 	chmod +x tools/box
 
