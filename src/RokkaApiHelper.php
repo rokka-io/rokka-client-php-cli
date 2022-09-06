@@ -13,17 +13,14 @@ use Rokka\Client\User;
  */
 class RokkaApiHelper
 {
-    /**
-     * @var Configuration
-     */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(Configuration $configuration)
     {
         $this->configuration = $configuration;
     }
 
-    public function getDefaultOrganizationName()
+    public function getDefaultOrganizationName(): string
     {
         if (!$this->configuration->getOrganizationName()) {
             throw new \Exception('Missing configuration');
@@ -34,30 +31,21 @@ class RokkaApiHelper
 
     /**
      * Validate that $organizationName is a valid name for an organization.
-     *
-     * @param string $organizationName
-     *
-     * @return bool
      */
-    public function validateOrganizationName($organizationName)
+    public function validateOrganizationName(?string $organizationName): bool
     {
         return \is_string($organizationName) && '' !== $organizationName;
     }
 
     /**
      * Checks if the specified organization is visible to the current user.
-     *
-     * @param User   $client
-     * @param string $organizationName
-     *
-     * @return bool
      */
-    public function organizationExists(User $client, $organizationName)
+    public function organizationExists(User $client, string $organizationName): bool
     {
         try {
             $org = $client->getOrganization($organizationName);
 
-            return $org->getName() == $organizationName;
+            return $org->getName() === $organizationName;
         } catch (ClientException $e) {
             if (404 === $e->getCode()) {
                 return false;
@@ -69,19 +57,13 @@ class RokkaApiHelper
 
     /**
      * Checks if the specified stack exists in the organization.
-     *
-     * @param $stackName
-     * @param $organizationName
-     * @param Image $client
-     *
-     * @return bool
      */
-    public function stackExists(Image $client, $stackName, $organizationName = '')
+    public function stackExists(Image $client, string $stackName, string $organizationName = ''): bool
     {
         try {
             $stack = $client->getStack($stackName, $organizationName);
 
-            return $stack->getName() == $stackName;
+            return $stack->getName() === $stackName;
         } catch (ClientException $e) {
             if (404 === $e->getCode()) {
                 return false;
@@ -105,14 +87,8 @@ class RokkaApiHelper
 
     /**
      * Checks if the specified image exists in the organization.
-     *
-     * @param Image  $client
-     * @param string $hash
-     * @param string $organizationName
-     *
-     * @return bool
      */
-    public function imageExists(Image $client, $hash, $organizationName = '')
+    public function imageExists(Image $client, string $hash, string $organizationName = ''): bool
     {
         try {
             $sourceImage = $client->getSourceImage($hash, $organizationName);
@@ -130,15 +106,12 @@ class RokkaApiHelper
     /**
      * Download an image.
      *
-     * @param Image  $client
-     * @param string $hash
-     * @param string $organizationName
-     * @param string $stackName        Optional, if not specified the unmodified source is downloaded
+     * @param string|null $stackName   Optional, if not specified the unmodified source is downloaded
      * @param string $format           Defaults to jpg
      *
      * @return string The binary data for the image
      */
-    public function getSourceImageContents(Image $client, $hash, $organizationName, $stackName = null, $format = 'jpg')
+    public function getSourceImageContents(Image $client, string $hash, string $organizationName, ?string $stackName = null, string $format = 'jpg'): string
     {
         if (!$stackName) {
             return $client->getSourceImageContents($hash, $organizationName);

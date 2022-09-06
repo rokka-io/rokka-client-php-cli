@@ -26,7 +26,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
         parent::__construct($clientProvider, $rokkaHelper, $namePrefix);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('user:create')
@@ -44,7 +44,7 @@ class UserCreateCommand extends BaseRokkaCliCommand
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $email = $input->getArgument('email');
         $user = $this->clientProvider->getUserClient()->createUser($email);

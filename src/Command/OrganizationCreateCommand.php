@@ -13,10 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrganizationCreateCommand extends BaseRokkaCliCommand
 {
-    /**
-     * @var EditableConfiguration|Configuration
-     */
-    private $configuration;
+    private Configuration|EditableConfiguration $configuration;
 
     public function __construct(ClientProvider $clientProvider, RokkaApiHelper $rokkaHelper, Configuration $configuration, $namePrefix = '')
     {
@@ -26,7 +23,7 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
         parent::__construct($clientProvider, $rokkaHelper, $namePrefix);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('organization:create')
@@ -45,7 +42,7 @@ class OrganizationCreateCommand extends BaseRokkaCliCommand
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organizationName = $input->getArgument('organization-name');
         $email = $input->getArgument('email');

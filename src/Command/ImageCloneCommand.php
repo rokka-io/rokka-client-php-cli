@@ -102,7 +102,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
         return true;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:clone')
@@ -114,7 +114,7 @@ class ImageCloneCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln($this->formatterHelper->formatBlock([
             'Deprecated!',

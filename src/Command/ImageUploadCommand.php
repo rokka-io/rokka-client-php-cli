@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageUploadCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:upload')
@@ -20,7 +20,7 @@ class ImageUploadCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organization = $input->getOption('organization');
         if (!$organization = $this->resolveOrganizationName($organization, $output)) {
@@ -39,10 +39,10 @@ class ImageUploadCommand extends BaseRokkaCliCommand
         $output->write('Uploading image: <info>'.$image.'</info> to <comment>'.$organization.'</comment> ...');
 
         $ret = $imageClient->uploadSourceImage($contents, basename($image), $organization);
-        if ($ret instanceof SourceImageCollection && 1 == $ret->count()) {
+        if ($ret instanceof SourceImageCollection && 1 === $ret->count()) {
             // We, at least, uploaded the image correctly. Check the binary hash to confirm it.
             $sourceImage = $ret->getSourceImages()[0];
-            if ($sourceImage->binaryHash != $binaryHash) {
+            if ($sourceImage->binaryHash !== $binaryHash) {
                 $output->writeln($this->formatterHelper->formatBlock([
                     'Error!',
                     'The image has been uploaded to Rokka, but the source and uploaded hashes does not match!',

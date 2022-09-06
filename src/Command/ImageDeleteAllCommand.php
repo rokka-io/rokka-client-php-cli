@@ -9,7 +9,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class ImageDeleteAllCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:delete-all')
@@ -19,7 +19,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organization = $input->getOption('organization');
         if (!$organization = $this->resolveOrganizationName($organization, $output)) {

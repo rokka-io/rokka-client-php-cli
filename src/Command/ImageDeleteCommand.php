@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class ImageDeleteCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:delete')
@@ -22,7 +22,7 @@ class ImageDeleteCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organization = $input->getOption('organization');
         $hash = $input->getArgument('hash');

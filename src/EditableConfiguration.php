@@ -7,17 +7,14 @@ use Symfony\Component\Yaml\Yaml;
 class EditableConfiguration extends Configuration
 {
     /**
-     * @param string        $fileName
-     * @param Configuration $config
-     *
      * @return int|bool Bytes written or false if writing failed
      */
-    public function updateConfigToFile($fileName, Configuration $config)
+    public function updateConfigToFile(string $fileName, Configuration $config): bool|int
     {
         $configArray = [
             'api_key' => $config->getApiKey(),
             'api_uri' => $config->getApiUri(),
-            'organization' => $config->getOrganizationName() ? $config->getOrganizationName() : '',
+            'organization' => $config->getOrganizationName() ?: '',
         ];
 
         $yml = [];
@@ -30,7 +27,7 @@ class EditableConfiguration extends Configuration
         return file_put_contents($fileName, Yaml::dump($yml));
     }
 
-    public function getConfigFileName()
+    public function getConfigFileName(): string
     {
         return getcwd().\DIRECTORY_SEPARATOR.'rokka.yml';
     }

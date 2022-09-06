@@ -55,15 +55,8 @@ abstract class BaseRokkaCliCommand extends Command
 
     /**
      * Ensures that the given Stack exists for the input Organization.
-     *
-     * @param $stackName
-     * @param $organization
-     * @param OutputInterface $output
-     * @param Image           $client
-     *
-     * @return bool
      */
-    public function verifyStackExists($stackName, $organization, OutputInterface $output, Image $client = null)
+    public function verifyStackExists(string $stackName, string $organization, OutputInterface $output, Image $client = null): bool
     {
         if (!$client) {
             $client = $this->clientProvider->getImageClient($organization);
@@ -94,7 +87,7 @@ abstract class BaseRokkaCliCommand extends Command
      *
      * @return string|bool the organization name to use or false if the provided name is not valid
      */
-    public function resolveOrganizationName($organizationName, OutputInterface $output)
+    public function resolveOrganizationName(string $organizationName, OutputInterface $output): bool|string
     {
         if (!$organizationName) {
             $organizationName = $this->rokkaHelper->getDefaultOrganizationName();
@@ -124,15 +117,8 @@ abstract class BaseRokkaCliCommand extends Command
 
     /**
      * Verify that the given Source image exists, output the error message if needed.
-     *
-     * @param string          $hash
-     * @param string          $organizationName
-     * @param OutputInterface $output
-     * @param Image           $client
-     *
-     * @return bool
      */
-    public function verifySourceImageExists($hash, $organizationName, OutputInterface $output, Image $client)
+    public function verifySourceImageExists(string $hash, string $organizationName, OutputInterface $output, Image $client): bool
     {
         if (!$this->rokkaHelper->validateImageHash($hash)) {
             $output->writeln($this->formatterHelper->formatBlock([
@@ -155,13 +141,7 @@ abstract class BaseRokkaCliCommand extends Command
         return false;
     }
 
-    /**
-     * @param string          $fileName
-     * @param OutputInterface $output
-     *
-     * @return bool
-     */
-    public function verifyLocalImageExists($fileName, OutputInterface $output)
+    public function verifyLocalImageExists(string $fileName, OutputInterface $output): bool
     {
         if (!file_exists($fileName)) {
             $output->writeln($this->formatterHelper->formatBlock([
@@ -175,10 +155,7 @@ abstract class BaseRokkaCliCommand extends Command
         return true;
     }
 
-    /**
-     * @param OutputInterface $output
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         if ($this->clientProvider->isDefaultApiUri()) {
             return;

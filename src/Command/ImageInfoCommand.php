@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageInfoCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:info')
@@ -19,7 +19,7 @@ class ImageInfoCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organizationName = $input->getOption('organization');
         $hash = $input->getArgument('hash');

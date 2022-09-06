@@ -2,6 +2,7 @@
 
 namespace RokkaCli\Command;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -9,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('organization:membership:info')
@@ -20,15 +21,10 @@ class OrganizationMembershipInfoCommand extends BaseRokkaCliCommand
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
      * @throws \RuntimeException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     *
-     * @return int
+     * @throws GuzzleException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organizationName = $input->getOption('organization');
         if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {

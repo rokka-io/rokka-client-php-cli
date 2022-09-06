@@ -2,7 +2,6 @@
 
 namespace RokkaCli\Command;
 
-use Rokka\Client\Core\Operation;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OperationListCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('operation:list')
@@ -18,7 +17,7 @@ class OperationListCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $imageClient = $this->clientProvider->getImageClient();
         $operations = $imageClient->listOperations();
@@ -31,16 +30,15 @@ class OperationListCommand extends BaseRokkaCliCommand
         }
         $table->setHeaders($headers);
 
-        /** @var Operation $operation */
         foreach ($operations->getOperations() as $i => $operation) {
             $table->addRow(['<comment>'.$operation->getName().'</comment>']);
 
             foreach ($operation->getProperties() as $name => $property) {
                 $data = [
                     null,
-                    $name.(\in_array($name, $operation->getRequired()) ? '*' : ''),
+                    $name.(\in_array($name, $operation->getRequired(), true) ? '*' : ''),
                     $property['type'],
-                    isset($property['default']) ? $property['default'] : '',
+                    $property['default'] ?? '',
                     $this->getPropertySettings($property),
                 ];
                 if ($output->isVerbose() && !empty($property['description'])) {
@@ -67,7 +65,7 @@ class OperationListCommand extends BaseRokkaCliCommand
      *
      * @return string
      */
-    private function getPropertySettings($property)
+    private function getPropertySettings($property): string
     {
         $data = [];
         $settings = [

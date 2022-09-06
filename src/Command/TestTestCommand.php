@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TestTestCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('test:test')
@@ -15,7 +15,7 @@ class TestTestCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         return 0;
     }

@@ -9,17 +9,14 @@ use Symfony\Component\Console\Application;
  */
 class ConsoleApplication extends Application
 {
-    /**
-     * @var string|null
-     */
-    private $organization;
+    private ?string $organization;
 
     /**
      * @param string      $name         The name of the application
      * @param string      $version      The version of the application
      * @param string|null $organization The configured organization, or null if not configured
      */
-    public function __construct($name, $version, $organization)
+    public function __construct(string $name, string $version, ?string $organization)
     {
         parent::__construct($name, $version);
 
@@ -31,7 +28,7 @@ class ConsoleApplication extends Application
      *
      * @return string The long application version
      */
-    public function getLongVersion()
+    public function getLongVersion(): string
     {
         $version = ('@package_version@' !== $this->getVersion())
             ? sprintf('%s <info>%s</info>', $this->getName(), $this->getVersion())

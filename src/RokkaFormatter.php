@@ -19,12 +19,8 @@ class RokkaFormatter extends FormatterHelper
 {
     /**
      * Build a string representation for the StackOperation's options attribute.
-     *
-     * @param array $settings
-     *
-     * @return string
      */
-    public function formatStackOperationOptions(array $settings)
+    public function formatStackOperationOptions(array $settings): string
     {
         $data = [];
 
@@ -37,11 +33,8 @@ class RokkaFormatter extends FormatterHelper
 
     /**
      * Print information about a source image from rokka.
-     *
-     * @param SourceImage     $sourceImage
-     * @param OutputInterface $output
      */
-    public function outputImageInfo(SourceImage $sourceImage, OutputInterface $output)
+    public function outputImageInfo(SourceImage $sourceImage, OutputInterface $output): void
     {
         $output->writeln([
             '  Hash: <info>'.$sourceImage->hash.'</info>',
@@ -73,11 +66,8 @@ class RokkaFormatter extends FormatterHelper
 
     /**
      * Print information about a rokka organization.
-     *
-     * @param Organization    $org
-     * @param OutputInterface $output
      */
-    public function outputOrganizationInfo(Organization $org, OutputInterface $output)
+    public function outputOrganizationInfo(Organization $org, OutputInterface $output): void
     {
         $output->writeln([
             '  ID: <info>'.$org->getId().'</info>',
@@ -89,11 +79,8 @@ class RokkaFormatter extends FormatterHelper
 
     /**
      * Print information about an organization membership.
-     *
-     * @param Membership      $membership
-     * @param OutputInterface $output
      */
-    public function outputOrganizationMembershipInfo(Membership $membership, OutputInterface $output)
+    public function outputOrganizationMembershipInfo(Membership $membership, OutputInterface $output): void
     {
         $output->writeln([
             '  ID: <info>'.$membership->userId.'</info>',
@@ -105,11 +92,8 @@ class RokkaFormatter extends FormatterHelper
 
     /**
      * Print information about a rokka stack.
-     *
-     * @param Stack           $stack
-     * @param OutputInterface $output
      */
-    public function outputStackInfo(Stack $stack, OutputInterface $output)
+    public function outputStackInfo(Stack $stack, OutputInterface $output): void
     {
         $output->writeln('  Name: <info>'.$stack->getName().'</info>');
         $output->writeln('  Created: <info>'.$stack->getCreated()->format('Y-m-d H:i:s').'</info>');
@@ -136,11 +120,8 @@ class RokkaFormatter extends FormatterHelper
 
     /**
      * Print information about a rokka user.
-     *
-     * @param User            $user
-     * @param OutputInterface $output
      */
-    public function outputUserInfo(User $user, OutputInterface $output)
+    public function outputUserInfo(User $user, OutputInterface $output): void
     {
         $output->writeln([
             '  ID: <info>'.$user->getId().'</info>',
@@ -151,12 +132,8 @@ class RokkaFormatter extends FormatterHelper
 
     /**
      * Convert dynamic metadata information to a string.
-     *
-     * @param DynamicMetadataInterface $metadata
-     *
-     * @return string
      */
-    private function formatDynamicMetadata(DynamicMetadataInterface $metadata)
+    private function formatDynamicMetadata(DynamicMetadataInterface $metadata): ?string
     {
         $info = null;
         switch ($metadata::getName()) {
