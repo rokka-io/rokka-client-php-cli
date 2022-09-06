@@ -2,7 +2,6 @@
 
 namespace RokkaCli\Command;
 
-use Rokka\Client\Core\SourceImage;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -10,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageCloneAllCommand extends ImageCloneCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:clone-all')
@@ -21,7 +20,7 @@ class ImageCloneAllCommand extends ImageCloneCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln($this->formatterHelper->formatBlock([
             'Deprecated!',
@@ -63,7 +62,6 @@ class ImageCloneAllCommand extends ImageCloneCommand
         $output->write('Reading images to be cloned from <info>'.$orgSource.'</info> to <info>'.$orgDest.'</info>');
 
         while ($images->count() > 0) {
-            /** @var SourceImage $image */
             foreach ($images->getSourceImages() as $image) {
                 try {
                     $this->cloneImage($image, $orgSource, $orgDest, $stackName, $client, $output);
@@ -85,7 +83,7 @@ class ImageCloneAllCommand extends ImageCloneCommand
         }
 
         // Avoid further processing if no stacks have been loaded.
-        if (0 == $clonedImages) {
+        if (0 === $clonedImages) {
             $output->write('No Image found in <info>'.$orgSource.'</info> organization.');
 
             return 0;

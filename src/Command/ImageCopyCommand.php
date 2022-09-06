@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageCopyCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:copy')
@@ -20,7 +20,7 @@ class ImageCopyCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sourceOrg = $input->getOption('source-organization');
         $destOrg = $input->getArgument('dest-organization');
@@ -61,7 +61,7 @@ class ImageCopyCommand extends BaseRokkaCliCommand
         }
     }
 
-    protected function copyImage($destOrg, $sourceOrg, $hash, OutputInterface $output, $client)
+    protected function copyImage($destOrg, $sourceOrg, $hash, OutputInterface $output, $client): void
     {
         if (!$client->copySourceImage($hash, $destOrg, $sourceOrg)) {
             throw new \Exception('Image with hash '.$hash.' not found on organization '.$sourceOrg.' !');

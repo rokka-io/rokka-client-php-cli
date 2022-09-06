@@ -5,6 +5,7 @@ namespace RokkaCli\Command;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Rokka\Client\Core\SourceImage;
+use Rokka\Client\Image;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -12,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageCopyAllCommand extends ImageCopyCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:copy-all')
@@ -23,16 +24,13 @@ class ImageCopyAllCommand extends ImageCopyCommand
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
      * @throws ClientException
      * @throws GuzzleException
      * @throws \RuntimeException
      *
      * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $orgSource = $input->getOption('source-organization');
         if (!$orgSource = $this->resolveOrganizationName($orgSource, $output)) {
@@ -106,19 +104,13 @@ class ImageCopyAllCommand extends ImageCopyCommand
     }
 
     /**
-     * @param string              $destOrg
-     * @param string              $sourceOrg
-     * @param array               $hashes
-     * @param OutputInterface     $output
-     * @param \Rokka\Client\Image $client
+     * @param string[] $hashes
      *
      * @throws GuzzleException
      * @throws \RuntimeException
      * @throws \Exception
-     *
-     * @return array
      */
-    protected function copyImages($destOrg, $sourceOrg, $hashes, \Rokka\Client\Image $client)
+    protected function copyImages(string $destOrg, string $sourceOrg, array $hashes, Image $client): array
     {
         $result = $client->copySourceImages($hashes, $destOrg, true, $sourceOrg);
         if (0 === \count($result['existing']) && 0 === \count($result['created'])) {

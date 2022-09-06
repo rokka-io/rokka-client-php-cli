@@ -2,6 +2,7 @@
 
 namespace RokkaCli\Command;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Rokka\Client\Core\Stack;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class StackCloneCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('stack:clone')
@@ -24,7 +25,7 @@ class StackCloneCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sourceOrganization = $input->getOption('source-organization');
         if (!$sourceOrganization = $this->resolveOrganizationName($sourceOrganization, $output)) {
@@ -81,27 +82,21 @@ class StackCloneCommand extends BaseRokkaCliCommand
     }
 
     /**
-     * @param Stack  $stack
-     * @param string $destOrganization
-     * @param string $destStackName
-     * @param bool   $overwrite
-     *
-     * @throws \ErrorException|\LogicException
-     *
-     * @return bool
+     * @throws \ErrorException If we fail to overwrite the stack
+     * @throws \LogicException If the target stack already exists and we did not set to overwrite
+     * @throws GuzzleException
      */
-    protected function cloneStack(Stack $stack, $destOrganization, $destStackName = null, $overwrite = false)
+    protected function cloneStack(Stack $stack, string $destOrganization, string $destStackName = null, $overwrite = false): bool
     {
         $destImageClient = $this->clientProvider->getImageClient($destOrganization);
-        $destStackName = $destStackName ? $destStackName : $stack->getName();
+        $destStackName = $destStackName ?: $stack->getName();
 
         if ($this->rokkaHelper->stackExists($destImageClient, $destStackName, $destOrganization)) {
-            if ($overwrite) {
-                if (!$destImageClient->deleteStack($destStackName, $destOrganization)) {
-                    throw new \ErrorException('Stack can not be removed from "'.$destOrganization.'" organization.');
-                }
-            } else {
+            if (!$overwrite) {
                 throw new \LogicException('Stack already exists on "'.$destOrganization.'" organization.');
+            }
+            if (!$destImageClient->deleteStack($destStackName, $destOrganization)) {
+                throw new \ErrorException('Stack can not be removed from "'.$destOrganization.'" organization.');
             }
         }
 

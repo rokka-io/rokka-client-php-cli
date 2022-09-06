@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageDynamicMetadataDeleteSubjectAreaCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:delete-subjectarea')
@@ -21,7 +21,7 @@ class ImageDynamicMetadataDeleteSubjectAreaCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organizationName = $input->getOption('organization-name');
         $hash = $input->getArgument('hash');

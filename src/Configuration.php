@@ -4,13 +4,13 @@ namespace RokkaCli;
 
 class Configuration
 {
-    private $apiUri;
+    private string $apiUri;
 
-    private $organization;
+    private ?string $apiKey;
 
-    private $apiKey;
+    private ?string $organization;
 
-    public function __construct($apiUri, $apiKey, $organization)
+    public function __construct(string $apiUri, ?string $apiKey, ?string $organization)
     {
         if (4 === \func_num_args()) {
             @trigger_error(sprintf('The $apiSecret argument to the configuration has been removed in version 1.5, adjust how you instantiate the configuration.', __METHOD__), E_USER_DEPRECATED);
@@ -23,18 +23,12 @@ class Configuration
         $this->organization = $organization;
     }
 
-    /**
-     * @return string
-     */
-    public function getApiUri()
+    public function getApiUri(): string
     {
         return $this->apiUri;
     }
 
-    /**
-     * @return string
-     */
-    public function getOrganizationName()
+    public function getOrganizationName(): ?string
     {
         return $this->organization;
     }
@@ -42,19 +36,14 @@ class Configuration
     /**
      * Kept for bc reasons, in case someone uses that.
      *
-     * @deprecated 2.0.0
-     *
-     * @return string
+     * @deprecated will be removed in 2.0.0 of the cli
      */
-    public function getApiSecret()
+    public function getApiSecret(): string
     {
         return '';
     }
 
-    /**
-     * @return string
-     */
-    public function getApiKey()
+    public function getApiKey(): string
     {
         return $this->apiKey;
     }

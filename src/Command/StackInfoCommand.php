@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class StackInfoCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('stack:info')
@@ -19,7 +19,7 @@ class StackInfoCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organization = $input->getOption('organization');
         $stackName = $input->getArgument('stack-name');

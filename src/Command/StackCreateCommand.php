@@ -14,7 +14,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
 {
     protected $collectedData = null;
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('stack:create')
@@ -23,7 +23,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $stackName = $input->getArgument('stack-name');
         $imageClient = $this->clientProvider->getImageClient();

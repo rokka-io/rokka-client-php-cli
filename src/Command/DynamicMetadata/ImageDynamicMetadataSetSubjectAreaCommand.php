@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:set-subjectarea')
@@ -25,7 +25,7 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organizationName = $input->getOption('organization-name');
         $hash = $input->getArgument('hash');
@@ -59,8 +59,6 @@ class ImageDynamicMetadataSetSubjectAreaCommand extends BaseRokkaCliCommand
     }
 
     /**
-     * @param InputInterface $input
-     *
      * @return bool|SubjectArea
      */
     protected function buildSubjectArea(InputInterface $input)

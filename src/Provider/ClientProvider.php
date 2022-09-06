@@ -10,27 +10,17 @@ use RokkaCli\Configuration;
 
 class ClientProvider
 {
-    /**
-     * @var Configuration
-     */
-    protected $configuration;
+    protected Configuration $configuration;
 
     /**
      * @var Image[] Index is the organization name
      */
-    private $imageClient = [];
+    private array $imageClient = [];
 
-    /**
-     * @var User
-     */
-    private $userClient = null;
+    private ?User $userClient = null;
 
     /**
      * If a client is not specified, a new one is set up from the configuration.
-     *
-     * @param Configuration $configuration
-     * @param User|null     $userClient    The user client to use
-     * @param Image|null    $imageClient   The image client to use for the organization specified in the configuration
      */
     public function __construct(Configuration $configuration, User $userClient = null, Image $imageClient = null)
     {
@@ -44,25 +34,20 @@ class ClientProvider
     /**
      * @return bool whether this client is configured to work against the default rokka API URI
      */
-    public function isDefaultApiUri()
+    public function isDefaultApiUri(): bool
     {
         return Base::DEFAULT_API_BASE_URL === $this->configuration->getApiUri();
     }
 
-    /**
-     * @return string The rokka API URI
-     */
-    public function getApiUri()
+    public function getApiUri(): string
     {
         return $this->configuration->getApiUri();
     }
 
     /**
      * @throws \RuntimeException
-     *
-     * @return User
      */
-    public function getUserClient()
+    public function getUserClient(): ?User
     {
         if (!$this->userClient) {
             $this->userClient = Factory::getUserClient(
@@ -74,13 +59,9 @@ class ClientProvider
     }
 
     /**
-     * @param null|string $organization
-     *
      * @throws \RuntimeException
-     *
-     * @return Image
      */
-    public function getImageClient($organization = null)
+    public function getImageClient(?string $organization = null): Image
     {
         if (!$organization) {
             $organization = $this->configuration->getOrganizationName();

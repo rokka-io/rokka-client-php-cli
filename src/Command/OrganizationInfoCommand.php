@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class OrganizationInfoCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('organization:info')
@@ -21,7 +21,7 @@ class OrganizationInfoCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $organizationName = $input->getArgument('organization-name');
         if (!$organizationName = $this->resolveOrganizationName($organizationName, $output)) {

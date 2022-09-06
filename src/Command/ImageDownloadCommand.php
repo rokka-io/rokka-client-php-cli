@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ImageDownloadCommand extends BaseRokkaCliCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('image:download')
@@ -25,7 +25,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $hash = $input->getArgument('hash');
         $saveTo = $input->getOption('save-to');
@@ -91,16 +91,14 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
     /**
      * Downloads and saves an image from Rokka.
      *
-     * @param Image           $client    The Image client to use
-     * @param SourceImage     $image     The image to download
-     * @param string          $saveTo    The destination stream to save the image to
+     * @param string          $saveTo    The destination file name to save the image to
      * @param OutputInterface $output    The output interface to display messages
-     * @param null            $stackName The stack name to use, leave empty to use the source image on Rokka
+     * @param string|null     $stackName The stack name to use, leave empty to use the source image on Rokka
      * @param string          $format    The file format to retrieve the image if using a Stack
      *
      * @return bool the status of the operation, True if the image has been saved correctly, false otherwise
      */
-    private function saveImageContents(Image $client, SourceImage $image, $saveTo, OutputInterface $output, $stackName = null, $format = 'jpg')
+    private function saveImageContents(Image $client, SourceImage $image, string $saveTo, OutputInterface $output, ?string $stackName = null, string $format = 'jpg'): bool
     {
         if (!$stackName) {
             $output->writeln('Getting source image contents for <info>'.$image->hash.'</info> from <comment>'.$image->organization.'</comment>');
@@ -120,7 +118,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
 
         // TODO: verify if target file exists, ask for permission to overwrite unless --force
         $ret = file_put_contents($saveTo, $contents, FILE_BINARY);
-        if (false == $ret) {
+        if (!$ret) {
             $output->writeln($this->formatterHelper->formatBlock([
                 'Error!',
                 'Error writing image contents to <info>'.$saveTo.'</info>!',

@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class StackCloneAllCommand extends StackCloneCommand
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('stack:clone-all')
@@ -22,7 +22,7 @@ class StackCloneAllCommand extends StackCloneCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sourceOrganization = $input->getOption('source-organization');
         if (!$sourceOrganization = $this->resolveOrganizationName($sourceOrganization, $output)) {
