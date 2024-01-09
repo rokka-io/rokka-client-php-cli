@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.10.0...1.x)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.10.1...1.x)
 
 ### Added
 ### Changed
@@ -11,6 +11,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 ### Removed
 ### Security
+
+## [1.10.1](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.1) - 2024-01-09
+
+### Fixed
+- Fixed the .phar release process
 
 ## [1.10.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.0) - 2024-01-09
 

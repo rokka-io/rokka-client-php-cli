@@ -9,7 +9,7 @@ A stand-alone console client for [rokka.io](https://rokka.io), built with Symfon
 
 ## Download: .phar
 
-The cli is provided as a stand alone tool. Download the .phar from our [releases](https://github.com/rokka-io/rokka-client-php-cli/releases)
+The cli can be used as a standalone commandline tool. Download the .phar from our [releases](https://github.com/rokka-io/rokka-client-php-cli/releases)
 page and put it into e.g. `/usr/local/bin/rokka-cli`.
 
 ## Installation: Composer

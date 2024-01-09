@@ -24,7 +24,7 @@ jobs:
         run: make dist
 
       - name: Check if we can run the phar
-        run: ./dist/rokka.phar --version
+        run: ./dist/rokka-cli.phar --version
 
       - name: Determine version name
         id: get-version
@@ -39,5 +39,5 @@ jobs:
           name: ${{ steps.get-version.outputs.version }}
           tag: ${{ steps.get-version.outputs.version }}
           body: 'Stable release.'
-          artifacts: ./dist/rokka.phar
+          artifacts: ./dist/rokka-cli.phar
           artifactContentType: application/x-php
