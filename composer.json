@@ -24,6 +24,7 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.46.0",
+    "phpstan/phpstan": "^1.7",
     "symfony/phpunit-bridge": "^5.2 || ^6.0"
   },
   "conflict": {
@@ -36,6 +37,11 @@
     "psr-4": {
       "RokkaCli\\": "src/"
     }
+  },
+  "scripts": {
+    "phpstan": "phpstan analyze",
+    "lint:fix": "php-cs-fixer fix -v --diff --using-cache=yes src/",
+    "lint": "php-cs-fixer fix -v --dry-run --diff --using-cache=yes src/"
   },
   "config": {
     "sort-packages": true

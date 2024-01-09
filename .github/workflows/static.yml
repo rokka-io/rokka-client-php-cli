@@ -1,0 +1,36 @@
+name: Static analysis
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  phpstan:
+    name: phpstan ${{ matrix.php }} 
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.3'
+
+
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install composer dependencies
+        run: |
+          composer update --prefer-dist --no-interaction --no-progress --no-ansi ${COMPOSER_FLAGS}
+
+      - name: PHPStan
+        run: composer phpstan

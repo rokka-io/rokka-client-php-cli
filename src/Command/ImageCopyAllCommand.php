@@ -66,11 +66,12 @@ class ImageCopyAllCommand extends ImageCopyCommand
             }
 
             try {
-                $output->writeln('Copying '.\count($hashes).' images from <comment>'.$image->organization.'</comment> to <comment>'.$orgDest.'</comment>');
+                $organization = isset($image) ? $image->organization : '';
+                $output->writeln('Copying '.\count($hashes).' images from <comment>'.$organization.'</comment> to <comment>'.$orgDest.'</comment>');
 
                 $hashes = $this->copyImages($orgDest, $orgSource, $hashes, $client);
                 $total = \count($hashes['existing']) + \count($hashes['created']);
-                $output->writeln($total.' images copied from <comment>'.$image->organization.'</comment> to <comment>'.$orgDest.'</comment> ('.
+                $output->writeln($total.' images copied from <comment>'.$organization.'</comment> to <comment>'.$orgDest.'</comment> ('.
                     \count($hashes['existing']).' existing, '.\count($hashes['created']).' newly created).'
                 );
 
