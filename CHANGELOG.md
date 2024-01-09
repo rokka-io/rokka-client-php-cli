@@ -3,17 +3,20 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.8.0...master)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.10.0...1.x)
 
 ### Added
-- Support for Symfony 7
-- Test with PHP 8.3
-
 ### Changed
 ### Deprecated
 ### Fixed
 ### Removed
 ### Security
+
+## [1.10.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.0)
+
+### Added
+- Support for Symfony 7
+- Test with PHP 8.3
 
 ## [1.9.10](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.9.10) - 2022-01-19
 
