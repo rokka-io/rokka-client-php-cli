@@ -19,7 +19,7 @@ class ConfigurationTest extends TestCase
     /**
      * @group legacy
      *
-     * @expectedDeprecation The $apiSecret argument to the configuration has been removed in version 1.5, adjust how you instantiate the configuration.
+     * @expectedDeprecation The $apiSecret argument to the Configuration constructor has been removed in version 1.5, adjust how you instantiate the configuration.
      */
     public function testConfigurationBC()
     {
