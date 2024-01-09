@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 ### Security
 
-## [1.10.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.0)
+## [1.10.0](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.0) - 2024-01-09
 
 ### Added
 - Support for Symfony 7
