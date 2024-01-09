@@ -2,6 +2,7 @@
 rokka.yml
 dist/
 tools/
+.php-cs-fixer.cache
 
 # Composer
 /vendor

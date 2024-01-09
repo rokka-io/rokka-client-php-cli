@@ -60,10 +60,6 @@ class OperationListCommand extends BaseRokkaCliCommand
 
     /**
      * Build a string for the "Other" column for the given property.
-     *
-     * @param $property
-     *
-     * @return string
      */
     private function getPropertySettings($property): string
     {

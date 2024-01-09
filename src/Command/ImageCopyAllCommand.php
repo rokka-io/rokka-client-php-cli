@@ -27,8 +27,6 @@ class ImageCopyAllCommand extends ImageCopyCommand
      * @throws ClientException
      * @throws GuzzleException
      * @throws \RuntimeException
-     *
-     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

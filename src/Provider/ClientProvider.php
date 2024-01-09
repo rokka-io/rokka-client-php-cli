@@ -61,13 +61,13 @@ class ClientProvider
     /**
      * @throws \RuntimeException
      */
-    public function getImageClient(?string $organization = null): Image
+    public function getImageClient(string $organization = null): Image
     {
         if (!$organization) {
             $organization = $this->configuration->getOrganizationName();
         }
 
-        if (!array_key_exists($organization, $this->imageClient)) {
+        if (!\array_key_exists($organization, $this->imageClient)) {
             $this->imageClient[$organization] = Factory::getImageClient(
                 $organization,
                 $this->configuration->getApiKey(),

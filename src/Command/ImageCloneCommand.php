@@ -15,13 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ImageCloneCommand extends BaseRokkaCliCommand
 {
     /**
-     * @param SourceImage $image
-     * @param $orgSource
-     * @param $orgDest
-     * @param $stackName
-     * @param Image           $imageClient
-     * @param OutputInterface $output
-     *
      * @throws \Exception
      *
      * @return int

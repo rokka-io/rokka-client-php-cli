@@ -106,12 +106,12 @@ class RokkaApiHelper
     /**
      * Download an image.
      *
-     * @param string|null $stackName   Optional, if not specified the unmodified source is downloaded
-     * @param string $format           Defaults to jpg
+     * @param string|null $stackName Optional, if not specified the unmodified source is downloaded
+     * @param string      $format    Defaults to jpg
      *
      * @return string The binary data for the image
      */
-    public function getSourceImageContents(Image $client, string $hash, string $organizationName, ?string $stackName = null, string $format = 'jpg'): string
+    public function getSourceImageContents(Image $client, string $hash, string $organizationName, string $stackName = null, string $format = 'jpg'): string
     {
         if (!$stackName) {
             return $client->getSourceImageContents($hash, $organizationName);

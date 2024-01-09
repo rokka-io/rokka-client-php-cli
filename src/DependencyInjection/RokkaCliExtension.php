@@ -7,9 +7,6 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 
 class RokkaCliExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();

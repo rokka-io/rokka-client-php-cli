@@ -46,7 +46,7 @@ class ImageDeleteAllCommand extends BaseRokkaCliCommand
         while ($images->count() - \count($skipped) > 0) {
             foreach ($images->getSourceImages() as $image) {
                 try {
-                    if (!array_key_exists($image->hash, $skipped)) {
+                    if (!\array_key_exists($image->hash, $skipped)) {
                         if (!$client->deleteSourceImage($image->hash, $organization)) {
                             $output->writeln($this->formatterHelper->formatBlock([
                                 'Error!',
