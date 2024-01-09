@@ -25,7 +25,7 @@ abstract class BaseRokkaCliCommand extends Command
     /**
      * @var RokkaFormatter
      */
-    protected $formatterHelper = null;
+    protected $formatterHelper;
 
     /**
      * Prefix for command names. E.g. "rokka:".

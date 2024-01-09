@@ -60,8 +60,6 @@ class ImageListCommand extends BaseRokkaCliCommand
     /**
      * Builds the "search" parameter as required bu the Rokka client.
      *
-     * @param array $searchFilters
-     *
      * @return array
      */
     protected function buildSearchParameter(array $searchFilters)
@@ -81,8 +79,6 @@ class ImageListCommand extends BaseRokkaCliCommand
 
     /**
      * Builds the "sort" parameter as required bu the Rokka client.
-     *
-     * @param array $sorts
      *
      * @return array
      */

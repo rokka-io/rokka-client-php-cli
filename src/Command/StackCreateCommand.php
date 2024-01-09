@@ -12,7 +12,7 @@ use Symfony\Component\Console\Question\Question;
 
 class StackCreateCommand extends BaseRokkaCliCommand
 {
-    protected $collectedData = null;
+    protected $collectedData;
 
     protected function configure(): void
     {
@@ -94,7 +94,7 @@ class StackCreateCommand extends BaseRokkaCliCommand
 
         $options = [];
         foreach ($operation->getProperties() as $optionName => $property) {
-            if (!\in_array($optionName, $operation->getRequired())) {
+            if (!\in_array($optionName, $operation->getRequired(), true)) {
                 if (!$this->getHelper('question')->ask($input, $output, new ConfirmationQuestion("\nDo you want to use the option [$optionName]? (y/n) "))) {
                     continue;
                 }
@@ -104,14 +104,6 @@ class StackCreateCommand extends BaseRokkaCliCommand
         $this->collectedData['operations'][$operationName] = new StackOperation($operationName, $options);
     }
 
-    /**
-     * @param $propertyName
-     * @param $propertyType
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return mixed
-     */
     private function askForOption($propertyName, $propertyType, InputInterface $input, OutputInterface $output)
     {
         $question = new Question("\nChoose $propertyName, type [$propertyType]: ");
