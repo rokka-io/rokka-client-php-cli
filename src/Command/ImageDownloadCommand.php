@@ -98,7 +98,7 @@ class ImageDownloadCommand extends BaseRokkaCliCommand
      *
      * @return bool the status of the operation, True if the image has been saved correctly, false otherwise
      */
-    private function saveImageContents(Image $client, SourceImage $image, string $saveTo, OutputInterface $output, string $stackName = null, string $format = 'jpg'): bool
+    private function saveImageContents(Image $client, SourceImage $image, string $saveTo, OutputInterface $output, ?string $stackName = null, string $format = 'jpg'): bool
     {
         if (!$stackName) {
             $output->writeln('Getting source image contents for <info>'.$image->hash.'</info> from <comment>'.$image->organization.'</comment>');

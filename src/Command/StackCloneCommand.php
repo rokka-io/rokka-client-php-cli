@@ -86,7 +86,7 @@ class StackCloneCommand extends BaseRokkaCliCommand
      * @throws \LogicException If the target stack already exists and we did not set to overwrite
      * @throws GuzzleException
      */
-    protected function cloneStack(Stack $stack, string $destOrganization, string $destStackName = null, $overwrite = false): bool
+    protected function cloneStack(Stack $stack, string $destOrganization, ?string $destStackName = null, $overwrite = false): bool
     {
         $destImageClient = $this->clientProvider->getImageClient($destOrganization);
         $destStackName = $destStackName ?: $stack->getName();

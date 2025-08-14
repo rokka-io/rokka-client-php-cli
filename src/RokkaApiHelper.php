@@ -111,7 +111,7 @@ class RokkaApiHelper
      *
      * @return string The binary data for the image
      */
-    public function getSourceImageContents(Image $client, string $hash, string $organizationName, string $stackName = null, string $format = 'jpg'): string
+    public function getSourceImageContents(Image $client, string $hash, string $organizationName, ?string $stackName = null, string $format = 'jpg'): string
     {
         if (!$stackName) {
             return $client->getSourceImageContents($hash, $organizationName);

@@ -31,12 +31,12 @@ class ConsoleApplication extends Application
     public function getLongVersion(): string
     {
         $version = ('@package_version@' !== $this->getVersion())
-            ? sprintf('%s <info>%s</info>', $this->getName(), $this->getVersion())
+            ? \sprintf('%s <info>%s</info>', $this->getName(), $this->getVersion())
             : $this->getName()
         ;
 
         if ($this->organization) {
-            $version .= sprintf(' <info>(configured organization: %s)</info>', $this->organization);
+            $version .= \sprintf(' <info>(configured organization: %s)</info>', $this->organization);
         } else {
             $version .= ' <info>(unconfigured, only limited set of commands available. Missing rokka.yml configuration?)</info>';
         }

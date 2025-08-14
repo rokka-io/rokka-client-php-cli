@@ -56,7 +56,7 @@ abstract class BaseRokkaCliCommand extends Command
     /**
      * Ensures that the given Stack exists for the input Organization.
      */
-    public function verifyStackExists(string $stackName, string $organization, OutputInterface $output, Image $client = null): bool
+    public function verifyStackExists(string $stackName, string $organization, OutputInterface $output, ?Image $client = null): bool
     {
         if (!$client) {
             $client = $this->clientProvider->getImageClient($organization);

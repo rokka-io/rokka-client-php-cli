@@ -22,7 +22,7 @@ class ClientProvider
     /**
      * If a client is not specified, a new one is set up from the configuration.
      */
-    public function __construct(Configuration $configuration, User $userClient = null, Image $imageClient = null)
+    public function __construct(Configuration $configuration, ?User $userClient = null, ?Image $imageClient = null)
     {
         $this->configuration = $configuration;
         $this->userClient = $userClient;
@@ -61,7 +61,7 @@ class ClientProvider
     /**
      * @throws \RuntimeException
      */
-    public function getImageClient(string $organization = null): Image
+    public function getImageClient(?string $organization = null): Image
     {
         if (!$organization) {
             $organization = $this->configuration->getOrganizationName();
