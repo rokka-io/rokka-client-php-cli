@@ -12,6 +12,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 ### Security
 
+
+## [1.10.3](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.2) - 2025-08-14
+
+### Fixed
+- Use ubuntu 2024-04 image to build release, instead of obsolete 2020-04.
+
 ## [1.10.2](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.2) - 2025-08-14
 
 ### Fixed
