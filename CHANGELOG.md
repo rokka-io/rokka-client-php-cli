@@ -12,6 +12,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 ### Security
 
+## [1.10.2](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.2) - 2025-08-14
+
+### Fixed
+- Fixed deprecation warnings of PHP 8.4 about implicit nullable parameters.
+
 ## [1.10.1](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.1) - 2024-01-09
 
 ### Fixed
