@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Support for Symfony 7 and Symfony 8
 ### Changed
 - Upgrade php-cs-fixer to v3
+- Convert XML service definitions to YAML (Symfony 8 removed XmlFileLoader)
 ### Removed
 - Support for PHP 8.0 and Symfony 5.x
 

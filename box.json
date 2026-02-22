@@ -4,7 +4,10 @@
     "src"
   ],
   "files": [
-    "vendor/symfony/dependency-injection/Loader/schema/dic/services/services-1.0.xsd"
+    "src/config/application.yaml",
+    "src/config/commands.yaml",
+    "src/config/restricted_commands.yaml",
+    "src/config/rokka.yml"
   ],
   "finder": [
     {

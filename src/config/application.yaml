@@ -1,0 +1,27 @@
+services:
+    symfony.application:
+        class: RokkaCli\ConsoleApplication
+        public: true
+        arguments:
+            - 'Rokka CLI'
+            - '@@package_version@'
+            - '%rokka_cli.organization%'
+
+    rokka.configuration:
+        class: RokkaCli\EditableConfiguration
+        arguments:
+            - '%rokka_cli.api_uri%'
+            - '%rokka_cli.api_key%'
+            - '%rokka_cli.organization%'
+
+    symfony.filesystem:
+        class: Symfony\Component\Filesystem\Filesystem
+
+    symfony.console_logger:
+        class: Symfony\Component\Console\Logger\ConsoleLogger
+        arguments:
+            - '@symfony.console_output'
+
+    symfony.console_output:
+        class: Symfony\Component\Console\Output\ConsoleOutput
+        public: true

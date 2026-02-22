@@ -5,7 +5,6 @@ use RokkaCli\DependencyInjection\RokkaCliExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -53,17 +52,18 @@ function loadRokkaConfig()
 loadRokkaConfig();
 
 // Loading the services
-$serviceLoader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../src/config'));
-$serviceLoader->load('commands.xml');
+$serviceLoader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../src/config'));
+$serviceLoader->load('commands.yaml');
 if ($configured) {
-    $serviceLoader->load('restricted_commands.xml');
+    $serviceLoader->load('restricted_commands.yaml');
 }
-$serviceLoader->load('application.xml');
+$serviceLoader->load('application.yaml');
 
 $applicationDefinition = $container->getDefinition('symfony.application');
 
+$addMethod = method_exists(Symfony\Component\Console\Application::class, 'addCommand') ? 'addCommand' : 'add';
 foreach ($container->findTaggedServiceIds('console.command') as $id => $options) {
-    $applicationDefinition->addMethodCall('add', [new Reference($id)]);
+    $applicationDefinition->addMethodCall($addMethod, [new Reference($id)]);
 }
 $container->compile();
 
