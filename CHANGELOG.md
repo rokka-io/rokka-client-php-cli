@@ -3,14 +3,15 @@ All notable changes to this project will be documented in this file based on the
 [Keep a Changelog](http://keepachangelog.com/) Standard.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.10.1...1.x)
+## [Unreleased](https://github.com/rokka-io/rokka-client-php-cli/compare/1.10.3...1.x)
 
 ### Added
+- Support for Symfony 7 and Symfony 8
 ### Changed
-### Deprecated
-### Fixed
+- Upgrade php-cs-fixer to v3
+- Convert XML service definitions to YAML (Symfony 8 removed XmlFileLoader)
 ### Removed
-### Security
+- Support for PHP 8.0 and Symfony 5.x
 
 
 ## [1.10.3](https://github.com/rokka-io/rokka-client-php-cli/releases/tag/1.10.2) - 2025-08-14

@@ -1,0 +1,149 @@
+# Commands that are only available if there are credentials configured
+services:
+    # Organization Commands
+    rokka.command.organization_info:
+        class: RokkaCli\Command\OrganizationInfoCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'organization:info' }
+
+    rokka.command.organization_list:
+        class: RokkaCli\Command\OrganizationListCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'organization:list' }
+
+    rokka.command.organization_membership_add:
+        class: RokkaCli\Command\OrganizationMembershipAddCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'organization:membership:add' }
+
+    rokka.command.organization_membership_info:
+        class: RokkaCli\Command\OrganizationMembershipInfoCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'organization:membership:info' }
+
+    # Image Commands
+    rokka.command.image_clone:
+        class: RokkaCli\Command\ImageCloneCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:clone' }
+
+    rokka.command.image_clone_all:
+        class: RokkaCli\Command\ImageCloneAllCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:clone-all' }
+
+    rokka.command.image_download:
+        class: RokkaCli\Command\ImageDownloadCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:download' }
+
+    rokka.command.image_list:
+        class: RokkaCli\Command\ImageListCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:list' }
+
+    rokka.command.image_upload:
+        class: RokkaCli\Command\ImageUploadCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:upload' }
+
+    rokka.command.image_info:
+        class: RokkaCli\Command\ImageInfoCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:info' }
+
+    rokka.command.image_delete:
+        class: RokkaCli\Command\ImageDeleteCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:delete' }
+
+    rokka.command.image_restore:
+        class: RokkaCli\Command\ImageRestoreCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:restore' }
+
+    rokka.command.image_render:
+        class: RokkaCli\Command\ImageRenderCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:render' }
+
+    rokka.command.image_copy:
+        class: RokkaCli\Command\ImageCopyCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:copy' }
+
+    rokka.command.image_copy_all:
+        class: RokkaCli\Command\ImageCopyAllCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:copy-all' }
+
+    rokka.command.image_delete_all:
+        class: RokkaCli\Command\ImageDeleteAllCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:delete-all' }
+
+    # Dynamic Metadata Commands
+    rokka.command.image_dynamic_metadata_set_subjectarea:
+        class: RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataSetSubjectAreaCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:set-subjectarea' }
+
+    rokka.command.image_dynamic_metadata_delete_subjectarea:
+        class: RokkaCli\Command\DynamicMetadata\ImageDynamicMetadataDeleteSubjectAreaCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'image:delete-subjectarea' }
+
+    # Stack Commands
+    rokka.command.stack_info:
+        class: RokkaCli\Command\StackInfoCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'stack:info' }
+
+    rokka.command.stack_list:
+        class: RokkaCli\Command\StackListCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'stack:list' }
+
+    rokka.command.stack_clone:
+        class: RokkaCli\Command\StackCloneCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'stack:clone' }
+
+    rokka.command.stack_create:
+        class: RokkaCli\Command\StackCreateCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'stack:create' }
+
+    rokka.command.stack_clone_all:
+        class: RokkaCli\Command\StackCloneAllCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'stack:clone-all' }
+
+    rokka.command.stack_delete:
+        class: RokkaCli\Command\StackDeleteCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'stack:delete' }

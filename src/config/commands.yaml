@@ -1,0 +1,46 @@
+services:
+    rokka.provider.client:
+        class: RokkaCli\Provider\ClientProvider
+        public: false
+        arguments:
+            - '@rokka.configuration'
+
+    rokka.helper.rokka:
+        class: RokkaCli\RokkaApiHelper
+        public: false
+        arguments:
+            - '@rokka.configuration'
+
+    rokka.command.base:
+        abstract: true
+        arguments:
+            - '@rokka.provider.client'
+            - '@rokka.helper.rokka'
+
+    rokka.command.user_create:
+        class: RokkaCli\Command\UserCreateCommand
+        parent: rokka.command.base
+        arguments:
+            - '@rokka.configuration'
+        tags:
+            - { name: console.command, command: 'user:create' }
+
+    rokka.command.organization_create:
+        class: RokkaCli\Command\OrganizationCreateCommand
+        parent: rokka.command.base
+        arguments:
+            - '@rokka.configuration'
+        tags:
+            - { name: console.command, command: 'organization:create' }
+
+    rokka.command.operation_list:
+        class: RokkaCli\Command\OperationListCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'operation:list' }
+
+    rokka.command.test_test:
+        class: RokkaCli\Command\TestTestCommand
+        parent: rokka.command.base
+        tags:
+            - { name: console.command, command: 'test:test' }
