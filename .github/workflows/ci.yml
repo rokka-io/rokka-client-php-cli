@@ -8,38 +8,31 @@ on:
 
 jobs:
   latest:
-    name: PHP ${{ matrix.php }} Symfony ${{ matrix.env.SYMFONY_REQUIRE }} ${{ matrix.env.COMPOSER_FLAGS }}
-    runs-on: ubuntu-24.04
+    name: PHP ${{ matrix.php }} Symfony ${{ matrix.symfony }} ${{ matrix.composer-flags }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - php: '8.0'
-            env:
-              SYMFONY_REQUIRE: "*"
           - php: '8.1'
-            env:
-              SYMFONY_REQUIRE: "*"
+            symfony: "6.*"
           - php: '8.2'
-            env:
-              SYMFONY_REQUIRE: "*"
-
+            symfony: "*"
           - php: '8.3'
-            env:
-              SYMFONY_REQUIRE: "*"
-          - php: '8.0'
-            env:
-              COMPOSER_FLAGS: "--prefer-lowest"
-              SYMFONY_REQUIRE: "5.2.*"
+            symfony: "*"
+          - php: '8.4'
+            symfony: "*"
+          - php: '8.1'
+            composer-flags: "--prefer-lowest"
+            symfony: "6.0.*"
           - php: '8.3'
-            env:
-              SYMFONY_REQUIRE: "5.*"
+            symfony: "6.*"
           - php: '8.3'
-            env:
-              SYMFONY_REQUIRE: "6.*"
-          - php: '8.3'
-            env:
-              SYMFONY_REQUIRE: "7.*"
+            symfony: "7.*"
+          - php: '8.4'
+            symfony: "8.*"
+    env:
+      SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
     steps:
       - name: Setup PHP
@@ -50,12 +43,12 @@ jobs:
           coverage: none
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install composer dependencies
         run: |
           composer global require --no-update --no-scripts --no-plugins --no-ansi symfony/flex
-          composer update --prefer-dist --no-interaction --no-progress --no-ansi ${COMPOSER_FLAGS}
+          composer update --prefer-dist --no-interaction --no-progress --no-ansi ${{ matrix.composer-flags }}
           vendor/bin/simple-phpunit install
 
       - name: Execute tests
